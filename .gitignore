@@ -10,6 +10,7 @@ dist/
 
 # === Configurazioni locali di NetBeans ===
 nbproject/private/
+nbproject/project.properties
 nbbuild/
 .nb-gradle/
 .nbproject/
