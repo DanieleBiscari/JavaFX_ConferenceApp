@@ -1,0 +1,25 @@
+# === Compilati e generati ===
+*.class
+*.jar
+*.war
+*.ear
+
+# === Directory di build NetBeans ===
+build/
+dist/
+
+# === Configurazioni locali di NetBeans ===
+nbproject/private/
+nbbuild/
+.nb-gradle/
+.nbproject/
+
+# === Log, backup, temporanei ===
+*.log
+*~
+*.bak
+*.tmp
+
+# === File di sistema ===
+.DS_Store
+Thumbs.db
