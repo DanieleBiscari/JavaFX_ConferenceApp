@@ -20,6 +20,14 @@ nbbuild/
 *.bak
 *.tmp
 
+# Configurazioni di esecuzione locali
+*.vmoptions
+
 # === File di sistema ===
 .DS_Store
 Thumbs.db
+
+# IDE generici (se usi più IDE o il progetto passa di mano)
+*.iml
+.idea/
+*.iws
