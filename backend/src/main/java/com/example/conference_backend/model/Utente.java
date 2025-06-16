@@ -22,7 +22,6 @@ public class Utente {
     @Pattern(regexp = "^\\+?[0-9\\-\\s]{7,20}$", message = "Numero di telefono non valido")
     private String telefono;
     @NotBlank
-    @Size(min = 8, message = "La password deve avere almeno 8 caratteri")
     private String password;
     @NotBlank
     private String affiliazione;
