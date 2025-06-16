@@ -1,34 +1,104 @@
 # === Compilati e generati ===
-*.class
-*.jar
-*.war
-*.ear
-
+backend/*.class
+backend/*.jar
+backend/*.war
+backend/*.ear
 # === Directory di build NetBeans ===
-build/
-dist/
-
+backend/build/
+backend/dist/
 # === Configurazioni locali di NetBeans ===
-nbproject/private/
-nbproject/project.properties
-nbbuild/
-.nb-gradle/
-.nbproject/
-
+backend/nbproject/private/
+backend/nbproject/project.properties
+backend/nbbuild/
+backend/.nb-gradle/
+backend/.nbproject/
 # === Log, backup, temporanei ===
-*.log
-*~
-*.bak
-*.tmp
-
+backend/*.log
+backend/*~
+backend/*.bak
+backend/*.tmp
 # Configurazioni di esecuzione locali
-*.vmoptions
-
+backend/*.vmoptions
 # === File di sistema ===
-.DS_Store
-Thumbs.db
-
+backend/.DS_Store
+backend/Thumbs.db
 # IDE generici (se usi più IDE o il progetto passa di mano)
-*.iml
-.idea/
-*.iws
+backend/*.iml
+backend/.idea/
+backend/*.iws
+
+# ========================
+# Java
+# ========================
+frontend/*.class
+frontend/*.log
+frontend/*.ctxt
+
+# Package Files #
+frontend/*.jar
+frontend/*.war
+frontend/*.ear
+
+# ========================
+# Maven
+# ========================
+frontend/target/
+frontend/pom.xml.tag
+frontend/pom.xml.releaseBackup
+frontend/pom.xml.versionsBackup
+frontend/pom.xml.next
+frontend/release.properties
+frontend/dependency-reduced-pom.xml
+frontend/buildNumber.properties
+frontend/.mvn/timing.properties
+
+# ========================
+# Gradle
+# ========================
+frontend/.gradle/
+frontend/build/
+!frontend/gradle-wrapper.jar
+
+# ========================
+# NetBeans
+# ========================
+frontend/nbproject/private/
+frontend/build/
+frontend/nbbuild/
+frontend/dist/
+frontend/nbdist/
+frontend/.nb-gradle/
+
+# ========================
+# IntelliJ IDEA
+# ========================
+frontend/.idea/
+frontend/*.iml
+frontend/*.iws
+frontend/out/
+
+# ========================
+# Operating System
+# ========================
+frontend/.DS_Store
+frontend/Thumbs.db
+
+# ========================
+# Logs
+# ========================
+frontend/logs/
+frontend/*.log
+
+# ========================
+# Spring Boot dev files (non rilevante per frontend, ma incluso nel caso ci siano config condivise)
+# ========================
+frontend/spring.log
+
+# ========================
+# Environment variables / Secrets
+# ========================
+frontend/.env
+frontend/.env.*
+frontend/application-dev.properties
+frontend/application-test.properties
+frontend/application-prod.properties
