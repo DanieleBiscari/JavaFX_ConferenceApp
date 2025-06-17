@@ -1,19 +1,47 @@
 package com.example.conference_backend.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 public class UtenteDTO {
-    private Long id;
+
+    @NotBlank(message = "Il nome è obbligatorio")
     private String nome;
+
+    @NotBlank(message = "Il cognome è obbligatorio")
     private String cognome;
+
+    @NotBlank(message = "La data di nascita è obbligatoria")
+    // Formato atteso: YYYY-MM-DD (verifica con il parser nel service, qui non serve regex)
     private String dataNascita;
+
+    @Pattern(
+        regexp = "^\\+?[0-9\\-\\s]{7,20}$",
+        message = "Numero di telefono non valido"
+    )
     private String telefono;
+
+    @NotBlank(message = "L'affiliazione è obbligatoria")
     private String affiliazione;
+
+    @NotBlank(message = "La specializzazione è obbligatoria")
     private String specializzazione;
+
+    @Email(message = "L'indirizzo email non è valido")
+    @NotBlank(message = "L'email è obbligatoria")
     private String email;
+
+    @NotBlank(message = "La password è obbligatoria")
+    @Size(min = 6, message = "La password deve contenere almeno 6 caratteri")
     private String password;
 
     public UtenteDTO() {
     }
-    public UtenteDTO(String nome, String cognome, String dataNascita, String telefono, String affiliazione, String specializzazione, String email, String password) {
+
+    public UtenteDTO(String nome, String cognome, String dataNascita, String telefono,
+                     String affiliazione, String specializzazione, String email, String password) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
@@ -23,21 +51,14 @@ public class UtenteDTO {
         this.email = email;
         this.password = password;
     }
+
     public UtenteDTO(Long id, String nome, String cognome, String email) {
-        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
     }
-    
-    
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Getters e Setters
 
     public String getNome() {
         return nome;
@@ -102,6 +123,4 @@ public class UtenteDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
 }

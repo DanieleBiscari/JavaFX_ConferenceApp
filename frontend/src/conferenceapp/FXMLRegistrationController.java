@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package conferenceapp;
 
 import conferenceapp.dto.UtenteDTO;
@@ -19,6 +15,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.URI;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import conferenceapp.utils.HttpClientUtil;
 
 /**
  * FXML Controller class
@@ -62,11 +59,13 @@ public class FXMLRegistrationController implements Initializable {
             String nome = inputNome.getText();
             String cognome = inputCognome.getText();
             String email = inputEmail.getText();
-            String dataNascita = inputDataNascita.getValue().toString(); // formato ISO (yyyy-MM-dd)
+            String dataNascita = inputDataNascita.getValue() != null
+                ? inputDataNascita.getValue().toString()
+                : "";
             String password = inputPassword.getText();
             String passwordConferma = inputPasswordConferma.getText();
             String telefono = inputTelefono.getText();
-            String affiliazione = inputTelefono.getText();
+            String affiliazione = inputAffiliazione.getText();
             String specializzazione = inputSpecializzazione.getText();
 
             // 2. Crea l'oggetto da mandare
@@ -80,20 +79,8 @@ public class FXMLRegistrationController implements Initializable {
             utente.setAffiliazione(affiliazione);
             utente.setSpecializzazione(specializzazione);
 
-            // 3. Serializza in JSON
-            ObjectMapper mapper = new ObjectMapper();
-            String requestBody = mapper.writeValueAsString(utente);
+            HttpResponse<String> response = HttpClientUtil.post("http://localhost:8081/api/utenti", utente);
 
-            // 4. Prepara la richiesta HTTP
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8081/api/utenti"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                    .build();
-
-            // 5. Invia la richiesta
-            HttpClient client = HttpClient.newHttpClient();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             // 6. Controlla la risposta
             if (response.statusCode() == 200 || response.statusCode() == 201) {

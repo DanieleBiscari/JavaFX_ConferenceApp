@@ -2,7 +2,6 @@
 package com.example.conference_backend.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
@@ -11,21 +10,13 @@ public class Utente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUtente;
-    @NotBlank
     private String nome;
-    @NotBlank
     private String cognome;
-    @Email
-    @NotBlank
     private String email;
     private LocalDate dataNascita;
-    @Pattern(regexp = "^\\+?[0-9\\-\\s]{7,20}$", message = "Numero di telefono non valido")
     private String telefono;
-    @NotBlank
     private String password;
-    @NotBlank
     private String affiliazione;
-    @NotBlank
     private String specializzazione;
 
     public Long getIdUtente() {
