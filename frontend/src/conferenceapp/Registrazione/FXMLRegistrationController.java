@@ -19,6 +19,8 @@ import conferenceapp.utils.HttpClientUtil;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -47,9 +49,15 @@ public class FXMLRegistrationController implements Initializable {
     @FXML
     private TextField inputAffiliazione;
     @FXML
-    private TextField inputRuolo;
-    @FXML
     private TextField inputSpecializzazione;
+    @FXML
+    private CheckBox utenteCheckbox;
+    @FXML
+    private CheckBox chairCheckbox;
+    @FXML
+    private CheckBox mdpcCheckbox;
+    @FXML
+    private Label btnAccedi;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

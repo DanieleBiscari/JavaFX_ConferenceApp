@@ -42,9 +42,9 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private void apriRegistrazione(MouseEvent event) {
-                try {
+        try {
             // Carica il file FXML della registrazione
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_Registration.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/Registrazione/FXML_Registration.fxml"));
             Parent root = loader.load();
 
             // Crea una nuova scena con il layout della registrazione
@@ -56,9 +56,7 @@ public class FXMLLoginController implements Initializable {
             // Imposta la scena della registrazione sulla finestra attuale
             stage.setScene(registrazioneScene);
             stage.setTitle("Registrazione");
-
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

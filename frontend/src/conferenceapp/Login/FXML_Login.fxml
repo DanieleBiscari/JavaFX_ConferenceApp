@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.FXMLLoginController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.Login.FXMLLoginController">
    <children>
       <VBox layoutX="142.0" layoutY="100.0" prefHeight="199.0" prefWidth="314.0" style="-fx-border-color: Black; -fx-border-radius: 20; -fx-padding: 5; -fx-background-color: #fff;">
          <children>

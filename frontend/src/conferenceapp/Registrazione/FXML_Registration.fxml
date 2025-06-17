@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="524.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.FXMLRegistrationController">
+<AnchorPane id="AnchorPane" prefHeight="524.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.Registrazione.FXMLRegistrationController">
    <children>
       <Pane layoutX="128.0" layoutY="39.0" prefHeight="457.0" prefWidth="467.0" style="-fx-border-color: Black; -fx-border-radius: 15;">
          <children>

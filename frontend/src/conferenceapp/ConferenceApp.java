@@ -15,12 +15,10 @@ import javafx.stage.Stage;
  */
 public class ConferenceApp extends Application{
 
-    /**
-     * @param args the command line arguments
-     */
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML_Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/conferenceapp/Login/FXML_Login.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
