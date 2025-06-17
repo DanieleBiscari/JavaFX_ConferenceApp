@@ -68,6 +68,7 @@ frontend/nbbuild/
 frontend/dist/
 frontend/nbdist/
 frontend/.nb-gradle/
+frontend/nbproject/project.properties
 
 # ========================
 # IntelliJ IDEA
