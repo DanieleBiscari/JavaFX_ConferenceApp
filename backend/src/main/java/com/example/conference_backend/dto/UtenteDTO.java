@@ -66,6 +66,18 @@ public class UtenteDTO {
         this.email = email;
     }
 
+    public UtenteDTO(String nome, String cognome, String dataNascita, String telefono, String affiliazione, String specializzazione, String email, List<String> ruoli) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.dataNascita = dataNascita;
+        this.telefono = telefono;
+        this.affiliazione = affiliazione;
+        this.specializzazione = specializzazione;
+        this.email = email;
+        this.ruoli = ruoli;
+    }
+    
+    
     // Getters e Setters
 
     public String getNome() {

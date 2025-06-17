@@ -4,7 +4,6 @@ import com.example.conference_backend.dto.UtenteDTO;
 import com.example.conference_backend.service.UtenteService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 

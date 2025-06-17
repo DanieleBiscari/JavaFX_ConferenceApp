@@ -32,6 +32,12 @@ public class GlobalExceptionHandler {
         ErrorResponse response = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Formato data non valido. Usa YYYY-MM-DD.");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
+    
+    @ExceptionHandler(CredenzialiNonValideException.class)
+    public ResponseEntity<ErrorResponse> handleCredenzialiNonValideException(CredenzialiNonValideException ex) {
+        ErrorResponse response = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGenericError(Exception ex) {
