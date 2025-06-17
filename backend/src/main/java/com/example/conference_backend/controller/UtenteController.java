@@ -18,11 +18,6 @@ public class UtenteController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<UtenteDTO> getAll() {
-        return service.getAllUtenti();
-    }
-
     @PostMapping
     public ResponseEntity<UtenteDTO> crea(@RequestBody @Valid UtenteDTO dto) {
         UtenteDTO creato = service.creaUtente(dto);

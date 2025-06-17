@@ -1,10 +1,14 @@
 package com.example.conference_backend.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import java.util.List;
 
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UtenteDTO {
 
     @NotBlank(message = "Il nome è obbligatorio")
@@ -36,12 +40,15 @@ public class UtenteDTO {
     @NotBlank(message = "La password è obbligatoria")
     @Size(min = 6, message = "La password deve contenere almeno 6 caratteri")
     private String password;
+    
+    @Size(min = 1, message = "Almeno un ruolo è obbligatorio")
+    private List<String> ruoli;
 
     public UtenteDTO() {
     }
 
     public UtenteDTO(String nome, String cognome, String dataNascita, String telefono,
-                     String affiliazione, String specializzazione, String email, String password) {
+                     String affiliazione, String specializzazione, String email, String password, List<String> ruoli) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
@@ -50,6 +57,7 @@ public class UtenteDTO {
         this.specializzazione = specializzazione;
         this.email = email;
         this.password = password;
+        this.ruoli = ruoli;
     }
 
     public UtenteDTO(Long id, String nome, String cognome, String email) {
@@ -122,5 +130,13 @@ public class UtenteDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public List<String> getRuoli() {
+        return ruoli;
+    }
+
+    public void setRuoli(List<String> ruoli) {
+        this.ruoli = ruoli;
     }
 }

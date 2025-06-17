@@ -1,22 +1,33 @@
 package com.example.conference_backend.service;
 
 import com.example.conference_backend.dto.UtenteDTO;
+import com.example.conference_backend.model.Associato;
+import com.example.conference_backend.model.Ruolo;
 import com.example.conference_backend.repository.UtenteRepository;
 import com.example.conference_backend.model.Utente;
+import com.example.conference_backend.repository.AssociatoRepository;
+import com.example.conference_backend.repository.RuoloRepository;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UtenteService {
     private final UtenteRepository repository;
+    private final RuoloRepository ruoloRepository;
+    private final AssociatoRepository associatoRepository;
     private final PasswordEncoder passwordEncoder;
     
-    public UtenteService(UtenteRepository repository, PasswordEncoder passwordEncoder){
+    public UtenteService(
+                    UtenteRepository repository,
+                    PasswordEncoder passwordEncoder,
+                    RuoloRepository ruoloRepository,
+                    AssociatoRepository associatoRepository
+                    ) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
+        this.ruoloRepository = ruoloRepository;
+        this.associatoRepository = associatoRepository;
     }
     
     public UtenteDTO creaUtente(UtenteDTO dto){
@@ -31,19 +42,30 @@ public class UtenteService {
         utente.setTelefono(dto.getTelefono());
         utente.setAffiliazione(dto.getAffiliazione());
         utente.setSpecializzazione(dto.getSpecializzazione());
-        //Salvataggio nel DB
+        //Salvataggio nel DB dell'Utente
         Utente salvato = repository.save(utente);
-        // Ritorna un DTO senza password
+        // Associazione ruoli
+        if (dto.getRuoli() == null || dto.getRuoli().isEmpty()) {
+            throw new IllegalArgumentException("Almeno un ruolo deve essere specificato.");
+        }
+        for (String nomeRuolo : dto.getRuoli()) {
+            if (nomeRuolo == null || nomeRuolo.trim().isEmpty()) {
+                throw new IllegalArgumentException("Uno dei ruoli è vuoto o non valido.");
+            }
+
+            Ruolo ruolo = ruoloRepository.findByNome(nomeRuolo)
+                .orElseThrow(() -> new RuntimeException("Ruolo non trovato: " + nomeRuolo));
+
+            Associato associato = new Associato();
+            associato.setUtente(salvato);
+            associato.setRuolo(ruolo);
+            associatoRepository.save(associato);
+        }
+        
         return new UtenteDTO(
-                salvato.getIdUtente(), 
-                salvato.getNome(), 
-                salvato.getCognome(), 
-                salvato.getEmail());
-    }
-    
-    public List<UtenteDTO> getAllUtenti(){
-        return repository.findAll().stream().map(u -> 
-                new UtenteDTO(u.getIdUtente(), u.getNome(), u.getCognome(), u.getEmail()))
-                .collect(Collectors.toList());
+            salvato.getIdUtente(), 
+            salvato.getNome(), 
+            salvato.getCognome(), 
+            salvato.getEmail());
     }
 }

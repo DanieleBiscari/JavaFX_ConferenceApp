@@ -3,6 +3,8 @@ package com.example.conference_backend.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Utente {
@@ -18,6 +20,8 @@ public class Utente {
     private String password;
     private String affiliazione;
     private String specializzazione;
+    @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Associato> ruoliAssociati = new ArrayList<>();
 
     public Long getIdUtente() {
         return idUtente;
@@ -91,5 +95,11 @@ public class Utente {
         this.specializzazione = specializzazione;
     }
     
-    
+    public List<Associato> getRuoliAssociati() {
+        return ruoliAssociati;
+    }
+
+    public void setRuoliAssociati(List<Associato> ruoliAssociati) {
+        this.ruoliAssociati = ruoliAssociati;
+    }
 }
