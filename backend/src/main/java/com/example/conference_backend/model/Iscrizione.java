@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class IscrizioneAutore {
+public class Iscrizione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idIscrizione;

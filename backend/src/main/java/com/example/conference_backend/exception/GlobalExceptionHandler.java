@@ -2,6 +2,7 @@ package com.example.conference_backend.exception;
 
 import java.time.format.DateTimeParseException;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,10 +14,19 @@ public class GlobalExceptionHandler {
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
-        String errorMessage = ex.getBindingResult().getFieldErrors().stream()
+        String fieldErrors = ex.getBindingResult().getFieldErrors().stream()
             .map(error -> error.getField() + ": " + error.getDefaultMessage())
             .collect(Collectors.joining("; "));
-        
+
+        String globalErrors = ex.getBindingResult().getGlobalErrors().stream()
+            .map(error -> error.getDefaultMessage())
+            .collect(Collectors.joining("; "));
+
+        // Unisci entrambi
+        String errorMessage = Stream.of(fieldErrors, globalErrors)
+            .filter(msg -> !msg.isEmpty())
+            .collect(Collectors.joining("; "));
+
         ErrorResponse response = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), errorMessage);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
@@ -43,6 +53,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleGenericError(Exception ex) {
         ErrorResponse response = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Errore interno del server.");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+    
+    @ExceptionHandler(ConferenzaGiaEsistenteException.class)
+    public ResponseEntity<ErrorResponse> handleConferenzaGiaEsistente(ConferenzaGiaEsistenteException ex) {
+        ErrorResponse response = new ErrorResponse(HttpStatus.CONFLICT.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
     }
 }
 

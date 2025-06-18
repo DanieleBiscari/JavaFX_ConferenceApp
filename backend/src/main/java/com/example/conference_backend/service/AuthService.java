@@ -30,15 +30,18 @@ public class AuthService {
                     .stream()
                     .map(a -> a.getRuolo().getNome())
                     .collect(Collectors.toList());
+
+                String dataNascitaStr = u.getDataNascita() != null ? u.getDataNascita().toString() : null;
+
                 return new UtenteDTO(
-                            u.getNome(), 
-                            u.getCognome(),
-                            u.getDataNascita().toString(), 
-                            u.getTelefono(), 
-                            u.getAffiliazione(), 
-                            u.getSpecializzazione(), 
-                            u.getEmail(), 
-                            nomiRuoli
+                        u.getNome(), 
+                        u.getCognome(),
+                        dataNascitaStr, 
+                        u.getTelefono(), 
+                        u.getAffiliazione(), 
+                        u.getSpecializzazione(), 
+                        u.getEmail(), 
+                        nomiRuoli
                 );
             }
         }
