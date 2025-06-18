@@ -47,13 +47,13 @@ public class FXMLRegistrationController implements Initializable {
     @FXML
     private TextField inputSpecializzazione;
     @FXML
-    private CheckBox utenteCheckbox;
-    @FXML
     private CheckBox chairCheckbox;
     @FXML
     private CheckBox mdpcCheckbox;
     @FXML
     private Label btnAccedi;
+    @FXML
+    private CheckBox utenteCheckbox;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -99,7 +99,7 @@ public class FXMLRegistrationController implements Initializable {
             // 6. Controlla la risposta
             if (response.statusCode() == 200 || response.statusCode() == 201) {
                 System.out.println("Registrazione completata!");
-                // Puoi aggiungere un alert o aggiornare la UI
+                
             } else {
                 mostraPopupErrore();
             }
@@ -121,11 +121,27 @@ public class FXMLRegistrationController implements Initializable {
           dialogStage.setResizable(false);
           dialogStage.show();
 
-      } catch (Exception e) {
+        } catch (Exception e) {
           e.printStackTrace();
-      }
+        }
     }
+     
+    @FXML
+    private void mostraPopupConfermaRegist() {
+        try{
+             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_popUpRegistCompleta.fxml"));
+          Parent root = loader.load();
 
+          Stage dialogStage = new Stage();
+          dialogStage.setTitle("Registrazione avvenuta con successo");
+          dialogStage.setScene(new Scene(root));
+          dialogStage.setResizable(false);
+          dialogStage.show();
+
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+    }
     @FXML
     private void handleAccedi(MouseEvent event) {
     try {
