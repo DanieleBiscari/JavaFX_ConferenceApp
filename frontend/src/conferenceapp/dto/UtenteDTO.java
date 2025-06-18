@@ -1,5 +1,7 @@
 package conferenceapp.dto;
 
+import java.util.List;
+
 public class UtenteDTO {
     private Long id;
     private String nome;
@@ -10,10 +12,11 @@ public class UtenteDTO {
     private String specializzazione;
     private String email;
     private String password;
+    private List<String> ruoli;
 
     public UtenteDTO() {
     }
-    public UtenteDTO(String nome, String cognome, String dataNascita, String telefono, String affiliazione, String specializzazione, String email, String password) {
+    public UtenteDTO(String nome, String cognome, String dataNascita, String telefono, String affiliazione, String specializzazione, String email, String password, List<String> ruoli) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
@@ -22,6 +25,7 @@ public class UtenteDTO {
         this.specializzazione = specializzazione;
         this.email = email;
         this.password = password;
+        this.ruoli = ruoli;
     }
     public UtenteDTO(Long id, String nome, String cognome, String email) {
         this.id = id;
@@ -103,5 +107,12 @@ public class UtenteDTO {
         this.password = password;
     }
     
+    public List<String> getRuoli() {
+        return ruoli;
+    }
+
+    public void setRuoli(List<String> ruoli) {
+        this.ruoli = ruoli;
+    }
     
 }
