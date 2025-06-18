@@ -14,6 +14,7 @@ public class Utente {
     private Long idUtente;
     private String nome;
     private String cognome;
+    @Column(unique = true, nullable = false)
     private String email;
     private LocalDate dataNascita;
     private String telefono;

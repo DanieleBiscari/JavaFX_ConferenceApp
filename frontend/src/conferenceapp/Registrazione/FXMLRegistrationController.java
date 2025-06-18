@@ -1,5 +1,7 @@
 package conferenceapp.Registrazione;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import conferenceapp.State.StatoApplicazione;
 import conferenceapp.dto.UtenteDTO;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import java.net.http.HttpResponse;
 import conferenceapp.utils.HttpClientUtil;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -47,13 +51,13 @@ public class FXMLRegistrationController implements Initializable {
     @FXML
     private TextField inputSpecializzazione;
     @FXML
-    private CheckBox utenteCheckbox;
-    @FXML
     private CheckBox chairCheckbox;
     @FXML
     private CheckBox mdpcCheckbox;
     @FXML
     private Label btnAccedi;
+    @FXML
+    private CheckBox autoreCheckbox;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -92,14 +96,22 @@ public class FXMLRegistrationController implements Initializable {
             utente.setTelefono(telefono);
             utente.setAffiliazione(affiliazione);
             utente.setSpecializzazione(specializzazione);
+            List<String> ruoliSelezionati = new ArrayList<>();
+            if (autoreCheckbox.isSelected()) ruoliSelezionati.add("Autore");
+            if (chairCheckbox.isSelected()) ruoliSelezionati.add("Chair");
+            if (mdpcCheckbox.isSelected()) ruoliSelezionati.add("MembroPC");
+            utente.setRuoli(ruoliSelezionati);
 
             HttpResponse<String> response = HttpClientUtil.post("http://localhost:8081/api/utenti", utente);
 
 
             // 6. Controlla la risposta
             if (response.statusCode() == 200 || response.statusCode() == 201) {
-                System.out.println("Registrazione completata!");
-                // Puoi aggiungere un alert o aggiornare la UI
+                ObjectMapper mapper = new ObjectMapper();
+                UtenteDTO utenteDto = mapper.readValue(response.body(), UtenteDTO.class);
+                // Salva in uno stato l'utente loggato
+                StatoApplicazione.getInstance().setUtenteCorrente(utenteDto);
+                UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
             } else {
                 mostraPopupErrore();
             }
