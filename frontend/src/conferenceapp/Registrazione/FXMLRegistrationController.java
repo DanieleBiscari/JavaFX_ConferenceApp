@@ -57,11 +57,7 @@ public class FXMLRegistrationController implements Initializable {
     @FXML
     private Label btnAccedi;
     @FXML
-<<<<<<< HEAD
-    private CheckBox utenteCheckbox;
-=======
     private CheckBox autoreCheckbox;
->>>>>>> a8b6669f5f1dc139d84233e5ff8d3ba696a8943d
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -111,16 +107,11 @@ public class FXMLRegistrationController implements Initializable {
 
             // 6. Controlla la risposta
             if (response.statusCode() == 200 || response.statusCode() == 201) {
-<<<<<<< HEAD
-                System.out.println("Registrazione completata!");
-                
-=======
                 ObjectMapper mapper = new ObjectMapper();
                 UtenteDTO utenteDto = mapper.readValue(response.body(), UtenteDTO.class);
                 // Salva in uno stato l'utente loggato
                 StatoApplicazione.getInstance().setUtenteCorrente(utenteDto);
                 UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
->>>>>>> a8b6669f5f1dc139d84233e5ff8d3ba696a8943d
             } else {
                 mostraPopupErrore();
             }
