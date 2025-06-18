@@ -4,10 +4,14 @@
  */
 package conferenceapp.Login;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import conferenceapp.State.StatoApplicazione;
+import conferenceapp.dto.LoginDTO;
+import conferenceapp.dto.UtenteDTO;
+import conferenceapp.utils.HttpClientUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +24,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import java.net.http.HttpResponse;
+
 
 /**
  * FXML Controller class
@@ -60,5 +66,43 @@ public class FXMLLoginController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleLogin(MouseEvent event) {
+            try {
+                String email = inputEmail.getText();
+                String password = inputPass.getText();
+
+                if (email.isEmpty() || password.isEmpty()) {
+//                    mostraPopupErrore("Email e password sono obbligatori.");
+                    return;
+                }
+
+                // Crea un oggetto DTO per il login
+                LoginDTO loginRequest = new LoginDTO();
+                loginRequest.setEmail(email);
+                loginRequest.setPassword(password);
+
+                // Chiama il backend
+                HttpResponse<String> response = HttpClientUtil.post("http://localhost:8081/api/auth/login", loginRequest);
+
+                // Controlla la risposta
+                if (response.statusCode() == 200) {
+                    ObjectMapper mapper = new ObjectMapper();
+                    UtenteDTO utente = mapper.readValue(response.body(), UtenteDTO.class);
+                    // Salva in uno stato l'utente loggato
+                    StatoApplicazione.getInstance().setUtenteCorrente(utente);
+                    UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
+                    // Puoi navigare a un'altra schermata, ad esempio:
+                    // caricaHomeUtente();
+                } else {
+//                    mostraPopupErrore("Credenziali non valide.");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+//                mostraPopupErrore("Errore durante il login.");
+            }
     }
 }

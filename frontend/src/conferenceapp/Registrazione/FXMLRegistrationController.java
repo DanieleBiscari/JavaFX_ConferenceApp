@@ -10,11 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.net.URI;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import conferenceapp.utils.HttpClientUtil;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -113,6 +109,7 @@ public class FXMLRegistrationController implements Initializable {
             mostraPopupErrore();
         }
     }
+    
      private void mostraPopupErrore() {
       try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_ErroreRegistrazione.fxml"));
