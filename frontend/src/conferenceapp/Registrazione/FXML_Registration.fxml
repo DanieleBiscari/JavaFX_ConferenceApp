@@ -83,7 +83,7 @@
             </HBox>
             <HBox alignment="BASELINE_CENTER" layoutX="-3.0" layoutY="426.0" prefHeight="50.0" prefWidth="474.0">
                <children>
-                  <Label fx:id="btnAccedi" style="-fx-underline: true; -fx-text-fill: blue; -fx-cursor: hand;" text="Accedi" />
+                  <Label fx:id="btnAccedi" onMouseClicked="#handleAccedi" style="-fx-underline: true; -fx-text-fill: blue; -fx-cursor: hand;" text="Accedi" />
                </children>
             </HBox>
          </children>

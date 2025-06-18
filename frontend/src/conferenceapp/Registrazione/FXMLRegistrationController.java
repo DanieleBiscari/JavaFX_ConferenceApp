@@ -128,5 +128,23 @@ public class FXMLRegistrationController implements Initializable {
           e.printStackTrace();
       }
     }
-    
+
+    @FXML
+    private void handleAccedi(MouseEvent event) {
+    try {
+        Parent loginRoot = FXMLLoader.load(getClass().getResource("/conferenceapp/Login/FXML_Login.fxml"));
+        Scene loginScene = new Scene(loginRoot);
+
+        // Prendo lo stage attuale dal label (btnAccedi)
+        Stage stage = (Stage) btnAccedi.getScene().getWindow();
+
+        stage.setScene(loginScene);
+        stage.setTitle("Login");
+        stage.show();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
 }
