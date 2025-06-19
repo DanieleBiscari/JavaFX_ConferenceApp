@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="494.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeAutore.FXML_HomeAutoreController">
+<AnchorPane id="AnchorPane" prefHeight="494.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeAutore.FXML_HomeAutoreController">
    <children>
       <Pane layoutX="45.0" layoutY="52.0" prefHeight="390.0" prefWidth="681.0" style="-fx-border-color: black; -fx-border-radius: 15;">
          <children>

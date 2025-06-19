@@ -106,16 +106,17 @@ public class FXMLRegistrationController implements Initializable {
             } else if (chairCheckbox.isSelected()) {
                 ruoloSelezionato = "Chair";
             } else if (mdpcCheckbox.isSelected()) {
-                ruoloSelezionato = "Membro del PC";
+                ruoloSelezionato = "MembroPC";
             } else {
                 // Nessun ruolo selezionato: mostra un messaggio o blocca la registrazione
                 System.out.println("Seleziona un ruolo!");
                 return;
             }
-
+            
+            List<String> ruoli = new ArrayList<>();
+            ruoli.add(ruoloSelezionato);
             // Usa ruoloSelezionato per proseguire con la registrazione
             System.out.println("Registrazione con ruolo: " + ruoloSelezionato);
-        
             
             if (!password.equals(passwordConferma)) {
             mostraPopupErrore();
@@ -133,8 +134,10 @@ public class FXMLRegistrationController implements Initializable {
             utente.setTelefono(telefono);
             utente.setAffiliazione(affiliazione);
             utente.setSpecializzazione(specializzazione); 
+            utente.setRuoli(ruoli);
             
 
+            
             HttpResponse<String> response = HttpClientUtil.post("http://localhost:8081/api/utenti", utente);
 
 
@@ -144,7 +147,6 @@ public class FXMLRegistrationController implements Initializable {
                 UtenteDTO utenteDto = mapper.readValue(response.body(), UtenteDTO.class);
                 // Salva in uno stato l'utente loggato
                 StatoApplicazione.getInstance().setUtenteCorrente(utenteDto);
-                UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
                 // Messaggio conferma registrazione
                 mostraPopupConfermaRegist();
             } else {
@@ -203,6 +205,6 @@ public class FXMLRegistrationController implements Initializable {
     } catch (Exception e) {
         e.printStackTrace();
     }
-}
-
+    }
+    
 }
