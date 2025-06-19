@@ -10,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -31,6 +33,9 @@ public class FXML_popUpRegistCompletaController implements Initializable {
 
     @FXML
     private void handleClose(ActionEvent event) {
+        Stage stage = (Stage) closePopupConfermRegis.getScene().getWindow();
+        stage.close();
     }
+
     
 }

@@ -2,24 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package conferenceapp.HomeChair;
+package conferenceapp.Login;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author alfon
  */
-public class FXML_HomeChairController implements Initializable {
+public class FXML_ErroreCampoVuotoController implements Initializable {
 
     @FXML
-    private Label btnLogoutHomeChair;
+    private Button closeCampiVuotiLoginPopup;
+    
 
     /**
      * Initializes the controller class.
@@ -28,9 +30,9 @@ public class FXML_HomeChairController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
     @FXML
-    private void handleLogout(MouseEvent event) {
-    }
-    
+    private void handleClose(ActionEvent event) {
+        Stage stage = (Stage) closeCampiVuotiLoginPopup.getScene().getWindow();
+        stage.close();
+        }
 }

@@ -2,25 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package conferenceapp.HomeChair;
+package conferenceapp.HomeAutore;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
  *
  * @author alfon
  */
-public class FXML_HomeChairController implements Initializable {
+public class FXML_HomeAutoreController implements Initializable {
+
 
     @FXML
-    private Label btnLogoutHomeChair;
-
+    private Label btnLogout;
     /**
      * Initializes the controller class.
      */
@@ -28,9 +31,9 @@ public class FXML_HomeChairController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
     @FXML
     private void handleLogout(MouseEvent event) {
     }
-    
+
 }

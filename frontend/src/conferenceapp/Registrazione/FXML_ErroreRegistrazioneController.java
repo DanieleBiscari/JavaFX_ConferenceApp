@@ -22,6 +22,7 @@ public class FXML_ErroreRegistrazioneController implements Initializable {
     @FXML
     private Button closePopUpReg;
 
+
     /**
      * Initializes the controller class.
      */

@@ -58,10 +58,30 @@ public class FXMLRegistrationController implements Initializable {
     private Label btnAccedi;
     @FXML
     private CheckBox autoreCheckbox;
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        autoreCheckbox.setOnAction(e -> {
+        if (autoreCheckbox.isSelected()) {
+            chairCheckbox.setSelected(false);
+            mdpcCheckbox.setSelected(false);
+        }
+    });
+
+        chairCheckbox.setOnAction(e -> {
+        if (chairCheckbox.isSelected()) {
+            autoreCheckbox.setSelected(false);
+            mdpcCheckbox.setSelected(false);
+        }
+        });
+
+        mdpcCheckbox.setOnAction(e -> {
+        if (mdpcCheckbox.isSelected()) {
+            autoreCheckbox.setSelected(false);
+            chairCheckbox.setSelected(false);
+        }
+        });
     }    
     @FXML
     private void handleRegistrazione(MouseEvent event) {
@@ -79,6 +99,23 @@ public class FXMLRegistrationController implements Initializable {
             String affiliazione = inputAffiliazione.getText();
             String specializzazione = inputSpecializzazione.getText();
             
+            String ruoloSelezionato = "";
+
+            if (autoreCheckbox.isSelected()) {
+                ruoloSelezionato = "Autore";
+            } else if (chairCheckbox.isSelected()) {
+                ruoloSelezionato = "Chair";
+            } else if (mdpcCheckbox.isSelected()) {
+                ruoloSelezionato = "Membro del PC";
+            } else {
+                // Nessun ruolo selezionato: mostra un messaggio o blocca la registrazione
+                System.out.println("Seleziona un ruolo!");
+                return;
+            }
+
+            // Usa ruoloSelezionato per proseguire con la registrazione
+            System.out.println("Registrazione con ruolo: " + ruoloSelezionato);
+        
             
             if (!password.equals(passwordConferma)) {
             mostraPopupErrore();
@@ -95,12 +132,8 @@ public class FXMLRegistrationController implements Initializable {
             utente.setPassword(password);
             utente.setTelefono(telefono);
             utente.setAffiliazione(affiliazione);
-            utente.setSpecializzazione(specializzazione);
-            List<String> ruoliSelezionati = new ArrayList<>();
-            if (autoreCheckbox.isSelected()) ruoliSelezionati.add("Autore");
-            if (chairCheckbox.isSelected()) ruoliSelezionati.add("Chair");
-            if (mdpcCheckbox.isSelected()) ruoliSelezionati.add("MembroPC");
-            utente.setRuoli(ruoliSelezionati);
+            utente.setSpecializzazione(specializzazione); 
+            
 
             HttpResponse<String> response = HttpClientUtil.post("http://localhost:8081/api/utenti", utente);
 
@@ -112,6 +145,8 @@ public class FXMLRegistrationController implements Initializable {
                 // Salva in uno stato l'utente loggato
                 StatoApplicazione.getInstance().setUtenteCorrente(utenteDto);
                 UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
+                // Messaggio conferma registrazione
+                mostraPopupConfermaRegist();
             } else {
                 mostraPopupErrore();
             }
@@ -121,8 +156,8 @@ public class FXMLRegistrationController implements Initializable {
             mostraPopupErrore();
         }
     }
-    
-     private void mostraPopupErrore() {
+
+    private void mostraPopupErrore() {
       try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_ErroreRegistrazione.fxml"));
           Parent root = loader.load();
@@ -138,18 +173,16 @@ public class FXMLRegistrationController implements Initializable {
         }
     }
      
-    @FXML
     private void mostraPopupConfermaRegist() {
         try{
              FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_popUpRegistCompleta.fxml"));
-          Parent root = loader.load();
+            Parent root = loader.load();
 
-          Stage dialogStage = new Stage();
-          dialogStage.setTitle("Registrazione avvenuta con successo");
-          dialogStage.setScene(new Scene(root));
-          dialogStage.setResizable(false);
-          dialogStage.show();
-
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Registrazione avvenuta con successo");
+            dialogStage.setScene(new Scene(root));
+            dialogStage.setResizable(false);
+            dialogStage.show();
         } catch (Exception e) {
           e.printStackTrace();
         }

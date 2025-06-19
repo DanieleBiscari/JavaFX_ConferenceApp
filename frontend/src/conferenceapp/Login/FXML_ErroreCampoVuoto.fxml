@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="219.0" prefWidth="376.0" style="-fx-background-color: white; -fx-border-color: red;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.Registrazione.FXML_ErroreRegistrazioneController">
+<AnchorPane id="AnchorPane" prefHeight="219.0" prefWidth="376.0" style="-fx-background-color: white; -fx-border-color: red;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.Login.FXML_ErroreCampoVuotoController">
    <children>
       <VBox prefHeight="219.0" prefWidth="376.0">
          <children>
             <HBox alignment="CENTER" prefHeight="146.0" prefWidth="300.0">
                <children>
-                  <Label prefHeight="104.0" prefWidth="286.0" text="Tutti i campi devono essere compilati per potersi registrare" textAlignment="CENTER" textFill="#ff7070" wrapText="true">
+                  <Label prefHeight="104.0" prefWidth="286.0" text="Compila tutti i campi per poter proseguire" textAlignment="CENTER" textFill="#ff7070" wrapText="true">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -22,7 +22,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="300.0">
                <children>
-                  <Button fx:id="closePopUpReg" mnemonicParsing="false" onAction="#handleClose" prefHeight="33.0" prefWidth="82.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #fa5050; -fx-border-color: red;" text="Ok" textFill="WHITE">
+                  <Button fx:id="closeCampiVuotiLoginPopup" mnemonicParsing="false" onAction="#handleClose" prefHeight="33.0" prefWidth="82.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #fa5050; -fx-border-color: red;" text="Ok" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

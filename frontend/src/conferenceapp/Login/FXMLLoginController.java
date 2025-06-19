@@ -70,39 +70,56 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     private void handleLogin(MouseEvent event) {
-            try {
-                String email = inputEmail.getText();
-                String password = inputPass.getText();
+        try {
+            String email = inputEmail.getText();
+            String password = inputPass.getText();
 
-                if (email.isEmpty() || password.isEmpty()) {
-//                    mostraPopupErrore("Email e password sono obbligatori.");
-                    return;
-                }
-
-                // Crea un oggetto DTO per il login
-                LoginDTO loginRequest = new LoginDTO();
-                loginRequest.setEmail(email);
-                loginRequest.setPassword(password);
-
-                // Chiama il backend
-                HttpResponse<String> response = HttpClientUtil.post("http://localhost:8081/api/auth/login", loginRequest);
-
-                // Controlla la risposta
-                if (response.statusCode() == 200) {
-                    ObjectMapper mapper = new ObjectMapper();
-                    UtenteDTO utente = mapper.readValue(response.body(), UtenteDTO.class);
-                    // Salva in uno stato l'utente loggato
-                    StatoApplicazione.getInstance().setUtenteCorrente(utente);
-                    UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
-                    // Puoi navigare a un'altra schermata, ad esempio:
-                    // caricaHomeUtente();
-                } else {
-//                    mostraPopupErrore("Credenziali non valide.");
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-//                mostraPopupErrore("Errore durante il login.");
+            if (email.isEmpty() || password.isEmpty()) {
+                mostraPopupErrore();
+                return;
             }
+
+            // Crea un oggetto DTO per il login
+            LoginDTO loginRequest = new LoginDTO();
+            loginRequest.setEmail(email);
+            loginRequest.setPassword(password);
+
+            // Chiama il backend
+             HttpResponse<String> response = HttpClientUtil.post("http://localhost:8081/api/auth/login", loginRequest);
+
+            // Controlla la risposta
+            if (response.statusCode() == 200) {
+                ObjectMapper mapper = new ObjectMapper();
+                UtenteDTO utente = mapper.readValue(response.body(), UtenteDTO.class);
+                // Salva in uno stato l'utente loggato
+                StatoApplicazione.getInstance().setUtenteCorrente(utente);
+                UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
+                // Puoi navigare a un'altra schermata, ad esempio:
+                // caricaHomeUtente();
+            } else {
+//               mostraPopupErrore("Credenziali non valide.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            //mostraPopupErrore("Errore durante il login.");
+        }
     }
+    @FXML
+    private void mostraPopupErrore() {
+      try {
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_ErroreCampoVuoto.fxml"));
+          Parent root = loader.load();
+
+          Stage dialogStage = new Stage();
+          dialogStage.setTitle("Email e password sono obbligatori.");
+          dialogStage.setScene(new Scene(root));
+          dialogStage.setResizable(false);
+          dialogStage.show();
+
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+    }
+     
 }

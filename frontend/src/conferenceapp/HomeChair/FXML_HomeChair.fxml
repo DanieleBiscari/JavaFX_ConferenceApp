@@ -43,7 +43,10 @@
                      </font></Button>
                </children>
             </HBox>
-            <Label alignment="CENTER" layoutX="276.0" layoutY="440.0" prefHeight="17.0" prefWidth="63.0" style="-fx-underline: true; -fx-text-fill: red; -fx-cursor: hand;" text="Logout" />
+            <Label fx:id="btnLogoutHomeChair" alignment="CENTER" layoutX="276.0" layoutY="440.0" onMouseClicked="#handleLogout" prefHeight="17.0" prefWidth="63.0" style="-fx-underline: true; -fx-text-fill: red; -fx-cursor: hand;" text="Logout">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <Label layoutX="103.0" layoutY="126.0" text="Conferenze attive">
                <font>
                   <Font name="System Bold" size="18.0" />
