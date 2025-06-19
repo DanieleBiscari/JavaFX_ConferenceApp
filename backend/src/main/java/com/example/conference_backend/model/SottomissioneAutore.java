@@ -13,7 +13,7 @@ public class SottomissioneAutore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSottomissione;
     @ManyToOne
-    @JoinColumn(name = "fk_idUtente", nullable = true)
+    @JoinColumn(name = "fk_idUtente", nullable = false)
     private Utente utente;
     @ManyToOne
     @JoinColumn(name = "fk_idArticolo", nullable = false)

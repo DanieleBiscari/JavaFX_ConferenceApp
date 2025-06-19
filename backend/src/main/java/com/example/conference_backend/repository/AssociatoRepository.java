@@ -10,5 +10,6 @@ import java.util.List;
 public interface AssociatoRepository extends JpaRepository<Associato, Long> {
     List<Associato> findByUtente(Utente utente);
     List<Associato> findByRuolo(Ruolo ruolo);
+    boolean existsByUtenteAndRuoloNome(Utente utente, String nomeRuolo);
 }
 

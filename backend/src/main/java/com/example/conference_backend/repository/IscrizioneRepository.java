@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IscrizioneRepository extends JpaRepository<Iscrizione, Long> {
     Optional<Iscrizione> findByUtenteAndConferenza(Utente utente, Conferenza conferenza);
+    boolean existsByUtenteAndConferenzaAndStato(Utente utente, Conferenza conferenza, String stato);
 }

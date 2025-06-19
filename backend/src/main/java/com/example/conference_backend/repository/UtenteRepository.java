@@ -14,7 +14,7 @@ public interface UtenteRepository extends JpaRepository<Utente, Long> {
     SELECT DISTINCT a.utente
     FROM Associato a
     JOIN Iscrizione i ON a.utente = i.utente
-    WHERE a.ruolo.nome = :nomeRuolo AND i.conferenza.idConferenza = :idConferenza
+    WHERE a.ruolo.nome = :nomeRuolo AND i.conferenza.idConferenza = :idConferenza AND i.stato = "ACCETTATA"
     """)
     List<Utente> findUtentiConRuoloByConferenza(
         @Param("nomeRuolo") String nomeRuolo,
