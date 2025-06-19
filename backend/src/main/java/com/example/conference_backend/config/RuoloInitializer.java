@@ -13,7 +13,7 @@ public class RuoloInitializer {
     @Bean
     CommandLineRunner initRuoli(RuoloRepository ruoloRepository) {
         return args -> {
-            List<String> nomiRuoli = List.of("Autore", "MembroPC", "Chair");
+            List<String> nomiRuoli = List.of("Autore", "MembroPC", "Chair", "Editore");
 
             for (String nome : nomiRuoli) {
                 if (ruoloRepository.findByNome(nome).isEmpty()) {

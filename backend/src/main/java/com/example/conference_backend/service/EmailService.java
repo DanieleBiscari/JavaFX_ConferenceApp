@@ -20,9 +20,9 @@ public class EmailService {
         messaggio.setTo(emailDestinatario);
         messaggio.setSubject("Invito a partecipare alla conferenza: " + nomeConferenza);
         messaggio.setText(
-            "Gentile collega,\n\n" +
+            "Gentile Editore,\n\n" +
             "Sei stato invitato a far parte della conferenza \"" + nomeConferenza + "\".\n\n" +
-            "Clicca sul seguente link per accettare l'invito e creare il tuo account come Membro del Comitato di Programma:\n" +
+            "Clicca sul seguente link per accettare l'invito e creare il tuo account come Editore nel nostro sistema di gestione conferenze:\n" +
             linkInvito + "\n\n"
             );
         mailSender.send(messaggio);

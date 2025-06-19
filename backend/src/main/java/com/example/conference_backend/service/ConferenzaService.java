@@ -4,34 +4,29 @@ import com.example.conference_backend.dto.ConferenzaDTO;
 import com.example.conference_backend.exception.ConferenzaGiaEsistenteException;
 import com.example.conference_backend.model.Conferenza;
 import com.example.conference_backend.model.CreazioneChair;
+import com.example.conference_backend.model.Iscrizione;
 import com.example.conference_backend.model.Utente;
 import com.example.conference_backend.repository.ConferenzaRepository;
 import com.example.conference_backend.repository.CreazioneChairRepository;
+import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ConferenzaService {
-    private final ConferenzaRepository conferenzaRepository;
-    private final UtenteRepository utenteRepository;
-    private final CreazioneChairRepository creazioneChairRepository;
-    private final EmailService emailService;
-
-    public ConferenzaService(
-            ConferenzaRepository conferenzaRepository, 
-            EmailService emailService, 
-            UtenteRepository utenteRepository, 
-            CreazioneChairRepository creazioneChairRepository) {
-        this.conferenzaRepository = conferenzaRepository;
-        this.emailService = emailService;
-        this.utenteRepository = utenteRepository;
-        this.creazioneChairRepository = creazioneChairRepository;
-    }
+    @Autowired private ConferenzaRepository conferenzaRepository;
+    @Autowired private UtenteRepository utenteRepository;
+    @Autowired private CreazioneChairRepository creazioneChairRepository;
+    @Autowired private IscrizioneRepository iscrizioneRepository;
+    @Autowired private EmailService emailService;
     
+
     @Transactional
     public ConferenzaDTO creaConferenza(ConferenzaDTO dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
@@ -54,7 +49,6 @@ public class ConferenzaService {
 
         return mappaEntityToDto(salvata);
     }
-
 
     private Conferenza mappaDtoToEntity(ConferenzaDTO dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
@@ -100,12 +94,37 @@ public class ConferenzaService {
         return dto;
     }
     
-    public void inviaInviti(Long idConferenza, List<String> emailRevisori) {
+    public void inviaInviti(Long idConferenza, List<String> emailEditori) {
         Conferenza conferenza = conferenzaRepository.findById(idConferenza)
             .orElseThrow(() -> new RuntimeException("Conferenza non trovata"));
 
-        for (String email : emailRevisori) {
+        for (String email : emailEditori) {
             emailService.inviaInvito(email, conferenza.getTitolo(), conferenza.getIdConferenza());
+        }
+    }
+    
+    public void invitaMembriPc(Long idConferenza, List<String> emails) {
+        Conferenza conferenza = conferenzaRepository.findById(idConferenza)
+            .orElseThrow(() -> new RuntimeException("Conferenza non trovata"));
+
+        for (String email : emails) {
+            Optional<Utente> optUtente = utenteRepository.findByEmail(email);
+
+            if (optUtente.isPresent()) {
+                Utente utente = optUtente.get();
+
+                // Evita inviti doppi
+                Optional<Iscrizione> esistente = iscrizioneRepository
+                    .findByUtenteAndConferenza(utente, conferenza);
+
+                if (esistente.isPresent()) continue;
+
+                Iscrizione iscrizione = new Iscrizione();
+                iscrizione.setUtente(utente);
+                iscrizione.setConferenza(conferenza);
+                iscrizione.setStato("IN_ATTESA");
+                iscrizioneRepository.save(iscrizione);         
+            }
         }
     }
 }

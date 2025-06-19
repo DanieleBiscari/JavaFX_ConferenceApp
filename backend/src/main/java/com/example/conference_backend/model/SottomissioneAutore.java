@@ -1,20 +1,32 @@
 package com.example.conference_backend.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-@IdClass(SottomissioneAutoreId.class)
 public class SottomissioneAutore {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idSottomissione;
     @ManyToOne
+    @JoinColumn(name = "fk_idUtente", nullable = true)
     private Utente utente;
-    @Id
     @ManyToOne
+    @JoinColumn(name = "fk_idArticolo", nullable = false)
     private Articolo articolo;
 
+    public Long getIdSottomissione() {
+        return idSottomissione;
+    }
+
+    public void setIdSottomissione(Long idSottomissione) {
+        this.idSottomissione = idSottomissione;
+    }
+    
     public Utente getUtente() {
         return utente;
     }

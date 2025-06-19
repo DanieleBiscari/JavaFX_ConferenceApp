@@ -83,13 +83,13 @@ public class UtenteService {
         return repository.findByEmail(email).isPresent();
     }
     
-    public void creaUtenteConRuoloMembroPC(String email, String password, Long idConferenza) {
+    public void creaUtenteConRuoloEditore(String email, String password, Long idConferenza) {
         Utente utente = new Utente();
         utente.setEmail(email);
         utente.setPassword(passwordEncoder.encode(password));
         repository.save(utente);
 
-        Ruolo ruolo = ruoloRepository.findByNome("MembroPC")
+        Ruolo ruolo = ruoloRepository.findByNome("Editore")
                 .orElseThrow(() -> new RuntimeException("Ruolo non trovato"));
 
         Associato associato = new Associato();
@@ -103,6 +103,7 @@ public class UtenteService {
         Iscrizione iscrizione = new Iscrizione();
         iscrizione.setUtente(utente);
         iscrizione.setConferenza(conferenza);
+        iscrizione.setStato("ACCETTATA");
         iscrizioneRepository.save(iscrizione);
     }
 }

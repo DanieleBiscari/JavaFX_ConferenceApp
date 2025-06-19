@@ -1,7 +1,9 @@
 package com.example.conference_backend.controller;
 
 import com.example.conference_backend.dto.ConferenzaDTO;
-import com.example.conference_backend.dto.InvitaMembriDTO;
+import com.example.conference_backend.dto.InvitoDTO;
+import com.example.conference_backend.model.Iscrizione;
+import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.service.ConferenzaService;
 import com.example.conference_backend.service.EmailService;
 import com.example.conference_backend.service.UtenteService;
@@ -23,6 +25,8 @@ public class ConferenzaController {
     private UtenteService utenteService;
     @Autowired
     private EmailService emailService;
+    @Autowired
+    private IscrizioneRepository iscrizioneRepository;
 
     @PostMapping
     public ResponseEntity<ConferenzaDTO> crea(@RequestBody @Valid ConferenzaDTO dto) {
@@ -30,20 +34,20 @@ public class ConferenzaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
     }
     
-    @PostMapping("/invita")
-    public ResponseEntity<String> invitaMembri(@RequestBody InvitaMembriDTO dto) {
-        service.inviaInviti(dto.getIdConferenza(), dto.getEmailRevisori());
+    @PostMapping("/invita/email")
+    public ResponseEntity<String> invitaEditori(@RequestBody InvitoDTO dto) {
+        service.inviaInviti(dto.getIdConferenza(), dto.getEmails());
         return ResponseEntity.ok("Email inviate correttamente");
     }
     
     @GetMapping("/accetta_invito")
-    public ResponseEntity<String> accettaInvito(@RequestParam String email, @RequestParam Long idConferenza) {
+    public ResponseEntity<String> accettaInvitoEmail(@RequestParam String email, @RequestParam Long idConferenza) {
         if (utenteService.emailEsiste(email)) {
             return ResponseEntity.badRequest().body("L'utente con questa email è già registrato.");
         }
 
         String password = PasswordGenerator.generaPasswordSicura();
-        utenteService.creaUtenteConRuoloMembroPC(email, password, idConferenza);
+        utenteService.creaUtenteConRuoloEditore(email, password, idConferenza);
 
         emailService.inviaCredenziali(email, password);
         
@@ -60,5 +64,33 @@ public class ConferenzaController {
             "</div></body></html>";
 
         return ResponseEntity.ok().contentType(MediaType.TEXT_HTML).body(html);    }
+
+    @PostMapping("/invita")
+    public ResponseEntity<String> invitaMembriPC(@RequestBody InvitoDTO dto) {
+        service.invitaMembriPc(dto.getIdConferenza(), dto.getEmails());
+        return ResponseEntity.ok("Membri del PC invitati correttamente");
+    }
+    
+    @PostMapping("/invito/{id}/accetta")
+    public ResponseEntity<String> accettaInvito(@PathVariable Long id) {
+        Iscrizione iscrizione = iscrizioneRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Invito non trovato"));
+
+        iscrizione.setStato("ACCETTATA");
+        iscrizioneRepository.save(iscrizione);
+
+        return ResponseEntity.ok("Hai accettato l'invito");
+    }
+    
+    @PostMapping("/invito/{id}/rifiuta")
+    public ResponseEntity<String> rifiutaInvito(@PathVariable Long id) {
+        Iscrizione iscrizione = iscrizioneRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Invito non trovato"));
+
+        iscrizione.setStato("RIFIUTATA");
+        iscrizioneRepository.save(iscrizione);
+
+        return ResponseEntity.ok("Hai rifiutato l'invito");
+    }
 }
 

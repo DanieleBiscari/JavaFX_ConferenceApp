@@ -2,9 +2,9 @@ package com.example.conference_backend.dto;
 
 import java.util.List;
 
-public class InvitaMembriDTO {
+public class InvitoDTO {
     private Long idConferenza;
-    private List<String> emailRevisori;
+    private List<String> emails;
 
     public Long getIdConferenza() {
         return idConferenza;
@@ -14,13 +14,12 @@ public class InvitaMembriDTO {
         this.idConferenza = idConferenza;
     }
 
-    public List<String> getEmailRevisori() {
-        return emailRevisori;
+    public List<String> getEmails() {
+        return emails;
     }
 
-    public void setEmailRevisori(List<String> emailRevisori) {
-        this.emailRevisori = emailRevisori;
+    public void setEmails(List<String> emails) {
+        this.emails = emails;
     }
-
     
 }

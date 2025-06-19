@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Iscrizione {
@@ -15,6 +16,8 @@ public class Iscrizione {
     private Utente utente;
     @ManyToOne
     private Conferenza conferenza;
+    @NotBlank
+    private String stato;
 
     public Long getIdIscrizione() {
         return idIscrizione;
@@ -39,7 +42,14 @@ public class Iscrizione {
     public void setConferenza(Conferenza conferenza) {
         this.conferenza = conferenza;
     }
-    
-    
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
+
 }
 
