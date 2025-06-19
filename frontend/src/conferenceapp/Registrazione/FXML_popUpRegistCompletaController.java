@@ -31,6 +31,15 @@ public class FXML_popUpRegistCompletaController implements Initializable {
     @FXML
     private Stage stageRegistrazione;
     
+    @FXML
+    public void setRuoloSelezionato(String ruoli) {
+        this.ruoloSelezionato = ruoli;
+    }
+    @FXML
+    public void setStageRegistrazione(Stage stage) {
+        this.stageRegistrazione = stage;
+   }
+    
 
     /**
      * Initializes the controller class.
@@ -49,20 +58,13 @@ public class FXML_popUpRegistCompletaController implements Initializable {
             stageRegistrazione.close();
         }
         //aprire la home per il ruolo selezionato
-        apriHomePerRuolo(ruoloSelezionato);
+        apriHomePerRuolo();
     }
+    
     @FXML
-    public void setRuoloSelezionato(String ruoli) {
-        this.ruoloSelezionato = ruoli;
-    }
-    @FXML
-    public void setStageRegistrazione(Stage stage) {
-        this.stageRegistrazione = stage;
-   }
-    @FXML
-    public void apriHomePerRuolo(String ruoli) {
+    public void apriHomePerRuolo() {
         String fxmlPath = "";
-        switch (ruoli) {
+        switch (ruoloSelezionato) {
             case "Autore":
                 fxmlPath = "/conferenceapp/HomeAutore/FXML_HomeAutore.fxml";
                 break;
@@ -81,8 +83,9 @@ public class FXML_popUpRegistCompletaController implements Initializable {
             
             Stage homeStage = new Stage();
             homeStage.setScene(new Scene(root));
-            homeStage.setTitle("Home " + ruoli);
+            homeStage.setTitle("Home " + ruoloSelezionato);
             homeStage.show();
+            
         } catch(IOException e){
             e.printStackTrace();
         }

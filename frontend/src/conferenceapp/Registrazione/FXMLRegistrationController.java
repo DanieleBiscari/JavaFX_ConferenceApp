@@ -148,7 +148,7 @@ public class FXMLRegistrationController implements Initializable {
                 // Salva in uno stato l'utente loggato
                 StatoApplicazione.getInstance().setUtenteCorrente(utenteDto);
                 // Messaggio conferma registrazione
-                mostraPopupConfermaRegist();
+                mostraPopupConfermaRegist(ruoloSelezionato);
             } else {
                 mostraPopupErrore();
             }
@@ -175,10 +175,16 @@ public class FXMLRegistrationController implements Initializable {
         }
     }
      
-    private void mostraPopupConfermaRegist() {
+    private void mostraPopupConfermaRegist(String ruoloSelezionato) {
         try{
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_popUpRegistCompleta.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_popUpRegistCompleta.fxml"));
             Parent root = loader.load();
+            
+            FXML_popUpRegistCompletaController controller = loader.getController();
+            controller.setRuoloSelezionato(ruoloSelezionato);
+            
+            controller.setStageRegistrazione((Stage) btnRegistrati.getScene().getWindow());
+
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Registrazione avvenuta con successo");
@@ -189,6 +195,7 @@ public class FXMLRegistrationController implements Initializable {
           e.printStackTrace();
         }
     }
+    
     @FXML
     private void handleAccedi(MouseEvent event) {
     try {
