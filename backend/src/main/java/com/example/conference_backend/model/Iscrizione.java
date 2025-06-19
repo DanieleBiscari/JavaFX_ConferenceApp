@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 
@@ -16,6 +17,9 @@ public class Iscrizione {
     private Utente utente;
     @ManyToOne
     private Conferenza conferenza;
+    @ManyToOne
+    @JoinColumn(name = "fk_idArticoloDelega", nullable = true)
+    private Articolo articolo;
     @NotBlank
     private String stato;
 
@@ -50,6 +54,16 @@ public class Iscrizione {
     public void setStato(String stato) {
         this.stato = stato;
     }
+
+    public Articolo getArticolo() {
+        return articolo;
+    }
+
+    public void setArticolo(Articolo articolo) {
+        this.articolo = articolo;
+    }
+    
+    
 
 }
 
