@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.net.http.HttpResponse;
+import javafx.scene.control.Alert;
 
 
 /**
@@ -83,6 +84,7 @@ public class FXMLLoginController implements Initializable {
             LoginDTO loginRequest = new LoginDTO();
             loginRequest.setEmail(email);
             loginRequest.setPassword(password);
+            
 
             // Chiama il backend
              HttpResponse<String> response = HttpClientUtil.post("http://localhost:8081/api/auth/login", loginRequest);
@@ -97,7 +99,11 @@ public class FXMLLoginController implements Initializable {
                 // Puoi navigare a un'altra schermata, ad esempio:
                 // caricaHomeUtente();
             } else {
-//               mostraPopupErrore("Credenziali non valide.");
+               //mostraPopupErrore("Credenziali non valide.");
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("Errore di login");
+               alert.setContentText("Le informazioni inserite sono errate");
+               alert.showAndWait();
             }
 
         } catch (Exception e) {
@@ -105,7 +111,6 @@ public class FXMLLoginController implements Initializable {
             //mostraPopupErrore("Errore durante il login.");
         }
     }
-    @FXML
     private void mostraPopupErrore() {
       try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_ErroreCampoVuoto.fxml"));

@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -185,11 +186,11 @@ public class FXMLRegistrationController implements Initializable {
             
             controller.setStageRegistrazione((Stage) btnRegistrati.getScene().getWindow());
 
-
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Registrazione avvenuta con successo");
             dialogStage.setScene(new Scene(root));
             dialogStage.setResizable(false);
+            dialogStage.initStyle(StageStyle.UNDECORATED);
             dialogStage.show();
         } catch (Exception e) {
           e.printStackTrace();

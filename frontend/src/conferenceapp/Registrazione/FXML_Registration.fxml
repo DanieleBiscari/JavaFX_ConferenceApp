@@ -9,84 +9,89 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="524.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.Registrazione.FXMLRegistrationController">
    <children>
-      <Pane layoutX="128.0" layoutY="39.0" prefHeight="457.0" prefWidth="467.0" style="-fx-border-color: Black; -fx-border-radius: 15;">
+      <StackPane layoutX="121.0" layoutY="39.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="37.0" prefWidth="423.0">
+            <Pane prefHeight="457.0" prefWidth="467.0" style="-fx-border-color: Black; -fx-border-radius: 15;">
                <children>
-                  <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Nome" />
-                  <TextField fx:id="inputNome" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
+                  <HBox alignment="CENTER" prefHeight="37.0" prefWidth="423.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Nome" />
+                        <TextField fx:id="inputNome" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutY="37.0" prefHeight="37.0" prefWidth="423.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Cognome" />
+                        <TextField fx:id="inputCognome" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutY="74.0" prefHeight="37.0" prefWidth="423.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="E-mail" />
+                        <TextField fx:id="inputEmail" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutY="111.0" prefHeight="37.0" prefWidth="407.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="38.0" prefWidth="85.0" text="Data di nascita" textOverrun="CENTER_ELLIPSIS" />
+                        <DatePicker fx:id="inputDataNascita" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutY="148.0" prefHeight="37.0" prefWidth="423.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Telefono" />
+                        <TextField fx:id="inputTelefono" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutY="185.0" prefHeight="37.0" prefWidth="423.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Password" />
+                        <PasswordField fx:id="inputPassword" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutY="222.0" prefHeight="37.0" prefWidth="380.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="38.0" prefWidth="110.0" text="Conferma Password" />
+                        <PasswordField fx:id="inputPasswordConferma" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutY="259.0" prefHeight="37.0" prefWidth="423.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Affiliazione" />
+                        <TextField fx:id="inputAffiliazione" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="22.0" layoutY="296.0" prefHeight="37.0" prefWidth="436.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Ruolo" />
+                        <CheckBox fx:id="autoreCheckbox" mnemonicParsing="false" prefHeight="18.0" prefWidth="89.0" text="Autore" />
+                        <CheckBox fx:id="chairCheckbox" mnemonicParsing="false" prefHeight="18.0" prefWidth="76.0" text="Chair" />
+                        <CheckBox fx:id="mdpcCheckbox" mnemonicParsing="false" prefHeight="18.0" prefWidth="116.0" text="Membro del PC" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutY="333.0" prefHeight="38.0" prefWidth="394.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="38.0" prefWidth="105.0" text="Specializzazione" />
+                        <TextField fx:id="inputSpecializzazione" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="-7.0" layoutY="368.0" prefHeight="50.0" prefWidth="474.0">
+                     <children>
+                        <Button fx:id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#handleRegistrazione" prefHeight="37.0" prefWidth="110.0" text="Registrati" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BASELINE_CENTER" layoutX="-3.0" layoutY="426.0" prefHeight="50.0" prefWidth="474.0">
+                     <children>
+                        <Label fx:id="btnAccedi" onMouseClicked="#handleAccedi" style="-fx-underline: true; -fx-text-fill: blue; -fx-cursor: hand;" text="Accedi" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="37.0" prefHeight="37.0" prefWidth="423.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Cognome" />
-                  <TextField fx:id="inputCognome" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="74.0" prefHeight="37.0" prefWidth="423.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="E-mail" />
-                  <TextField fx:id="inputEmail" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="111.0" prefHeight="37.0" prefWidth="407.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="85.0" text="Data di nascita" textOverrun="CENTER_ELLIPSIS" />
-                  <DatePicker fx:id="inputDataNascita" prefHeight="26.0" prefWidth="192.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="148.0" prefHeight="37.0" prefWidth="423.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Telefono" />
-                  <TextField fx:id="inputTelefono" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="185.0" prefHeight="37.0" prefWidth="423.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Password" />
-                  <PasswordField fx:id="inputPassword" prefHeight="26.0" prefWidth="192.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="222.0" prefHeight="37.0" prefWidth="380.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="110.0" text="Conferma Password" />
-                  <PasswordField fx:id="inputPasswordConferma" prefHeight="26.0" prefWidth="192.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="259.0" prefHeight="37.0" prefWidth="423.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Affiliazione" />
-                  <TextField fx:id="inputAffiliazione" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="22.0" layoutY="296.0" prefHeight="37.0" prefWidth="436.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="54.0" prefWidth="70.0" text="Ruolo" />
-                  <CheckBox fx:id="autoreCheckbox" mnemonicParsing="false" prefHeight="18.0" prefWidth="89.0" text="Autore" />
-                  <CheckBox fx:id="chairCheckbox" mnemonicParsing="false" prefHeight="18.0" prefWidth="76.0" text="Chair" />
-                  <CheckBox fx:id="mdpcCheckbox" mnemonicParsing="false" prefHeight="18.0" prefWidth="116.0" text="Membro del PC" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutY="333.0" prefHeight="38.0" prefWidth="394.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="38.0" prefWidth="105.0" text="Specializzazione" />
-                  <TextField fx:id="inputSpecializzazione" alignment="CENTER" prefHeight="26.0" prefWidth="192.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="-7.0" layoutY="368.0" prefHeight="50.0" prefWidth="474.0">
-               <children>
-                  <Button fx:id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#handleRegistrazione" prefHeight="37.0" prefWidth="110.0" text="Registrati" />
-               </children>
-            </HBox>
-            <HBox alignment="BASELINE_CENTER" layoutX="-3.0" layoutY="426.0" prefHeight="50.0" prefWidth="474.0">
-               <children>
-                  <Label fx:id="btnAccedi" onMouseClicked="#handleAccedi" style="-fx-underline: true; -fx-text-fill: blue; -fx-cursor: hand;" text="Accedi" />
-               </children>
-            </HBox>
+            </Pane>
          </children>
-      </Pane>
+      </StackPane>
    </children>
 </AnchorPane>

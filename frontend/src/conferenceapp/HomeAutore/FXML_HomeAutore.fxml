@@ -8,50 +8,55 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="494.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeAutore.FXML_HomeAutoreController">
    <children>
-      <Pane layoutX="45.0" layoutY="52.0" prefHeight="390.0" prefWidth="681.0" style="-fx-border-color: black; -fx-border-radius: 15;">
+      <StackPane layoutX="45.0" layoutY="52.0">
          <children>
-            <ScrollPane layoutX="105.0" layoutY="24.0" prefHeight="153.0" prefWidth="471.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="471.0">
-                     <children>
-                        <TableView prefHeight="153.0" prefWidth="471.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
-            <HBox alignment="CENTER" layoutX="52.0" layoutY="276.0" prefHeight="100.0" prefWidth="589.0">
+            <Pane prefHeight="390.0" prefWidth="681.0" style="-fx-border-color: black; -fx-border-radius: 15;">
                <children>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="217.0">
+                  <ScrollPane layoutX="105.0" layoutY="24.0" prefHeight="153.0" prefWidth="471.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="471.0">
+                           <children>
+                              <TableView prefHeight="153.0" prefWidth="471.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+                  <HBox alignment="CENTER" layoutX="52.0" layoutY="276.0" prefHeight="100.0" prefWidth="589.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="155.0" text="Gestione profilo">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="247.0" />
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="234.0">
-                     <children>
-                        <Label fx:id="btnLogoutHomeAutore" alignment="CENTER_RIGHT" onMouseClicked="#handleLogout" prefHeight="39.0" prefWidth="161.0" style="-fx-underline: true; -fx-cursor: hand;" text="Logout" textAlignment="CENTER" textFill="RED">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
+                        <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="217.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="155.0" text="Gestione profilo">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="247.0" />
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="234.0">
+                           <children>
+                              <Label fx:id="btnLogoutHomeAutore" alignment="CENTER_RIGHT" onMouseClicked="#handleLogout" prefHeight="39.0" prefWidth="161.0" style="-fx-underline: true; -fx-cursor: hand;" text="Logout" textAlignment="CENTER" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
                   </HBox>
                </children>
-            </HBox>
+            </Pane>
          </children>
-      </Pane>
+      </StackPane>
    </children>
 </AnchorPane>
