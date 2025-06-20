@@ -111,6 +111,7 @@ public class FXMLRegistrationController implements Initializable {
             } else {
                 // Nessun ruolo selezionato: mostra un messaggio o blocca la registrazione
                 System.out.println("Seleziona un ruolo!");
+                mostraPopupErrore();
                 return;
             }
             
@@ -123,6 +124,16 @@ public class FXMLRegistrationController implements Initializable {
             mostraPopupErrore();
             return;
             }
+            
+            if (inputNome.getText().isEmpty() || inputCognome.getText().isEmpty() ||
+                inputEmail.getText().isEmpty() || inputPassword.getText().isEmpty() ||
+                inputPasswordConferma.getText().isEmpty() || inputTelefono.getText().isEmpty() ||
+                inputAffiliazione.getText().isEmpty() || inputSpecializzazione.getText().isEmpty() ||
+                inputDataNascita.getValue() == null) {
+
+                mostraPopupErrore();
+                return;
+                }
             
             
             // 2. Crea l'oggetto da mandare

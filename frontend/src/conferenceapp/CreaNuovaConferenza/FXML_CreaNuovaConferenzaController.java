@@ -6,7 +6,10 @@ package conferenceapp.CreaNuovaConferenza;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -15,12 +18,19 @@ import javafx.fxml.Initializable;
  */
 public class FXML_CreaNuovaConferenzaController implements Initializable {
 
+    @FXML
+    private Button btnConfermaCreazione;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }  
+
+    @FXML
+    private void handleConfermaCreazione(MouseEvent event) {
+        
+    }
 }
