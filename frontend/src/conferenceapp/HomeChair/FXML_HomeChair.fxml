@@ -34,6 +34,7 @@
                                   <columns>
                                     <TableColumn fx:id="colTitolo" prefWidth="121.0" text="Titolo" />
                                     <TableColumn fx:id="colData" prefWidth="121.0" text="Data" />
+                                    <TableColumn fx:id="colModifica" prefWidth="112.0" />
                                   </columns>
                                 </TableView>
                            </children>

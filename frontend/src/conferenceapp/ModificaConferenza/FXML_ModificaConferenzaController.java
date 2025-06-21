@@ -4,6 +4,7 @@
  */
 package conferenceapp.ModificaConferenza;
 
+import conferenceapp.HomeChair.Conferenza;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -48,5 +49,12 @@ public class FXML_ModificaConferenzaController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+    private Conferenza conferenza;
+
+    public void setConferenza(Conferenza conferenza) {
+        this.conferenza = conferenza;
+
+    }
+
+
 }

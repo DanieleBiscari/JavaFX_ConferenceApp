@@ -6,6 +6,7 @@ package conferenceapp.HomeChair;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import conferenceapp.ModificaConferenza.FXML_ModificaConferenzaController;
 import conferenceapp.State.StatoApplicazione;
 import conferenceapp.dto.UtenteDTO;
 import conferenceapp.utils.HttpClientUtil;
@@ -23,6 +24,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -48,6 +50,8 @@ public class FXML_HomeChairController implements Initializable {
     private TableColumn<Conferenza, String> colData;
     
     private final ObservableList<Conferenza> conferenzeList = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<?, ?> colModifica;
     
     
     private void caricaDatiConferenze() {
@@ -82,6 +86,9 @@ public class FXML_HomeChairController implements Initializable {
 
         // Carica i dati da backend
          new Thread(this::caricaDatiConferenze).start();  // Esegui in background
+        
+        //Pulsante di modifica conferenza
+        addButtonToTable();
     }  
 
     @FXML
@@ -107,6 +114,58 @@ public class FXML_HomeChairController implements Initializable {
         stage.show();
 
     } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+    @FXML
+    private void addButtonToTable() {
+    TableColumn<Conferenza, Void> colBtn = new TableColumn<>("Azioni");
+
+    colBtn.setCellFactory(param -> new TableCell<>() {
+        private final Button btn = new Button("Modifica");
+
+        {
+            btn.setOnAction(event -> {
+                Conferenza conferenza = getTableView().getItems().get(getIndex());
+                System.out.println("Modifica conferenza: " + conferenza.getTitolo());
+                apriModificaConferenza(conferenza);
+            });
+        }
+
+        @Override
+        protected void updateItem(Void item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty || getTableRow() == null || getTableRow().getItem() == null) {
+                setGraphic(null);  // niente bottone se riga vuota o nulla
+            } else {
+                setGraphic(btn);   // mostra bottone solo se riga valida
+            }
+        }
+    });
+
+        //La colonna si aggiunge solo una volta
+        if (!tableConferenze.getColumns().contains(colBtn)) {
+        tableConferenze.getColumns().add(colBtn);
+        }
+    }
+
+
+    @FXML
+    private void apriModificaConferenza(Conferenza conferenza) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_ModificaConferenza.fxml"));
+        Parent root = loader.load();
+
+        // Passa la conferenza al controller
+        FXML_ModificaConferenzaController controller = loader.getController();
+        controller.setConferenza(conferenza);
+
+        Stage stage = new Stage();
+        stage.setTitle("Modifica Conferenza");
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e) {
         e.printStackTrace();
     }
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -35,6 +36,19 @@
                               <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="114.0" text="Modifica deadline" textAlignment="CENTER" wrapText="true" />
                            </children>
                         </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="14.0" layoutY="14.0" prefHeight="227.0" prefWidth="433.0">
+                     <children>
+                        <HBox prefHeight="49.0" prefWidth="434.0">
+                           <children>
+                              <TextField fx:id="txtTitolo" prefHeight="38.0" prefWidth="194.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="49.0" prefWidth="434.0" />
+                        <HBox prefHeight="49.0" prefWidth="434.0" />
+                        <HBox prefHeight="49.0" prefWidth="434.0" />
+                        <HBox prefHeight="49.0" prefWidth="434.0" />
                      </children>
                   </VBox>
                </children>
