@@ -24,6 +24,14 @@ public class Utente {
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Associato> ruoliAssociati = new ArrayList<>();
 
+    public Utente() {
+    }
+    
+    
+    public Utente(Long id) {
+        this.idUtente = id;
+    }
+
     public Long getIdUtente() {
         return idUtente;
     }

@@ -10,7 +10,7 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UtenteDTO {
-
+    private Long id;
     @NotBlank(message = "Il nome è obbligatorio")
     private String nome;
 
@@ -66,7 +66,8 @@ public class UtenteDTO {
         this.email = email;
     }
 
-    public UtenteDTO(String nome, String cognome, String dataNascita, String telefono, String affiliazione, String specializzazione, String email, List<String> ruoli) {
+    public UtenteDTO(Long id, String nome, String cognome, String dataNascita, String telefono, String affiliazione, String specializzazione, String email, List<String> ruoli) {
+        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dataNascita;
@@ -151,4 +152,14 @@ public class UtenteDTO {
     public void setRuoli(List<String> ruoli) {
         this.ruoli = ruoli;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
 }

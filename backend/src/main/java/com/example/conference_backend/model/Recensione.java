@@ -6,8 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 
 @Entity
 public class Recensione {
@@ -16,9 +14,7 @@ public class Recensione {
     private Long idRecensione;
     private String esito;
     private String suggerimenti;
-    private String esperienza;
-    @Min(-3)
-    @Max(3)
+    private int esperienza;
     private int score;
     private String riassunto;
     @ManyToOne
@@ -52,11 +48,11 @@ public class Recensione {
         this.suggerimenti = suggerimenti;
     }
 
-    public String getEsperienza() {
+    public int getEsperienza() {
         return esperienza;
     }
 
-    public void setEsperienza(String esperienza) {
+    public void setEsperienza(int esperienza) {
         this.esperienza = esperienza;
     }
 

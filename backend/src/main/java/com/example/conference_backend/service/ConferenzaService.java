@@ -6,6 +6,7 @@ import com.example.conference_backend.model.Conferenza;
 import com.example.conference_backend.model.CreazioneChair;
 import com.example.conference_backend.model.Iscrizione;
 import com.example.conference_backend.model.Utente;
+import com.example.conference_backend.repository.AssociatoRepository;
 import com.example.conference_backend.repository.ConferenzaRepository;
 import com.example.conference_backend.repository.CreazioneChairRepository;
 import com.example.conference_backend.repository.IscrizioneRepository;
@@ -126,6 +127,10 @@ public class ConferenzaService {
                 iscrizioneRepository.save(iscrizione);         
             }
         }
+    }
+    
+    public List<Conferenza> getConferenzeByChair(Long idUtente) {
+        return creazioneChairRepository.findConferenzeByChairId(idUtente);
     }
 }
 

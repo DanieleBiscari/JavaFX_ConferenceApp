@@ -14,6 +14,7 @@ public class VisualizzazioneChair {
     @Id
     @ManyToOne
     private Articolo articolo;
+    private int posizioneGraduatoria;
 
     public Utente getUtente() {
         return utente;
@@ -30,7 +31,14 @@ public class VisualizzazioneChair {
     public void setArticolo(Articolo articolo) {
         this.articolo = articolo;
     }
-    
+
+    public int getPosizioneGraduatoria() {
+        return posizioneGraduatoria;
+    }
+
+    public void setPosizioneGraduatoria(int posizioneGraduatoria) {
+        this.posizioneGraduatoria = posizioneGraduatoria;
+    }
     
 }
 

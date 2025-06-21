@@ -34,6 +34,7 @@ public class AuthService {
                 String dataNascitaStr = u.getDataNascita() != null ? u.getDataNascita().toString() : null;
 
                 return new UtenteDTO(
+                        u.getIdUtente(),
                         u.getNome(), 
                         u.getCognome(),
                         dataNascitaStr, 

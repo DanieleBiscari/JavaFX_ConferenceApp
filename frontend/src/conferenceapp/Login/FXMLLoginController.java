@@ -96,8 +96,10 @@ public class FXMLLoginController implements Initializable {
                 // Salva in uno stato l'utente loggato
                 StatoApplicazione.getInstance().setUtenteCorrente(utente);
                 UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
-                // Puoi navigare a un'altra schermata, ad esempio:
-                // caricaHomeUtente();
+                Stage stage = (Stage) bntAccedi.getScene().getWindow();
+                stage.close();
+                String ruoloFromDatabase = utenteCorrente.getRuoli().getFirst();
+                apriHomePerRuolo(ruoloFromDatabase);
             } else {
                //mostraPopupErrore("Credenziali non valide.");
                Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -111,6 +113,36 @@ public class FXMLLoginController implements Initializable {
             //mostraPopupErrore("Errore durante il login.");
         }
     }
+    
+    public void apriHomePerRuolo(String ruoloFromDatabase) {
+        String fxmlPath = "";
+        switch (ruoloFromDatabase) {
+            case "Autore":
+                fxmlPath = "/conferenceapp/HomeAutore/FXML_HomeAutore.fxml";
+                break;
+            case "Chair":
+                fxmlPath = "/conferenceapp/HomeChair/FXML_HomeChair.fxml";
+                break;
+            case "MembroPC":
+                fxmlPath = "/conferenceapp/HomeMembroDelPC/FXML_HomeMembroDelPC.fxml";
+                break; 
+            default:
+                return;
+        }
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            
+            Stage homeStage = new Stage();
+            homeStage.setScene(new Scene(root));
+            homeStage.setTitle("Home " + ruoloFromDatabase);
+            homeStage.show();
+            
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
     private void mostraPopupErrore() {
       try {
           FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_ErroreCampoVuoto.fxml"));

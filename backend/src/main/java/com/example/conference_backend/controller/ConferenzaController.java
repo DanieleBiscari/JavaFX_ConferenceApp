@@ -2,6 +2,7 @@ package com.example.conference_backend.controller;
 
 import com.example.conference_backend.dto.ConferenzaDTO;
 import com.example.conference_backend.dto.InvitoDTO;
+import com.example.conference_backend.model.Conferenza;
 import com.example.conference_backend.model.Iscrizione;
 import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.service.ConferenzaService;
@@ -9,6 +10,7 @@ import com.example.conference_backend.service.EmailService;
 import com.example.conference_backend.service.UtenteService;
 import com.example.conference_backend.utils.PasswordGenerator;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -91,6 +93,12 @@ public class ConferenzaController {
         iscrizioneRepository.save(iscrizione);
 
         return ResponseEntity.ok("Hai rifiutato l'invito");
+    }
+    
+    @GetMapping("/{idUtente}")
+    public ResponseEntity<List<Conferenza>> getConferenzeByChair(@PathVariable Long idUtente) {
+        List<Conferenza> conferenze = service.getConferenzeByChair(idUtente);
+        return ResponseEntity.ok(conferenze);
     }
 }
 
