@@ -1,5 +1,6 @@
 package com.example.conference_backend.service;
 
+import com.example.conference_backend.dto.InvitoMembroPcDTO;
 import com.example.conference_backend.model.Articolo;
 import com.example.conference_backend.model.Conferenza;
 import com.example.conference_backend.model.GestioneRevisore;
@@ -12,6 +13,7 @@ import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.repository.UtenteRepository;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +71,17 @@ public class RevisoreService {
             gestione.setArticolo(articolo);
             gestioneRevisoreRepository.save(gestione);
         }
+    }
+    
+    public List<InvitoMembroPcDTO> getInvitiByUtente(Long idUtente) {
+        List<Iscrizione> iscrizioni = iscrizioneRepository.findByUtente_IdUtente(idUtente);
+        return iscrizioni.stream().map(iscrizione -> new InvitoMembroPcDTO(
+                iscrizione.getIdIscrizione(),
+                iscrizione.getStato(),
+                iscrizione.getConferenza().getTitolo(),
+                iscrizione.getConferenza().getLuogo(),
+                iscrizione.getConferenza().getDataInizio().toString()
+        )).collect(Collectors.toList());
     }
 }
 

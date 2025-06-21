@@ -28,7 +28,7 @@
                         </HBox>
                         <HBox alignment="TOP_CENTER" prefHeight="48.0" prefWidth="319.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="172.0" text="Inviti">
+                              <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="172.0" text="Inviti" onMouseClicked="#handleInviti">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>

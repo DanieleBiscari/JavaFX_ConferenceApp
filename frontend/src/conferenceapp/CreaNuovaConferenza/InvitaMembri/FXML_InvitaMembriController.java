@@ -4,6 +4,8 @@
  */
 package conferenceapp.CreaNuovaConferenza.InvitaMembri;
 
+import conferenceapp.HomeChair.Conferenza;
+import conferenceapp.utils.HttpClientUtil;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -31,6 +33,8 @@ public class FXML_InvitaMembriController implements Initializable {
     @FXML
     private ListView<String> listaEmail;
     
+    private Conferenza conferenza;
+    
     private ObservableList<String> emailList;
     /**
      * Initializes the controller class.
@@ -44,22 +48,43 @@ public class FXML_InvitaMembriController implements Initializable {
 
     @FXML
     private void inviaInviti(ActionEvent event) {
-        // Qui puoi ciclare su emailList per inviare gli inviti
-        for (String email : emailList) {
-            System.out.println("Invio invito a: " + email);
+        if (conferenza == null) {
+            System.out.println("Conferenza non impostata");
+            return;
         }
+        if (emailList.isEmpty()) {
+            System.out.println("Nessuna email da invitare");
+            return;
+        }
+
+        InvitoRequest requestBody = new InvitoRequest(conferenza.getIdConferenza(), emailList);
+
+        // Esegui chiamata in un thread separato per non bloccare UI
+        new Thread(() -> {
+            try {
+                var response = HttpClientUtil.post("http://localhost:8081/api/conferenza/invita", requestBody);
+                if (response.statusCode() == 200 || response.statusCode() == 201) {
+                    System.out.println("Inviti inviati con successo");
+                } else {
+                    System.err.println("Errore invio inviti: " + response.body());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+    
+    public void setConferenza(Conferenza conferenza) {
+        this.conferenza = conferenza;
     }
 
     @FXML
     private void aggEmail(ActionEvent event) {
         String email = emailTextField.getText().trim();
-         // Controllo che non sia vuota e non sia già presente
         if (!email.isEmpty() && !emailList.contains(email)) {
             emailList.add(email);
             emailTextField.clear();
         }
-        emailList.clear();
     }
-        
-    
+      
 }

@@ -4,6 +4,7 @@
  */
 package conferenceapp.ModificaConferenza;
 
+import conferenceapp.CreaNuovaConferenza.InvitaMembri.FXML_InvitaMembriController;
 import conferenceapp.HomeChair.Conferenza;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ public class FXML_ModificaConferenzaController implements Initializable {
 
     @FXML
     private Button btnInvitaMemPC;
+    private Conferenza conferenza;
 
     /**
      * Initializes the controller class.
@@ -37,8 +39,12 @@ public class FXML_ModificaConferenzaController implements Initializable {
     @FXML
     private void handleInvitaMemPC(MouseEvent event) {
         try{
-            Parent invitaMemPCRoot = FXMLLoader.load(getClass().getResource("/conferenceapp/CreaNuovaConferenza/InvitaMembri/FXML_InvitaMembri.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/CreaNuovaConferenza/InvitaMembri/FXML_InvitaMembri.fxml"));
+            Parent invitaMemPCRoot = loader.load();  // carica la view
             Scene invitaMemPCScene = new Scene(invitaMemPCRoot);
+
+            FXML_InvitaMembriController controller = loader.getController();
+            controller.setConferenza(conferenza);
 
             Stage stage = (Stage) btnInvitaMemPC.getScene().getWindow();
 
@@ -49,11 +55,9 @@ public class FXML_ModificaConferenzaController implements Initializable {
             e.printStackTrace();
         }
     }
-    private Conferenza conferenza;
 
     public void setConferenza(Conferenza conferenza) {
         this.conferenza = conferenza;
-
     }
 
 

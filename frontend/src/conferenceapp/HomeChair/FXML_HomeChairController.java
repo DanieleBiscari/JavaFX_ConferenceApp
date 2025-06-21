@@ -117,11 +117,12 @@ public class FXML_HomeChairController implements Initializable {
         e.printStackTrace();
     }
     }
+    
     @FXML
     private void addButtonToTable() {
-    TableColumn<Conferenza, Void> colBtn = new TableColumn<>("Azioni");
+        TableColumn<Conferenza, Void> colBtn = new TableColumn<>("Azioni");
 
-    colBtn.setCellFactory(param -> new TableCell<>() {
+        colBtn.setCellFactory(param -> new TableCell<>() {
         private final Button btn = new Button("Modifica");
 
         {
@@ -146,7 +147,7 @@ public class FXML_HomeChairController implements Initializable {
 
         //La colonna si aggiunge solo una volta
         if (!tableConferenze.getColumns().contains(colBtn)) {
-        tableConferenze.getColumns().add(colBtn);
+            tableConferenze.getColumns().add(colBtn);
         }
     }
 

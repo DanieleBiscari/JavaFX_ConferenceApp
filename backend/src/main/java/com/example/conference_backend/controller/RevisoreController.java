@@ -1,9 +1,11 @@
 package com.example.conference_backend.controller;
 
 import com.example.conference_backend.dto.DelegaDTO;
+import com.example.conference_backend.dto.InvitoMembroPcDTO;
 import com.example.conference_backend.model.Iscrizione;
 import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.service.RevisoreService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +40,11 @@ public class RevisoreController {
         iscrizioneRepository.save(iscrizione);
 
         return ResponseEntity.ok("Hai rifiutato l'invito");
+    }
+    
+    @GetMapping("/inviti/{idMembroPc}")
+    public ResponseEntity<List<InvitoMembroPcDTO>> getInvitiByUtente(@PathVariable Long idMembroPc) {
+        List<InvitoMembroPcDTO> inviti = service.getInvitiByUtente(idMembroPc);
+        return ResponseEntity.ok(inviti);
     }
 }

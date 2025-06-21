@@ -84,6 +84,7 @@ public class FXMLRegistrationController implements Initializable {
         }
         });
     }    
+
     @FXML
     private void handleRegistrazione(MouseEvent event) {
         try {

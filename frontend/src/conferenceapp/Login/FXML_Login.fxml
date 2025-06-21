@@ -1,63 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="236.0" prefWidth="409.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.Login.FXMLLoginController">
-   <children>
-      <StackPane layoutX="41.0" layoutY="24.0">
-         <children>
-            <VBox style="-fx-border-color: Black; -fx-border-radius: 20; -fx-padding: 5; -fx-background-color: #fff;">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="314.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="38.0" prefWidth="61.0" text="E-mail">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
+<AnchorPane prefHeight="280.0" prefWidth="450.0" style="-fx-background-color: #f5f5f5;"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="conferenceapp.Login.FXMLLoginController">
+
+    <children>
+        <VBox spacing="15" alignment="CENTER"
+              style="-fx-border-color: #cccccc; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20; -fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);"
+              AnchorPane.topAnchor="0"
+              AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0"
+              AnchorPane.rightAnchor="0"
+        >
+
+            <children>
+                <!-- Form Grid -->
+                <GridPane hgap="10" vgap="15" maxWidth="400">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" minWidth="90"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <children>
+                        <!-- Email -->
+                        <Label text="E-mail:" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
                         </Label>
-                        <TextField fx:id="inputEmail" alignment="CENTER" prefHeight="26.0" prefWidth="194.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="314.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="38.0" prefWidth="61.0" text="Password" />
-                        <PasswordField fx:id="inputPass" alignment="CENTER" prefHeight="26.0" prefWidth="194.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="37.0" prefWidth="302.0">
-                     <children>
-                        <Button fx:id="bntAccedi" mnemonicParsing="false" onMouseClicked="#handleLogin" text="Accedi" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="302.0">
-                     <children>
+                        <TextField fx:id="inputEmail" promptText="Inserisci la tua email"
+                                   GridPane.rowIndex="0" GridPane.columnIndex="1"
+                                   style="-fx-background-radius: 5;" />
+
+                        <!-- Password -->
+                        <Label text="Password:" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <PasswordField fx:id="inputPass" promptText="Inserisci la password"
+                                       GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                       style="-fx-background-radius: 5;" />
+                    </children>
+                </GridPane>
+
+                <!-- Bottone Accedi -->
+                <Button fx:id="bntAccedi" mnemonicParsing="false" onMouseClicked="#handleLogin"
+                        text="Accedi"
+                        prefWidth="160.0" prefHeight="36.0"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" />
+
+                <!-- Registrazione -->
+                <VBox spacing="5" alignment="CENTER">
+                    <children>
                         <Label text="Non hai un account?">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
                         </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="BASELINE_CENTER" prefHeight="31.0" prefWidth="302.0">
-                     <children>
-                        <Label fx:id="bntRegistrati" onMouseClicked="#apriRegistrazione" style="-fx-underline: true; -fx-text-fill: blue; -fx-cursor: hand;" text="Registrati" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </StackPane>
-   </children>
+                        <Label fx:id="bntRegistrati" onMouseClicked="#apriRegistrazione"
+                               text="Crea un nuovo account"
+                               style="-fx-underline: true; -fx-text-fill: #1976D2; -fx-cursor: hand; -fx-font-size: 13;" />
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>
