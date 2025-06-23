@@ -12,6 +12,8 @@ import com.example.conference_backend.repository.ConferenzaRepository;
 import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.repository.RuoloRepository;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -72,11 +74,18 @@ public class UtenteService {
             associatoRepository.save(associato);
         }
         
+        String dataNascitaStr = salvato.getDataNascita() != null ? salvato.getDataNascita().toString() : null;
+        
         return new UtenteDTO(
-            salvato.getIdUtente(), 
+            salvato.getIdUtente(),
             salvato.getNome(), 
-            salvato.getCognome(), 
-            salvato.getEmail());
+            salvato.getCognome(),
+            dataNascitaStr, 
+            salvato.getTelefono(), 
+            salvato.getAffiliazione(), 
+            salvato.getSpecializzazione(), 
+            salvato.getEmail(), 
+            dto.getRuoli());
     }
     
     public boolean emailEsiste(String email) {

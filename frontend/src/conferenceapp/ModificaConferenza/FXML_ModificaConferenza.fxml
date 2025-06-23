@@ -18,7 +18,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="236.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="114.0" text="Gestione articoli" />
+                              <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="114.0" text="Gestione articoli" onMouseClicked="#handleGestioneArticoli" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="236.0">

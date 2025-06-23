@@ -47,7 +47,7 @@ public class FXML_InvitiMembroPCController implements Initializable {
                                 HBox container = new HBox(10);
                                 Text info = new Text(invito.toString());
 
-                                if ("IN_ATTESA".equals(invito.getStato())) {
+                                if ("IN_ATTESA".equals(invito.getStato()) || "DELEGA".equals(invito.getStato()) ) {
                                     Button accetta = new Button("Accetta");
                                     Button rifiuta = new Button("Rifiuta");
 

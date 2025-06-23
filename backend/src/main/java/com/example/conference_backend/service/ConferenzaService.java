@@ -1,19 +1,24 @@
 package com.example.conference_backend.service;
 
+import com.example.conference_backend.dto.ArticoloConRevisoreDTO;
 import com.example.conference_backend.dto.ConferenzaDTO;
 import com.example.conference_backend.exception.ConferenzaGiaEsistenteException;
+import com.example.conference_backend.model.Articolo;
 import com.example.conference_backend.model.Conferenza;
 import com.example.conference_backend.model.CreazioneChair;
+import com.example.conference_backend.model.GestioneRevisore;
 import com.example.conference_backend.model.Iscrizione;
 import com.example.conference_backend.model.Utente;
-import com.example.conference_backend.repository.AssociatoRepository;
+import com.example.conference_backend.repository.ArticoloRepository;
 import com.example.conference_backend.repository.ConferenzaRepository;
 import com.example.conference_backend.repository.CreazioneChairRepository;
+import com.example.conference_backend.repository.GestioneRevisoreRepository;
 import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +30,8 @@ public class ConferenzaService {
     @Autowired private UtenteRepository utenteRepository;
     @Autowired private CreazioneChairRepository creazioneChairRepository;
     @Autowired private IscrizioneRepository iscrizioneRepository;
+    @Autowired private GestioneRevisoreRepository gestioneRevisoreRepository;
+    @Autowired private ArticoloRepository articoloRepository;
     @Autowired private EmailService emailService;
     
 
@@ -131,6 +138,38 @@ public class ConferenzaService {
     
     public List<Conferenza> getConferenzeByChair(Long idUtente) {
         return creazioneChairRepository.findConferenzeByChairId(idUtente);
+    }
+    
+    public List<Conferenza> getAllConferenze() {
+        return conferenzaRepository.findAll();
+    }
+    
+    public List<ArticoloConRevisoreDTO> getArticoliConRevisoriPerConferenza(Long conferenzaId) {
+        List<Articolo> articoli = articoloRepository.findByConferenzaIdConferenza(conferenzaId);
+        List<ArticoloConRevisoreDTO> risultati = new ArrayList<>();
+
+        for (Articolo articolo : articoli) {
+            Optional<GestioneRevisore> assegnazione = gestioneRevisoreRepository.findByArticolo(articolo);
+            Utente revisore = assegnazione.map(GestioneRevisore::getUtente).orElse(null);
+
+            ArticoloConRevisoreDTO dto = new ArticoloConRevisoreDTO();
+            dto.setArticoloId(articolo.getIdArticolo());
+            dto.setTitoloArticolo(articolo.getTitolo());
+
+            if (revisore != null) {
+                dto.setRevisoreId(revisore.getIdUtente());
+                dto.setNomeRevisore(revisore.getNome());
+                dto.setCognomeRevisore(revisore.getCognome());
+            } else {
+                dto.setRevisoreId(null);
+                dto.setNomeRevisore(null);
+                dto.setCognomeRevisore(null);
+            }
+
+            risultati.add(dto);
+        }
+
+        return risultati;
     }
 }
 

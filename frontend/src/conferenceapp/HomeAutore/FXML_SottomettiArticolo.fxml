@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml" fx:controller="conferenceapp.HomeAutore.FXML_SottomettiArticoloController">
+    <children>
+        <VBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <children>
+                <Label text="Sottometti Articolo" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+                <TextField fx:id="titoloField" promptText="Titolo"/>
+                <TextArea fx:id="abstractField" promptText="Abstract"/>
+                <TextArea fx:id="testoField" promptText="Testo dell'articolo"/>
+                <TextField fx:id="pdfField" promptText="Nome file PDF"/>
+                <TextField fx:id="affiliazioneField" promptText="Affiliazione"/>
+
+                <Button text="Sottometti" onAction="#handleInviaArticolo"/>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
+

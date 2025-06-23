@@ -56,4 +56,15 @@ public class FXML_HomeMembroDelPCController implements Initializable {
         invitiStage.show();
     }
     
+    @FXML
+    private void handleGestioneRevisioni() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/HomeMembroDelPC/FXML_GestioneRevisioni.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        stage.setTitle("Gestione Revisioni");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    
 }

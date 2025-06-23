@@ -59,6 +59,21 @@ public class FXML_ModificaConferenzaController implements Initializable {
     public void setConferenza(Conferenza conferenza) {
         this.conferenza = conferenza;
     }
+    
+    @FXML
+    private void handleGestioneArticoli(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_GestioneArticoli.fxml"));
+            Parent root = loader.load();
+            FXML_GestioneArticoliController controller = loader.getController();
+            controller.setConferenzaId(conferenza.getIdConferenza());
 
-
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Gestione Articoli e Revisori");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

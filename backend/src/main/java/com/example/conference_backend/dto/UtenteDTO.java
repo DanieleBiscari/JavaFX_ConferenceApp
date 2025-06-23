@@ -61,6 +61,7 @@ public class UtenteDTO {
     }
 
     public UtenteDTO(Long id, String nome, String cognome, String email) {
+        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;

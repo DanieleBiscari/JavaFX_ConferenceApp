@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.ModificaConferenza.FXML_GestioneArticoliController" prefWidth="600" prefHeight="400">
+    <children>
+        <TableView fx:id="tableArticoli" layoutX="14" layoutY="14" prefWidth="572" prefHeight="300">
+            <columns>
+                <TableColumn fx:id="colTitolo" text="Titolo Articolo" prefWidth="200"/>
+                <TableColumn fx:id="colRevisore" text="Revisore" prefWidth="200"/>
+                <TableColumn fx:id="colAzione" text="Azione" prefWidth="150"/>
+            </columns>
+        </TableView>
+
+        <Button fx:id="btnAggiorna" layoutX="14" layoutY="330" text="Aggiorna" prefWidth="100"/>
+    </children>
+</AnchorPane>

@@ -19,7 +19,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="82.0" prefWidth="319.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="172.0" text="Gestione revisioni">
+                              <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="172.0" text="Gestione revisioni" onAction="#handleGestioneRevisioni">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>

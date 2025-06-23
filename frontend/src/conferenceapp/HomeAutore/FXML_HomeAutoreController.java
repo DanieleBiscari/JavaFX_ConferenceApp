@@ -1,58 +1,63 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package conferenceapp.HomeAutore;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import conferenceapp.dto.ConferenzaDTO;
+import conferenceapp.utils.HttpClientUtil;
+import conferenceapp.State.StatoApplicazione;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-/**
- * FXML Controller class
- *
- * @author alfon
- */
+
+import java.io.IOException;
+import java.net.URL;
+import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+
 public class FXML_HomeAutoreController implements Initializable {
 
+    @FXML private TableView<ConferenzaDTO> tableConferenze;
+    @FXML private TableColumn<ConferenzaDTO, String> colTitolo, colLuogo, colDataInizio, colDataFine, colTopic;
+    @FXML private Label btnLogoutHomeAutore;
 
-    @FXML
-    private Label btnLogoutHomeAutore;
-    /**
-     * Initializes the controller class.
-     */
+    private ObservableList<ConferenzaDTO> conferenzeList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        colTitolo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTitolo()));
+        colLuogo.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getLuogo()));
+        colDataInizio.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDataInizio()));
+        colDataFine.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDataFine()));
+        colTopic.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getTopic()));
+
+        try {
+            HttpResponse<String> response = HttpClientUtil.get("http://localhost:8081/api/conferenza");
+            ObjectMapper mapper = new ObjectMapper();
+            List<ConferenzaDTO> conferenze = mapper.readValue(response.body(), new TypeReference<>() {});
+            conferenzeList.setAll(conferenze);
+            tableConferenze.setItems(conferenzeList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void handleLogout(MouseEvent event) {
         try {
-            // Carica il file FXML della registrazione
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/Registrazione/FXML_Registration.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/Login/FXML_Login.fxml"));
             Parent root = loader.load();
-
-            // Crea una nuova scena con il layout della registrazione
-            Scene registrazioneScene = new Scene(root);
-
-            // Prendi lo stage dalla sorgente evento (cioè finestra corrente)
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Imposta la scena della registrazione sulla finestra attuale
-            stage.setScene(registrazioneScene);
+            Stage stage = (Stage) btnLogoutHomeAutore.getScene().getWindow();
+            stage.setScene(new Scene(root));
             stage.setTitle("Registrazione");
             stage.show();
         } catch (IOException e) {
@@ -60,4 +65,25 @@ public class FXML_HomeAutoreController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleSottomettiArticolo() {
+        ConferenzaDTO selezionata = tableConferenze.getSelectionModel().getSelectedItem();
+        if (selezionata == null) {
+            new Alert(Alert.AlertType.WARNING, "Seleziona una conferenza").showAndWait();
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/HomeAutore/FXML_SottomettiArticolo.fxml"));
+            Parent root = loader.load();
+            FXML_SottomettiArticoloController controller = loader.getController();
+            controller.setConferenza(selezionata);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Sottometti Articolo");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

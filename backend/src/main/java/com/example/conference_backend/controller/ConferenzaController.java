@@ -1,5 +1,6 @@
 package com.example.conference_backend.controller;
 
+import com.example.conference_backend.dto.ArticoloConRevisoreDTO;
 import com.example.conference_backend.dto.ConferenzaDTO;
 import com.example.conference_backend.dto.InvitoDTO;
 import com.example.conference_backend.model.Conferenza;
@@ -34,6 +35,11 @@ public class ConferenzaController {
     public ResponseEntity<ConferenzaDTO> crea(@RequestBody @Valid ConferenzaDTO dto) {
         ConferenzaDTO creato = service.creaConferenza(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
+    }
+    
+    @GetMapping
+    public List<Conferenza> getAllConferenze() {
+        return service.getAllConferenze();
     }
     
     @PostMapping("/invita/email")
@@ -99,6 +105,13 @@ public class ConferenzaController {
     public ResponseEntity<List<Conferenza>> getConferenzeByChair(@PathVariable Long idUtente) {
         List<Conferenza> conferenze = service.getConferenzeByChair(idUtente);
         return ResponseEntity.ok(conferenze);
+    }
+    
+    @GetMapping("/{id}/articoli-con-revisori")
+    public ResponseEntity<List<ArticoloConRevisoreDTO>> getArticoliConRevisori(
+            @PathVariable Long id) {
+        List<ArticoloConRevisoreDTO> risultato = service.getArticoliConRevisoriPerConferenza(id);
+        return ResponseEntity.ok(risultato);
     }
 }
 
