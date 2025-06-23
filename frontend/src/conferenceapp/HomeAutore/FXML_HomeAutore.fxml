@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="494.0" prefWidth="772.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="conferenceapp.HomeAutore.FXML_HomeAutoreController">
+<AnchorPane prefHeight="494.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeAutore.FXML_HomeAutoreController">
    <children>
-      <VBox spacing="10">
+      <VBox prefHeight="426.0" prefWidth="772.0" spacing="10">
         <padding>
-           <Insets top="20" right="20" bottom="20" left="20"/>
+           <Insets bottom="20" left="20" right="20" top="20" />
         </padding>
-         <TableView fx:id="tableConferenze" prefHeight="350" prefWidth="700">
+         <TableView fx:id="tableConferenze" prefHeight="350" prefWidth="700.0">
             <columns>
-               <TableColumn fx:id="colTitolo" text="Titolo" prefWidth="200"/>
-               <TableColumn fx:id="colLuogo" text="Luogo" prefWidth="150"/>
-               <TableColumn fx:id="colDataInizio" text="Inizio" prefWidth="100"/>
-               <TableColumn fx:id="colDataFine" text="Fine" prefWidth="100"/>
-               <TableColumn fx:id="colTopic" text="Topic" prefWidth="150"/>
+               <TableColumn fx:id="colTitolo" prefWidth="150.40004920959473" text="Titolo" />
+               <TableColumn fx:id="colLuogo" prefWidth="123.199951171875" text="Luogo" />
+               <TableColumn fx:id="colDataInizio" prefWidth="130.4000244140625" text="Inizio" />
+               <TableColumn fx:id="colDataFine" prefWidth="112.00003051757812" text="Fine" />
+               <TableColumn fx:id="colTopic" prefWidth="96.800048828125" text="Topic" />
             </columns>
          </TableView>
          <HBox spacing="10">
-            <Button text="Sottometti Articolo" onAction="#handleSottomettiArticolo"/>
-            <Label fx:id="btnLogoutHomeAutore" text="Logout" onMouseClicked="#handleLogout" style="-fx-underline: true; -fx-cursor: hand;" textFill="red" />
+            <Button onAction="#handleSottomettiArticolo" style="-fx-background-color: #4CAF50; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-weight: bold;" text="Sottometti Articolo" />
+            <Label fx:id="btnLogoutHomeAutore" onMouseClicked="#handleLogout" style="-fx-underline: true; -fx-cursor: hand;" text="Logout" textFill="red" />
          </HBox>
       </VBox>
    </children>

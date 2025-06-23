@@ -50,8 +50,6 @@ public class FXML_HomeChairController implements Initializable {
     private TableColumn<Conferenza, String> colData;
     
     private final ObservableList<Conferenza> conferenzeList = FXCollections.observableArrayList();
-    @FXML
-    private TableColumn<?, ?> colModifica;
     
     
     private void caricaDatiConferenze() {
@@ -118,7 +116,6 @@ public class FXML_HomeChairController implements Initializable {
     }
     }
     
-    @FXML
     private void addButtonToTable() {
         TableColumn<Conferenza, Void> colBtn = new TableColumn<>("Azioni");
 
@@ -152,7 +149,6 @@ public class FXML_HomeChairController implements Initializable {
     }
 
 
-    @FXML
     private void apriModificaConferenza(Conferenza conferenza) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_ModificaConferenza.fxml"));

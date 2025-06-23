@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -65,6 +66,14 @@ public class FXML_InvitaMembriController implements Initializable {
                 var response = HttpClientUtil.post("http://localhost:8081/api/conferenza/invita", requestBody);
                 if (response.statusCode() == 200 || response.statusCode() == 201) {
                     System.out.println("Inviti inviati con successo");
+                    
+                    javafx.application.Platform.runLater(()-> {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Operazione riuscita");
+                    alert.setHeaderText(null);  // Nessun header
+                    alert.setContentText("Invitati correttamente");
+                    alert.showAndWait();
+                    });
                 } else {
                     System.err.println("Errore invio inviti: " + response.body());
                 }
