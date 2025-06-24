@@ -5,18 +5,24 @@
 package conferenceapp.CreaNuovaConferenza.InvitaMembri;
 
 import conferenceapp.HomeChair.Conferenza;
+import conferenceapp.ModificaConferenza.FXML_ModificaConferenzaController;
 import conferenceapp.utils.HttpClientUtil;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -73,6 +79,26 @@ public class FXML_InvitaMembriController implements Initializable {
                     alert.setHeaderText(null);  // Nessun header
                     alert.setContentText("Invitati correttamente");
                     alert.showAndWait();
+                    sendInvites.getScene().getWindow().hide();
+                    try {
+                        // Carico la finestra di modifica conferenza
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_ModificaConferenza.fxml"));
+                        Parent root = loader.load();
+
+                        // Passo la conferenza al controller
+                        FXML_ModificaConferenzaController controller = loader.getController();
+                        controller.setConferenza(conferenza);
+
+                        // Mostro la nuova finestra
+                        Stage stage = new Stage();
+                        stage.setTitle("Modifica Conferenza");
+                        stage.setScene(new Scene(root));
+                        stage.show();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    
                     });
                 } else {
                     System.err.println("Errore invio inviti: " + response.body());

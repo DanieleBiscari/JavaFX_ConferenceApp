@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="conferenceapp.HomeMembroDelPC.FXML_GestioneRevisioniController"
-            prefWidth="800" prefHeight="400">
-    <TableView fx:id="articoliTable" layoutX="20" layoutY="20" prefWidth="760" prefHeight="360">
+<AnchorPane prefHeight="400" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="conferenceapp.HomeMembroDelPC.FXML_GestioneRevisioniController">
+    <TableView fx:id="articoliTable" layoutX="20" layoutY="20" prefHeight="360" prefWidth="760">
         <columns>
-            <TableColumn fx:id="colTitolo" text="Titolo" prefWidth="180"/>
-            <TableColumn fx:id="colStato" text="Stato" prefWidth="120"/>
-            <TableColumn fx:id="colAbstract" text="Abstract" prefWidth="300"/>
-            <TableColumn fx:id="colAzione" text="Azione" prefWidth="120"/>
+            <TableColumn fx:id="colTitolo" prefWidth="180" text="Titolo" />
+            <TableColumn fx:id="colStato" prefWidth="152.0" text="Stato" />
+            <TableColumn fx:id="colAbstract" prefWidth="142.4000244140625" text="Abstract" />
+            <TableColumn fx:id="colAzione" prefWidth="137.5999755859375" text="Azione" />
         </columns>
     </TableView>
 </AnchorPane>

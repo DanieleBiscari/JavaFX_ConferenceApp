@@ -2,7 +2,6 @@ package conferenceapp.HomeAutore;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import conferenceapp.HomeAutore.FXML_InfoConferenzaController;
 import conferenceapp.HomeAutore.FXML_SottomettiArticoloController;
 import conferenceapp.dto.ConferenzaDTO;
 import conferenceapp.utils.HttpClientUtil;
@@ -29,7 +28,6 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 
 public class FXML_HomeAutoreController implements Initializable {
-    @FXML private TableColumn<ConferenzaDTO, Void> colScopri;
     @FXML private TableView<ConferenzaDTO> tableConferenze;
     @FXML private TableColumn<ConferenzaDTO, String> colTitolo, colLuogo, colDataInizio, colDataFine, colTopic;
     @FXML private Label btnLogoutHomeAutore;
@@ -77,7 +75,6 @@ public class FXML_HomeAutoreController implements Initializable {
     }
 
 
-    @FXML
     private void aggiungiColonnaScopri() {
         TableColumn<ConferenzaDTO, Void> colBtn = new TableColumn<>("Azioni");
 
@@ -122,7 +119,6 @@ public class FXML_HomeAutoreController implements Initializable {
         }
     }
 
-    @FXML
     private void handleSottomettiArticolo() {
         ConferenzaDTO selezionata = tableConferenze.getSelectionModel().getSelectedItem();
         if (selezionata == null) {
@@ -144,12 +140,11 @@ public class FXML_HomeAutoreController implements Initializable {
         }
     }
     
-    @FXML
     private void apriPaginaDettagli(ConferenzaDTO conferenza) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/HomeAutore/FXML_InfoConferenza.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/HomeAutore/FXML_SottomettiArticolo.fxml"));
             Parent root = loader.load();
-            FXML_InfoConferenzaController controller = loader.getController();
+            FXML_SottomettiArticoloController controller = loader.getController();
             controller.setConferenza(conferenza); // Metodo da implementare nel controller dei dettagli
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

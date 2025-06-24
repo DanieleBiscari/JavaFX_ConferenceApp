@@ -142,7 +142,7 @@ public class FXML_GestioneRevisioniController {
         dialog.setTitle("Sottomissione Recensione");
         dialog.setHeaderText("Compila la recensione per: " + articolo.getTitolo());
 
-        ButtonType submitButtonType = new ButtonType("Invia", ButtonBar.ButtonData.OK_DONE);
+        ButtonType submitButtonType = new ButtonType("Invia Recensione", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(submitButtonType, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
@@ -191,7 +191,7 @@ public class FXML_GestioneRevisioniController {
         try {
             var response = HttpClientUtil.post("http://localhost:8081/api/recensione/sottometti", recensione);
             if (response.statusCode() == 200 || response.statusCode() == 201) {
-                mostraConferma("Recensione inviata con successo.");
+                mostraConferma("Recensione inviata correttamente");
                 caricaArticoli(); // Aggiorna la tabella
             } else {
                 mostraErrore("Errore durante l'invio", response.body());
