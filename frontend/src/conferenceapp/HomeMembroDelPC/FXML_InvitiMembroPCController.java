@@ -17,6 +17,7 @@ import java.net.http.HttpResponse;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.control.Alert;
 
 public class FXML_InvitiMembroPCController implements Initializable {
 
@@ -82,6 +83,16 @@ public class FXML_InvitiMembroPCController implements Initializable {
             if (response.statusCode() == 200) {
                 // Aggiorna la lista rimuovendo o aggiornando l'invito
                 listaInviti.getItems().removeIf(inv -> inv.getIdIscrizione().equals(idIscrizione));
+                
+                if (accetta) {
+                    javafx.application.Platform.runLater(() -> {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Invito accettato");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Hai accettato l'invito correttamente.");
+                        alert.showAndWait();
+                    });
+                }
             } else {
                 System.out.println("Errore risposta: " + response.body());
             }
