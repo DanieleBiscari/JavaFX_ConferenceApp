@@ -17,6 +17,7 @@ import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -170,6 +171,12 @@ public class ConferenzaService {
         }
 
         return risultati;
+    }
+    
+    public LocalDate getDeadlineRecensione(Long id) {
+        Conferenza conferenza = conferenzaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Conferenza non trovata con ID: " + id));
+        return conferenza.getDeadlineRevisione();
     }
 }
 

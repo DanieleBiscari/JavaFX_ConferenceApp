@@ -11,6 +11,8 @@ import com.example.conference_backend.service.EmailService;
 import com.example.conference_backend.service.UtenteService;
 import com.example.conference_backend.utils.PasswordGenerator;
 import jakarta.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -112,6 +114,12 @@ public class ConferenzaController {
             @PathVariable Long id) {
         List<ArticoloConRevisoreDTO> risultato = service.getArticoliConRevisoriPerConferenza(id);
         return ResponseEntity.ok(risultato);
+    }
+    
+    @GetMapping("/{id}/deadline-recensioni")
+    public ResponseEntity<LocalDate> getDeadlineRecensioni(@PathVariable Long id) {
+        LocalDate deadline = service.getDeadlineRecensione(id);
+        return ResponseEntity.ok(deadline);
     }
 }
 

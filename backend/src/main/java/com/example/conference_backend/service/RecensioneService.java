@@ -20,6 +20,7 @@ import com.example.conference_backend.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,8 @@ public class RecensioneService {
     private ContieneRepository contieneRepository;
     @Autowired
     private RicezioneAutoreRepository ricezioneAutoreRepository;
+    @Autowired
+    private EmailService emailService;
     
     private RecensioneResponseDTO toDto(Recensione recensione) {
         RecensioneResponseDTO dto = new RecensioneResponseDTO();
@@ -105,5 +108,39 @@ public class RecensioneService {
 
         return toDto(saved);
     }
+    
+    @Transactional
+    public void inviaEsiti(Long idConferenza) {
+        // Prendi tutti gli articoli della conferenza
+        List<Articolo> articoli = articoloRepository.findByConferenzaIdConferenza(idConferenza);
+        if (articoli.isEmpty()) {
+            throw new RuntimeException("Nessun articolo trovato per questa conferenza");
+        }
+
+        // Per ogni articolo trova le recensioni
+        for (Articolo articolo : articoli) {
+            List<Recensione> recensioni = recensioneRepository.findByArticoloIdArticolo(articolo.getIdArticolo());
+
+            for (Recensione recensione : recensioni) {
+                // Per ogni recensione trova gli autori dell'articolo
+                List<SottomissioneAutore> autori = sottomissioneAutoreRepository.findByArticolo(articolo);
+                for (SottomissioneAutore autore : autori) {
+                    String email = autore.getUtente().getEmail();
+                    // Prepara testo email con esito, riassunto e suggerimenti
+                    String subject = "Esito revisione articolo: " + articolo.getTitolo();
+                    String body = "Gentile Autore,\n\n" +
+                        "L'esito finale della revisione per il suo articolo \"" + articolo.getTitolo() + "\" è:\n\n" +
+                        "Esito: " + recensione.getEsito() + "\n" +
+                        "Riassunto: " + recensione.getRiassunto() + "\n" +
+                        "Suggerimenti: " + recensione.getSuggerimenti() + "\n\n" +
+                        "La invitiamo ad inviare la versione finale del paper \n" +                        
+                        "Cordiali saluti,\n";
+
+                    // Usa EmailService per inviare mail (devi implementare metodo generico)
+                    emailService.inviaEmailSemplice(email, subject, body);
+                }
+            }
+        }
+    }  
 }
 

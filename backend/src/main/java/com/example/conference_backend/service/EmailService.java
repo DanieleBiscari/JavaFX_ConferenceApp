@@ -41,4 +41,12 @@ public class EmailService {
         );
         mailSender.send(messaggio);
     }
+    
+    public void inviaEmailSemplice(String destinatario, String subject, String testo) {
+        SimpleMailMessage messaggio = new SimpleMailMessage();
+        messaggio.setTo(destinatario);
+        messaggio.setSubject(subject);
+        messaggio.setText(testo);
+        mailSender.send(messaggio);
+    }
 }

@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RecensioneRepository extends JpaRepository<Recensione, Long> {
     boolean existsByArticoloIdArticoloAndUtenteIdUtente(Long idArticolo, Long idUtente);
     List<Recensione> findByArticolo(Articolo articolo);
+    List<Recensione> findByArticoloIdArticolo(Long idArticolo);
 }

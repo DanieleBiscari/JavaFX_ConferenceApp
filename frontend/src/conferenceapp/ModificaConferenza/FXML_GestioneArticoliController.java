@@ -14,6 +14,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
+import conferenceapp.State.StatoApplicazione;
+import conferenceapp.dto.GraduatoriaDTO;
+import java.io.IOException;
+import java.time.LocalDate;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Region;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class FXML_GestioneArticoliController {
 
@@ -21,7 +31,7 @@ public class FXML_GestioneArticoliController {
     @FXML private TableColumn<ArticoloConRevisoreView, String> colTitolo;
     @FXML private TableColumn<ArticoloConRevisoreView, String> colRevisore;
     @FXML private TableColumn<ArticoloConRevisoreView, Void> colAzione;
-    @FXML private Button btnAggiorna;
+    @FXML private Button btnVisualizzaGraduatoria;
 
     private Long conferenzaId;
 
@@ -87,8 +97,69 @@ public class FXML_GestioneArticoliController {
         }
     }
 
+    private void gestisciGraduatoria() {
+        try {
+            Long idChair = StatoApplicazione.getInstance().getUtenteCorrente().getId();
+            String urlDeadline = "http://localhost:8081/api/conferenza/" + conferenzaId + "/deadline-recensioni";
+
+            HttpResponse<String> responseDeadline = HttpClientUtil.get(urlDeadline);
+            String deadlineStr = responseDeadline.body(); // formato ISO (es: 2025-06-23T23:59:59)
+            LocalDate deadline = LocalDate.parse(deadlineStr.replace("\"", ""));
+            LocalDate now = LocalDate.now();
+
+            if (now.isAfter(deadline)) {
+                // Deadline superata: procedi con visualizzazione graduatoria
+                String urlGraduatoria = "http://localhost:8081/api/graduatoria/visualizza?idConferenza=" + conferenzaId + "&idChair=" + idChair;
+                HttpResponse<String> responseGraduatoria = HttpClientUtil.get(urlGraduatoria);
+                System.out.println(conferenzaId) ;
+                System.out.println(idChair) ;
+                ObjectMapper mapper = new ObjectMapper();
+                List<GraduatoriaDTO> graduatoria = mapper.readValue(responseGraduatoria.body(), new TypeReference<>() {});
+
+                mostraGraduatoria(graduatoria);
+
+            } else {
+                // Deadline non ancora superata
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Graduatoria non disponibile");
+                alert.setHeaderText(null);
+                alert.setContentText("Al momento la graduatoria non è disponibile, aspetta il termine delle revisioni.");
+                alert.showAndWait();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Errore durante la visualizzazione della graduatoria.");
+            alert.showAndWait();
+        }
+    }
+
+    private void mostraGraduatoria(List<GraduatoriaDTO> listaGraduatoria) {
+        try {
+            System.out.println("1");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_Graduatoria.fxml"));
+            Parent root = loader.load();
+
+            FXML_GraduatoriaController controller = loader.getController();
+            controller.setListaGraduatoria(listaGraduatoria);  // cambia il metodo setter nel controller graduatoria
+            controller.setConferenzaId(conferenzaId);
+            
+            Stage stage = new Stage();
+            stage.setTitle("Graduatoria Articoli");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            
+           // caricaArticoli();
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Errore nell'apertura della graduatoria").showAndWait();
+        }
+    }
+
+    
     @FXML
     private void initialize() {
-        btnAggiorna.setOnAction(e -> caricaArticoli());
+        btnVisualizzaGraduatoria.setOnAction(e -> gestisciGraduatoria());
     }
 }

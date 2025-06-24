@@ -13,6 +13,6 @@
             </columns>
         </TableView>
 
-        <Button fx:id="btnAggiorna" layoutX="14" layoutY="330" text="Aggiorna" prefWidth="100"/>
+        <Button fx:id="btnVisualizzaGraduatoria" layoutX="14" layoutY="330" text="Visualizza Graduatoria" prefWidth="200"/>
     </children>
 </AnchorPane>

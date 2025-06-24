@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="conferenceapp.ModificaConferenza.FXML_GraduatoriaController" spacing="10">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Graduatoria Articoli" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tableGraduatoria" prefHeight="400" prefWidth="600">
+        <columns>
+            <TableColumn fx:id="colTitolo" text="Titolo" prefWidth="250"/>
+            <TableColumn fx:id="colPunteggio" text="Punteggio" prefWidth="80"/>
+            <TableColumn fx:id="colPosizione" text="Posizione" prefWidth="80"/>
+            <TableColumn fx:id="colEsito" text="Esito" prefWidth="80"/>
+            <TableColumn fx:id="colVisualizza" text="Visualizza" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <!-- Bottone per inviare gli esiti -->
+    <Button fx:id="btnInviaEsiti" text="Invia Esiti" maxWidth="150"/>
+
+</VBox>

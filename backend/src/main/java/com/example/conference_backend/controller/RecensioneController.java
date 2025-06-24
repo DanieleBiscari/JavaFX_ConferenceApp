@@ -20,4 +20,14 @@ public class RecensioneController {
         RecensioneResponseDTO response = recensioneService.sottomettiRecensione(dto);
         return ResponseEntity.ok(response);
     }
+    
+    @PostMapping("/inviaEsiti/{idConferenza}")
+    public ResponseEntity<String> inviaEsiti(@PathVariable Long idConferenza) {
+        try {
+            recensioneService.inviaEsiti(idConferenza);
+            return ResponseEntity.ok("Esiti inviati correttamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Errore durante invio esiti: " + e.getMessage());
+        }
+    }
 }

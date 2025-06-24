@@ -10,6 +10,7 @@ import com.example.conference_backend.repository.ArticoloRepository;
 import com.example.conference_backend.repository.ConferenzaRepository;
 import com.example.conference_backend.repository.RecensioneRepository;
 import com.example.conference_backend.repository.VisualizzazioneChairRepository;
+import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +30,8 @@ public class GraduatoriaService {
     private ArticoloRepository articoloRepo;
     @Autowired
     private VisualizzazioneChairRepository visualizzazioneChairRepo;
-
+    
+    @Transactional
     public List<GraduatoriaArticoloDTO> visualizzaGraduatoria(Long idConferenza, Long idChair) {
         Conferenza conferenza = conferenzaRepo.findById(idConferenza)
             .orElseThrow(() -> new RuntimeException("Conferenza non trovata"));
@@ -61,6 +63,16 @@ public class GraduatoriaService {
         List<GraduatoriaArticoloDTO> graduatoria = new ArrayList<>();
         int posizione = 1;
         for (Map.Entry<Articolo, Double> entry : ordinati) {
+            Articolo articolo = entry.getKey();
+            List<Recensione> recensioni = recensioneRepo.findByArticolo(articolo);
+            // Calcolo esito, ad esempio:
+            String esitoFinale = "NON DEFINITO";
+            for (Recensione r : recensioni) {
+                if ("ACCETTATO".equals(r.getEsito())) {
+                    esitoFinale = "ACCETTATO";
+                    break;
+                }
+            }
             VisualizzazioneChair v = new VisualizzazioneChair();
             v.setArticolo(entry.getKey());
             v.setUtente(new Utente(idChair));
@@ -70,6 +82,7 @@ public class GraduatoriaService {
             GraduatoriaArticoloDTO dto = new GraduatoriaArticoloDTO();
             dto.setIdArticolo(entry.getKey().getIdArticolo());
             dto.setTitolo(entry.getKey().getTitolo());
+            dto.setEsito(esitoFinale);
             dto.setPunteggioFinale(entry.getValue());
             dto.setPosizione(posizione - 1);
 

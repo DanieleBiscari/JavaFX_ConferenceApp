@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="conferenceapp.ModificaConferenza.FXML_ResocontoValutazioneController"
+      spacing="10" alignment="CENTER">
+    
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    
+    <Label fx:id="titoloLabel" text="Resoconto valutazione" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+    
+    <Label fx:id="nomeArticoloLabel" text="Nome Articolo: " />
+    <Label fx:id="valutazioneLabel" text="Valutazione: " />
+    <Label fx:id="commentoLabel" text="Commento: " wrapText="true" />
+    
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Mantieni Esito" onAction="#handleMantieniEsito" />
+        <Button text="Cambia Esito" onAction="#handleCambiaEsito" />
+    </HBox>
+
+</VBox>

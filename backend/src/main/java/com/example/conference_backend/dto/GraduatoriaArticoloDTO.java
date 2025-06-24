@@ -3,6 +3,7 @@ package com.example.conference_backend.dto;
 public class GraduatoriaArticoloDTO {
     private Long idArticolo;
     private String titolo;
+    private String esito;
     private double punteggioFinale;
     private int posizione;
 
@@ -38,5 +39,11 @@ public class GraduatoriaArticoloDTO {
         this.posizione = posizione;
     }
 
-    
+    public String getEsito() {
+        return esito;
+    }
+
+    public void setEsito(String esito) {
+        this.esito = esito;
+    } 
 }
