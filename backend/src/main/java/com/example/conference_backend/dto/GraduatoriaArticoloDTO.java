@@ -5,6 +5,7 @@ public class GraduatoriaArticoloDTO {
     private String titolo;
     private String esito;
     private double punteggioFinale;
+    private String testo;
     private int posizione;
 
     public Long getIdArticolo() {
@@ -46,4 +47,13 @@ public class GraduatoriaArticoloDTO {
     public void setEsito(String esito) {
         this.esito = esito;
     } 
+
+    public String getTesto() {
+        return testo;
+    }
+
+    public void setTesto(String testo) {
+        this.testo = testo;
+    }
+    
 }

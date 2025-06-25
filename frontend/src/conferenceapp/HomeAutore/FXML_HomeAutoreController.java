@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.layout.HBox;
 
 public class FXML_HomeAutoreController implements Initializable {
     @FXML private TableView<ConferenzaDTO> tableConferenze;
@@ -74,27 +75,54 @@ public class FXML_HomeAutoreController implements Initializable {
     }
     }
 
+    
+    private void controllaESottomettiVersioneFinale(ConferenzaDTO conferenza) {
+        try {
+            // Apri direttamente la pagina per l'upload finale
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/HomeAutore/FXML_SottomettiVersioneFinale.fxml"));
+            Parent root = loader.load();
+            FXML_SottomettiVersioneFinaleController controller = loader.getController();
+            controller.setConferenza(conferenza);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Sottometti Versione Finale");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Errore nell'apertura della schermata di sottomissione").showAndWait();
+        }
+    }
+
 
     private void aggiungiColonnaScopri() {
         TableColumn<ConferenzaDTO, Void> colBtn = new TableColumn<>("Azioni");
 
         colBtn.setCellFactory(param -> new TableCell<>() {
-            private final Button btn = new Button("Scopri");
+            private final Button btnScopri = new Button("Scopri");
+            private final Button btnInviaFinale = new Button("Invia versione finale");
+            private final HBox box = new HBox(5, btnScopri, btnInviaFinale);
 
             {
-                btn.setOnAction(event -> {
+                btnScopri.setOnAction(event -> {
                     ConferenzaDTO conferenza = getTableView().getItems().get(getIndex());
                     apriPaginaDettagli(conferenza);
+                });
+
+                btnInviaFinale.setOnAction(event -> {
+                    ConferenzaDTO conferenza = getTableView().getItems().get(getIndex());
+                    controllaESottomettiVersioneFinale(conferenza);
                 });
             }
 
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
+                if (empty || getTableRow().getItem() == null) {
                     setGraphic(null);
                 } else {
-                    setGraphic(btn);
+                    setGraphic(box);
                 }
             }
         });
@@ -103,7 +131,6 @@ public class FXML_HomeAutoreController implements Initializable {
             tableConferenze.getColumns().add(colBtn);
         }
     }
-
 
     @FXML
     private void handleLogout(MouseEvent event) {

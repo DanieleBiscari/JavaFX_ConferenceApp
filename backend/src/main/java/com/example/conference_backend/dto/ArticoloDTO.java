@@ -11,9 +11,7 @@ public class ArticoloDTO {
     private String titolo;
     private String abstractText;
     private String testo;
-    @NotBlank
     private String pdf;
-    @NotBlank
     private String affiliazione;
     @NotNull
     @Min(1)

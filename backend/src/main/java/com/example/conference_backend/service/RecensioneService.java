@@ -67,14 +67,14 @@ public class RecensioneService {
             .orElseThrow(() -> new RuntimeException("Articolo non trovato"));
         Utente utente = utenteRepository.findById(dto.getIdUtente())
             .orElseThrow(() -> new RuntimeException("Utente non trovato"));
-
-        if (recensioneRepository.existsByArticoloIdArticoloAndUtenteIdUtente(dto.getIdArticolo(), dto.getIdUtente())) {
-            throw new RuntimeException("Hai già sottomesso una recensione per questo articolo.");
-        }
-
+        
         Conferenza conferenza = articolo.getConferenza();
         if (LocalDate.now().isAfter(conferenza.getDeadlineRevisione())) {
             throw new RuntimeException("La deadline per la recensione degli articoli è scaduta.");
+        }
+        
+        if (recensioneRepository.existsByArticoloIdArticoloAndUtenteIdUtente(dto.getIdArticolo(), dto.getIdUtente())) {
+            throw new RuntimeException("Hai già sottomesso una recensione per questo articolo.");
         }
 
         Recensione recensione = new Recensione();
@@ -134,7 +134,7 @@ public class RecensioneService {
                         "Riassunto: " + recensione.getRiassunto() + "\n" +
                         "Suggerimenti: " + recensione.getSuggerimenti() + "\n\n" +
                         "La invitiamo ad inviare la versione finale del paper \n" +                        
-                        "Cordiali saluti,\n";
+                        "Cordiali saluti\n";
 
                     // Usa EmailService per inviare mail (devi implementare metodo generico)
                     emailService.inviaEmailSemplice(email, subject, body);

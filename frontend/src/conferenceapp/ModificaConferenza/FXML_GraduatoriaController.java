@@ -86,8 +86,15 @@ public class FXML_GraduatoriaController {
             Parent root = loader.load();
 
             FXML_ResocontoValutazioneController controller = loader.getController();
-            controller.inizializzaDati(articolo.getTitolo(), articolo.getPunteggioFinale(), articolo.getPosizione());
-
+            controller.inizializzaDati(articolo.getTitolo(), 
+                    articolo.getPunteggioFinale(), 
+                    articolo.getPosizione(), 
+                    articolo.getTesto(), 
+                    articolo.getIdArticolo(),
+                    articolo.getEsito());
+            
+            controller.setControllerGraduatoria(this);
+            
             Stage stage = new Stage();
             stage.setTitle("Resoconto valutazione");
             stage.setScene(new Scene(root));
@@ -121,7 +128,7 @@ public class FXML_GraduatoriaController {
     }
     
     @FXML
-    private void handleChiudi() {
+    public void handleChiudi() {
         Stage stage = (Stage) tableGraduatoria.getScene().getWindow();
         stage.close();
     }

@@ -52,7 +52,7 @@ public class ArticoloService {
         articolo.setAbstractText(dto.getAbstractText());
         articolo.setTesto(dto.getTesto());
         articolo.setPdf(dto.getPdf());
-        articolo.setAffiliazione(dto.getAffiliazione());
+        articolo.setAffiliazione(autore.getAffiliazione());
         articolo.setStato("Inviato");
         articolo.setConferenza(conferenza);
 
@@ -125,6 +125,6 @@ public class ArticoloService {
             gestioneRevisoreRepository.save(nuovaAssegnazione);
         }
     }
-
+    
 }
 

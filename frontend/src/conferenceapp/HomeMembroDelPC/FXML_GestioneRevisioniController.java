@@ -206,7 +206,6 @@ public class FXML_GestioneRevisioniController {
         alert.setTitle(titolo);
         alert.setHeaderText(null);
         alert.setContentText(messaggio);
-        alert.showAndWait();
     }
 
     private void mostraConferma(String messaggio) {
