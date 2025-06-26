@@ -14,11 +14,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import java.net.http.HttpResponse;
 import conferenceapp.utils.HttpClientUtil;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -59,6 +61,9 @@ public class FXMLRegistrationController implements Initializable {
     private Label btnAccedi;
     @FXML
     private CheckBox autoreCheckbox;
+    @FXML
+    private String ruoloSelezionato = "";
+
 
     
     @Override
@@ -100,8 +105,6 @@ public class FXMLRegistrationController implements Initializable {
             String telefono = inputTelefono.getText();
             String affiliazione = inputAffiliazione.getText();
             String specializzazione = inputSpecializzazione.getText();
-            
-            String ruoloSelezionato = "";
 
             if (autoreCheckbox.isSelected()) {
                 ruoloSelezionato = "Autore";
@@ -112,7 +115,10 @@ public class FXMLRegistrationController implements Initializable {
             } else {
                 // Nessun ruolo selezionato: mostra un messaggio o blocca la registrazione
                 System.out.println("Seleziona un ruolo!");
-                mostraPopupErrore();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore di registrazione");
+                alert.setContentText("Tutti i campi devono essere compilati per potersi registrare");
+                alert.showAndWait();
                 return;
             }
             
@@ -122,8 +128,11 @@ public class FXMLRegistrationController implements Initializable {
             System.out.println("Registrazione con ruolo: " + ruoloSelezionato);
             
             if (!password.equals(passwordConferma)) {
-            mostraPopupErrore();
-            return;
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore di registrazione");
+                alert.setContentText("Tutti i campi devono essere compilati per potersi registrare");
+                alert.showAndWait();
+                return;
             }
             
             if (inputNome.getText().isEmpty() || inputCognome.getText().isEmpty() ||
@@ -132,7 +141,10 @@ public class FXMLRegistrationController implements Initializable {
                 inputAffiliazione.getText().isEmpty() || inputSpecializzazione.getText().isEmpty() ||
                 inputDataNascita.getValue() == null) {
 
-                mostraPopupErrore();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore di registrazione");
+                alert.setContentText("Tutti i campi devono essere compilati per potersi registrare");
+                alert.showAndWait();
                 return;
                 }
             
@@ -161,54 +173,32 @@ public class FXMLRegistrationController implements Initializable {
                 // Salva in uno stato l'utente loggato
                 StatoApplicazione.getInstance().setUtenteCorrente(utenteDto);
                 // Messaggio conferma registrazione
-                mostraPopupConfermaRegist(ruoloSelezionato);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Registrazione completata");
+                alert.setHeaderText(null);
+                alert.setContentText("Registrazione avvenuta correttamente");
+                alert.showAndWait();
+                
+                apriHomePerRuolo();
+                
+                Stage stage = (Stage) btnRegistrati.getScene().getWindow();
+                stage.close();
+                
             } else {
-                mostraPopupErrore();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore di registrazione");
+                alert.setContentText("Tutti i campi devono essere compilati per potersi registrare");
+                alert.showAndWait();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            mostraPopupErrore();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore di registrazione");
+            alert.setContentText("Errore durante la registrazione");
+            alert.showAndWait();
         }
-    }
-
-    private void mostraPopupErrore() {
-      try {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_ErroreRegistrazione.fxml"));
-          Parent root = loader.load();
-
-          Stage dialogStage = new Stage();
-          dialogStage.setTitle("Errore");
-          dialogStage.setScene(new Scene(root));
-          dialogStage.setResizable(false);
-          dialogStage.show();
-
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-    }
-     
-    private void mostraPopupConfermaRegist(String ruoloSelezionato) {
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_popUpRegistCompleta.fxml"));
-            Parent root = loader.load();
-            
-            FXML_popUpRegistCompletaController controller = loader.getController();
-            controller.setRuoloSelezionato(ruoloSelezionato);
-            
-            controller.setStageRegistrazione((Stage) btnRegistrati.getScene().getWindow());
-
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Registrazione avvenuta con successo");
-            dialogStage.setScene(new Scene(root));
-            dialogStage.setResizable(false);
-            dialogStage.initStyle(StageStyle.UNDECORATED);
-            dialogStage.show();
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-    }
-    
+    }   
     @FXML
     private void handleAccedi(MouseEvent event) {
     try {
@@ -226,5 +216,37 @@ public class FXMLRegistrationController implements Initializable {
         e.printStackTrace();
     }
     }
+    @FXML
+    public void apriHomePerRuolo() {
+        String fxmlPath = "";
+        switch (ruoloSelezionato) {
+            case "Autore":
+                fxmlPath = "/conferenceapp/HomeAutore/FXML_HomeAutore.fxml";
+                break;
+            case "Chair":
+                fxmlPath = "/conferenceapp/HomeChair/FXML_HomeChair.fxml";
+                break;
+            case "MembroPC":
+                fxmlPath = "/conferenceapp/HomeMembroDelPC/FXML_HomeMembroDelPC.fxml";
+                break;
+            case "Editore":
+                fxmlPath = "/conferenceapp/HomeEditore/FXML_HomeEditore.fxml";
+                break;
+            default:
+                return;
+        }
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            
+            Stage homeStage = new Stage();
+            homeStage.setScene(new Scene(root));
+            homeStage.setTitle("Home " + ruoloSelezionato);
+            homeStage.show();
+            
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+   }
     
 }

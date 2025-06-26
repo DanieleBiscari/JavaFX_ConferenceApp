@@ -76,7 +76,10 @@ public class FXMLLoginController implements Initializable {
             String password = inputPass.getText();
 
             if (email.isEmpty() || password.isEmpty()) {
-                mostraPopupErrore();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore di login");
+                alert.setContentText("Compila tutti i campi per poter proseguire");
+                alert.showAndWait();
                 return;
             }
 
@@ -111,6 +114,10 @@ public class FXMLLoginController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
             //mostraPopupErrore("Errore durante il login.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("Errore di login");
+               alert.setContentText("Errore durante il login");
+               alert.showAndWait();
         }
     }
     
@@ -145,21 +152,4 @@ public class FXMLLoginController implements Initializable {
             e.printStackTrace();
         }
     }
-    
-    private void mostraPopupErrore() {
-      try {
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_ErroreCampoVuoto.fxml"));
-          Parent root = loader.load();
-
-          Stage dialogStage = new Stage();
-          dialogStage.setTitle("Email e password sono obbligatori.");
-          dialogStage.setScene(new Scene(root));
-          dialogStage.setResizable(false);
-          dialogStage.show();
-
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-    }
-     
 }
