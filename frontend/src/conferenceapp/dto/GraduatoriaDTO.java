@@ -3,6 +3,7 @@ package conferenceapp.dto;
 public class GraduatoriaDTO {
     private Long idArticolo;
     private String titolo;
+    private String testo;
     private String esito;
     private double punteggioFinale;
     private int posizione;
@@ -27,5 +28,15 @@ public class GraduatoriaDTO {
     public void setEsito(String esito) {
         this.esito = esito;
     }
+
+    public String getTesto() {
+        return testo;
+    }
+
+    public void setTesto(String testo) {
+        this.testo = testo;
+    }
+    
+    
 }
 

@@ -16,6 +16,7 @@
     <Label fx:id="titoloLabel" text="Resoconto valutazione" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
     
     <Label fx:id="nomeArticoloLabel" text="Nome Articolo: " />
+    <Label fx:id="testoLabel" text="Testo Articolo: " />
     <Label fx:id="valutazioneLabel" text="Valutazione: " />
     <Label fx:id="commentoLabel" text="Commento: " wrapText="true" />
     

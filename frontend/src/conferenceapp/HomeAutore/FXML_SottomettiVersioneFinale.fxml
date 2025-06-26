@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="conferenceapp.HomeAutore.FXML_SottomettiVersioneFinaleController"
+            prefWidth="600" prefHeight="400">
+    <children>
+        <VBox spacing="10" layoutX="20" layoutY="20" prefWidth="560" prefHeight="360">
+            <Label text="Contenuto Versione Finale"/>
+            <TextArea fx:id="textAreaVersioneFinale" prefHeight="250" wrapText="true"/>
+            <HBox spacing="10">
+                <Button fx:id="btnAnnulla" text="Annulla" onAction="#handleAnnulla"/>
+                <Button fx:id="btnSottometti" text="Sottometti" onAction="#handleSottometti"/>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>
+

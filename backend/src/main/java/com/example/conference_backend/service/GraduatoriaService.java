@@ -47,7 +47,13 @@ public class GraduatoriaService {
             List<Recensione> recensioni = recensioneRepo.findByArticolo(articolo);
             double totale = 0;
             for (Recensione r : recensioni) {
-                totale += r.getScore() * r.getEsperienza();
+                totale += r.getScore() + r.getEsperienza();
+                if(r.getEsito() == null) {
+                    String esito = (totale >= 0) ? "ACCETTATO" : "RIFIUTATO";
+                    r.setEsito(esito);
+                    recensioneRepo.save(r);
+                }
+
             }
             if (!recensioni.isEmpty()) {
                 punteggi.put(articolo, totale);
@@ -66,7 +72,7 @@ public class GraduatoriaService {
             Articolo articolo = entry.getKey();
             List<Recensione> recensioni = recensioneRepo.findByArticolo(articolo);
             // Calcolo esito, ad esempio:
-            String esitoFinale = "NON DEFINITO";
+            String esitoFinale = "RIFIUTATO";
             for (Recensione r : recensioni) {
                 if ("ACCETTATO".equals(r.getEsito())) {
                     esitoFinale = "ACCETTATO";
@@ -83,6 +89,7 @@ public class GraduatoriaService {
             dto.setIdArticolo(entry.getKey().getIdArticolo());
             dto.setTitolo(entry.getKey().getTitolo());
             dto.setEsito(esitoFinale);
+            dto.setTesto(entry.getKey().getTesto());
             dto.setPunteggioFinale(entry.getValue());
             dto.setPosizione(posizione - 1);
 
