@@ -27,12 +27,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
-<<<<<<< HEAD
+import javafx.scene.layout.HBox;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
-=======
 import javafx.scene.layout.HBox;
->>>>>>> fb1769299345a9f5b498c4b5d6d60f623e48f622
 
 public class FXML_HomeAutoreController implements Initializable {
     @FXML private TableView<ConferenzaDTO> tableConferenze;
@@ -113,7 +111,7 @@ public class FXML_HomeAutoreController implements Initializable {
             {
                 btnScopri.setOnAction(event -> {
                     ConferenzaDTO conferenza = getTableView().getItems().get(getIndex());
-                    apriPaginaDettagli(conferenza, btn);
+                    apriPaginaDettagli(conferenza, btnScopri);
                 });
 
                 btnInviaFinale.setOnAction(event -> {
