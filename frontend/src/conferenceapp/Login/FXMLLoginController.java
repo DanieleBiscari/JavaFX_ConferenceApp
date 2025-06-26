@@ -126,6 +126,9 @@ public class FXMLLoginController implements Initializable {
             case "MembroPC":
                 fxmlPath = "/conferenceapp/HomeMembroDelPC/FXML_HomeMembroDelPC.fxml";
                 break; 
+            case "Editore":
+                fxmlPath = "/conferenceapp/HomeEditore/FXML_HomeEditore.fxml";
+                break; 
             default:
                 return;
         }

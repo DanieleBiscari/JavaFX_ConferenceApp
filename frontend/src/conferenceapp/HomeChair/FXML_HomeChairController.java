@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -102,19 +103,24 @@ public class FXML_HomeChairController implements Initializable {
 
     @FXML
     private void handleCreaNewConf(MouseEvent event) {
-        try {
-        Parent creaNewConfRoot = FXMLLoader.load(getClass().getResource("/conferenceapp/CreaNuovaConferenza/FXML_CreaNuovaConferenza.fxml"));
-        Scene creaNewConfScene = new Scene(creaNewConfRoot);
+            try {
+                Parent creaNewConfRoot = FXMLLoader.load(getClass().getResource("/conferenceapp/CreaNuovaConferenza/FXML_CreaNuovaConferenza.fxml"));
+                Scene creaNewConfScene = new Scene(creaNewConfRoot);
 
-        Stage stage = (Stage) btnCreaNuovaConf.getScene().getWindow();
-        stage.setScene(creaNewConfScene);
-        stage.setTitle("Crea Nuova Conferenza");
-        stage.show();
+                Stage stageCorrente = (Stage) btnCreaNuovaConf.getScene().getWindow();
+                
+                
+                Stage nuovaFinestra = new Stage();
+                nuovaFinestra.setScene(creaNewConfScene);
+                nuovaFinestra.setTitle("Crea Nuova Conferenza");
+                nuovaFinestra.show();
 
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    }
+                stageCorrente.close();  // chiude la finestra home chair
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     
     private void addButtonToTable() {
         TableColumn<Conferenza, Void> colBtn = new TableColumn<>("Azioni");
@@ -126,7 +132,7 @@ public class FXML_HomeChairController implements Initializable {
             btn.setOnAction(event -> {
                 Conferenza conferenza = getTableView().getItems().get(getIndex());
                 System.out.println("Modifica conferenza: " + conferenza.getTitolo());
-                apriModificaConferenza(conferenza);
+                apriModificaConferenza(conferenza, btn);
             });
         }
 
@@ -149,7 +155,7 @@ public class FXML_HomeChairController implements Initializable {
     }
 
 
-    private void apriModificaConferenza(Conferenza conferenza) {
+    private void apriModificaConferenza(Conferenza conferenza, Button button) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_ModificaConferenza.fxml"));
         Parent root = loader.load();
@@ -161,10 +167,13 @@ public class FXML_HomeChairController implements Initializable {
         Stage stage = new Stage();
         stage.setTitle("Modifica Conferenza");
         stage.setScene(new Scene(root));
+        Stage stageCorrente = (Stage) button.getScene().getWindow();
+        stageCorrente.close();
         stage.show();
     } catch (IOException e) {
         e.printStackTrace();
     }
     }
+
     
 }

@@ -7,8 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="494.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeAutore.FXML_HomeAutoreController">
+<AnchorPane prefHeight="431.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeAutore.FXML_HomeAutoreController">
    <children>
       <VBox prefHeight="426.0" prefWidth="772.0" spacing="10">
         <padding>
@@ -24,7 +25,10 @@
             </columns>
          </TableView>
          <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="732.0" spacing="10">
-            <Label fx:id="btnLogoutHomeAutore" onMouseClicked="#handleLogout" prefHeight="25.0" prefWidth="47.0" style="-fx-underline: true; -fx-cursor: hand; -fx-font-weight: bold;" text="Logout" textAlignment="CENTER" textFill="red" />
+            <Label fx:id="btnLogoutHomeAutore" onMouseClicked="#handleLogout" prefHeight="25.0" prefWidth="47.0" style="-fx-underline: true; -fx-cursor: hand; -fx-font-weight: bold;" text="Logout" textAlignment="CENTER" textFill="red">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
          </HBox>
       </VBox>
    </children>

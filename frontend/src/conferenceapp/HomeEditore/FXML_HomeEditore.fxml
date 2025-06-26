@@ -1,45 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="434.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeEditore.FXML_HomeEditoreController">
+<AnchorPane id="AnchorPane" prefHeight="477.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeEditore.FXML_HomeEditoreController">
    <children>
-      <StackPane layoutX="82.0" layoutY="18.0">
+      <StackPane layoutX="82.0" layoutY="14.0" prefHeight="395.0" prefWidth="605.0">
          <children>
-            <Pane prefHeight="397.0" prefWidth="471.0" style="-fx-border-color: black; -fx-border-radius: 15;">
-               <children>
-                  <HBox alignment="CENTER" layoutX="62.0" layoutY="14.0" prefHeight="68.0" prefWidth="348.0">
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="393.0" prefWidth="614.0">
                      <children>
-                        <Label fx:id="titoloConferenzaHomeEditore" alignment="CENTER" prefHeight="62.0" prefWidth="274.0" style="-fx-border-color: black; -fx-border-radius: 10;" text="Titolo conferenza" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
+                        <TableView layoutX="13.0" layoutY="15.0" prefHeight="363.0" prefWidth="588.0">
+                          <columns>
+                            <TableColumn prefWidth="198.39994525909424" text="Titolo" />
+                            <TableColumn prefWidth="208.00001525878906" text="Descrizione" />
+                          </columns>
+                        </TableView>
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="70.0" layoutY="95.0" prefHeight="171.0" prefWidth="332.0" style="-fx-border-color: black; -fx-border-radius: 5;">
-                     <children>
-                        <Label fx:id="infoConferenzaHomeEditore" alignment="TOP_LEFT" prefHeight="159.0" prefWidth="323.0" text="Info conferenza" wrapText="true">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <Button fx:id="visualizzaVersFinalEditore" layoutX="161.0" layoutY="307.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="150.0" text="Visualizza versioni finali" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
       </StackPane>
+      <Label fx:id="btnLogoutHomeEditore" alignment="CENTER" contentDisplay="CENTER" layoutX="354.0" layoutY="422.0" onMouseClicked="#handleLogout" prefHeight="26.0" prefWidth="52.0" style="-fx-text-fill: red; -fx-underline: true; -fx-font-weight: bold; -fx-cursor: hand;" text="Logout">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

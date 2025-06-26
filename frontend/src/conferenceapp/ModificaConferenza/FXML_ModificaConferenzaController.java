@@ -8,6 +8,7 @@ import conferenceapp.CreaNuovaConferenza.InvitaMembri.FXML_InvitaMembriControlle
 import conferenceapp.HomeChair.Conferenza;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,11 +30,7 @@ public class FXML_ModificaConferenzaController implements Initializable {
     private Button btnInvitaMemPC;
     private Conferenza conferenza;
     @FXML
-    private TextField txtTitolo;
-    @FXML
-    private TextField txtTitolo1;
-    @FXML
-    private TextField txtTitolo2;
+    private Button btnIndietro;
 
     /**
      * Initializes the controller class.
@@ -82,5 +79,10 @@ public class FXML_ModificaConferenzaController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleIndietro(ActionEvent event) {
+        
     }
 }

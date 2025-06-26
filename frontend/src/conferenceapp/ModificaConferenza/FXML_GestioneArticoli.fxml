@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.ModificaConferenza.FXML_GestioneArticoliController" prefWidth="600" prefHeight="400">
+<AnchorPane prefHeight="400" prefWidth="600" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.ModificaConferenza.FXML_GestioneArticoliController">
     <children>
-        <TableView fx:id="tableArticoli" layoutX="14" layoutY="14" prefWidth="572" prefHeight="300">
+        <TableView fx:id="tableArticoli" layoutX="14" layoutY="14" prefHeight="300" prefWidth="572">
             <columns>
-                <TableColumn fx:id="colTitolo" text="Titolo Articolo" prefWidth="200"/>
-                <TableColumn fx:id="colRevisore" text="Revisore" prefWidth="200"/>
-                <TableColumn fx:id="colAzione" text="Azione" prefWidth="150"/>
+                <TableColumn fx:id="colTitolo" prefWidth="200" text="Titolo Articolo" />
+                <TableColumn fx:id="colRevisore" prefWidth="200" text="Revisore" />
+                <TableColumn fx:id="colAzione" prefWidth="150" text="Azione" />
             </columns>
         </TableView>
 
-        <Button fx:id="btnVisualizzaGraduatoria" layoutX="14" layoutY="330" text="Visualizza Graduatoria" prefWidth="200"/>
+        <Button fx:id="btnVisualizzaGraduatoria" layoutX="14" layoutY="330" prefWidth="200" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8;" text="Visualizza Graduatoria" />
+      <Button fx:id="btnIndietro" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleIndietro" style="-fx-background-radius: 8; -fx-background-color: #ff432e; -fx-text-fill: white;" text="Indietro" />
     </children>
 </AnchorPane>

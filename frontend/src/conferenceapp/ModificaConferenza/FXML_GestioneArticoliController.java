@@ -18,6 +18,7 @@ import conferenceapp.State.StatoApplicazione;
 import conferenceapp.dto.GraduatoriaDTO;
 import java.io.IOException;
 import java.time.LocalDate;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -34,6 +35,8 @@ public class FXML_GestioneArticoliController {
     @FXML private Button btnVisualizzaGraduatoria;
 
     private Long conferenzaId;
+    @FXML
+    private Button btnIndietro;
 
     public void setConferenzaId(Long conferenzaId) {
         this.conferenzaId = conferenzaId;
@@ -57,7 +60,7 @@ public class FXML_GestioneArticoliController {
             tableArticoli.setItems(data);
 
             colAzione.setCellFactory(param -> new TableCell<>() {
-                private final Button btn = new Button("Riassegna");
+                private final Button btn = new Button("Modifica");
 
                 {
                     btn.setOnAction(event -> {
@@ -158,8 +161,11 @@ public class FXML_GestioneArticoliController {
     }
 
     
-    @FXML
     private void initialize() {
         btnVisualizzaGraduatoria.setOnAction(e -> gestisciGraduatoria());
+    }
+
+    @FXML
+    private void handleIndietro(ActionEvent event) {
     }
 }

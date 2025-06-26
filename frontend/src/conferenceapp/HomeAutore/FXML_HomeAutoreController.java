@@ -3,6 +3,7 @@ package conferenceapp.HomeAutore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import conferenceapp.HomeAutore.FXML_SottomettiArticoloController;
+import conferenceapp.HomeAutore.FXML_SottomettiArticoloController.WindowManager;
 import conferenceapp.dto.ConferenzaDTO;
 import conferenceapp.utils.HttpClientUtil;
 import conferenceapp.State.StatoApplicazione;
@@ -26,6 +27,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
 
 public class FXML_HomeAutoreController implements Initializable {
     @FXML private TableView<ConferenzaDTO> tableConferenze;
@@ -84,7 +87,7 @@ public class FXML_HomeAutoreController implements Initializable {
             {
                 btn.setOnAction(event -> {
                     ConferenzaDTO conferenza = getTableView().getItems().get(getIndex());
-                    apriPaginaDettagli(conferenza);
+                    apriPaginaDettagli(conferenza, btn);
                 });
             }
 
@@ -140,7 +143,7 @@ public class FXML_HomeAutoreController implements Initializable {
         }
     }
     
-    private void apriPaginaDettagli(ConferenzaDTO conferenza) {
+    private void apriPaginaDettagli(ConferenzaDTO conferenza, Button button) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/HomeAutore/FXML_SottomettiArticolo.fxml"));
             Parent root = loader.load();
@@ -149,10 +152,20 @@ public class FXML_HomeAutoreController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Dettagli Conferenza");
+            
+            Stage stageCorrente = (Stage) button.getScene().getWindow();
+            stageCorrente.close();
+            
             stage.show();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
+    public void ricaricaConferenze() {
+    caricaDatiConferenze();
+    }
+    public void setStage(Stage stage) {
+        WindowManager.setHomeAutoreStage(stage);
+    }
 }
