@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -43,6 +44,8 @@ public class FXML_InvitaMembriController implements Initializable {
     private Conferenza conferenza;
     
     private ObservableList<String> emailList;
+    @FXML
+    private Button btnIndietro;
     /**
      * Initializes the controller class.
      */
@@ -119,6 +122,31 @@ public class FXML_InvitaMembriController implements Initializable {
         if (!email.isEmpty() && !emailList.contains(email)) {
             emailList.add(email);
             emailTextField.clear();
+        }
+    }
+
+
+    @FXML
+    private void handleIndietro(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_ModificaConferenza.fxml"));
+            Parent root = loader.load();
+
+            // Passa la conferenza al controller
+            FXML_ModificaConferenzaController controller = loader.getController();
+            controller.setConferenza(conferenza);
+
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            newStage.setTitle("Modifica Conferenza");
+            newStage.show();
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Errore nel caricamento della schermata Modifica Conferenza.").showAndWait();
         }
     }
       

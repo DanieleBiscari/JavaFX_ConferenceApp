@@ -17,9 +17,9 @@
    <children>
       <StackPane layoutX="19.0" layoutY="9.0" prefHeight="429.0" prefWidth="706.0">
          <children>
-            <ScrollPane prefHeight="546.0" prefWidth="706.0">
+            <ScrollPane prefHeight="546.0" prefWidth="706.0" style="-fx-background-color: #abd8f5;">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="736.0" prefWidth="402.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="736.0" prefWidth="696.0" style="-fx-background-color: #95c8e8;">
                   <children>
                     <VBox layoutX="6.0" layoutY="-2.0" prefHeight="736.0" prefWidth="407.0">
                       <children>
@@ -62,7 +62,7 @@
                         <!-- Min Revisori -->
                         <HBox alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="407.0">
                           <children>
-                            <Label text="Numero minimo revisori">
+                            <Label text="Numero minimo revisori" textFill="WHITE">
                               <font><Font name="System Bold" size="14.0" /></font>
                             </Label>
                           </children>
@@ -76,7 +76,7 @@
                         <!-- Max Articoli -->
                         <HBox alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="407.0">
                           <children>
-                            <Label text="Numero massimo di articoli per revisore">
+                            <Label text="Numero massimo di articoli per revisore" textFill="WHITE">
                               <font><Font name="System Bold" size="14.0" /></font>
                             </Label>
                           </children>
@@ -97,7 +97,7 @@
                         <!-- Deadline articoli -->
                         <HBox alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="407.0">
                           <children>
-                            <Label text="Deadline sottomissione articoli">
+                            <Label text="Deadline sottomissione articoli" textFill="WHITE">
                               <font><Font name="System Bold" size="14.0" /></font>
                             </Label>
                           </children>
@@ -111,7 +111,7 @@
                         <!-- Deadline recensione -->
                         <HBox alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="407.0">
                           <children>
-                            <Label text="Deadline sottomissione recensione">
+                            <Label text="Deadline sottomissione recensione" textFill="WHITE">
                               <font><Font name="System Bold" size="14.0" /></font>
                             </Label>
                           </children>
@@ -125,7 +125,7 @@
                         <!-- Deadline versione finale -->
                         <HBox alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="407.0">
                           <children>
-                            <Label text="Deadline sottomissione versione finale">
+                            <Label text="Deadline sottomissione versione finale" textFill="WHITE">
                               <font><Font name="System Bold" size="14.0" /></font>
                             </Label>
                           </children>
@@ -139,7 +139,7 @@
                         <!-- Deadline controllo editore -->
                         <HBox alignment="BOTTOM_CENTER" prefHeight="30.0" prefWidth="407.0">
                           <children>
-                            <Label text="Deadline controllo qualità editore">
+                            <Label text="Deadline controllo qualità editore" textFill="WHITE">
                               <font><Font name="System Bold" size="14.0" /></font>
                             </Label>
                           </children>
@@ -153,7 +153,7 @@
                         <!-- Bottone conferma -->
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="407.0">
                           <children>
-                            <Button fx:id="btnConfermaCreazione" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleConfermaCreazione" prefHeight="54.0" prefWidth="162.0" text="Conferma creazione">
+                            <Button fx:id="btnConfermaCreazione" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#handleConfermaCreazione" prefHeight="54.0" prefWidth="162.0" style="-fx-background-color: #4CAF50; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-weight: bold;" text="Conferma creazione">
                               <font><Font name="System Bold" size="15.0" /></font>
                             </Button>
                           </children>

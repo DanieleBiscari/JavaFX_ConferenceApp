@@ -41,7 +41,6 @@ public class FXML_GraduatoriaController {
         tableGraduatoria.setItems(FXCollections.observableArrayList(graduatoria));
     }
 
-    @FXML
     private void initialize() {
         colTitolo.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         colPunteggio.setCellValueFactory(new PropertyValueFactory<>("punteggioFinale"));
@@ -127,7 +126,6 @@ public class FXML_GraduatoriaController {
         }
     }
     
-    @FXML
     public void handleChiudi() {
         Stage stage = (Stage) tableGraduatoria.getScene().getWindow();
         stage.close();

@@ -109,6 +109,8 @@ public class FXML_HomeAutoreController implements Initializable {
             private final HBox box = new HBox(5, btnScopri, btnInviaFinale);
 
             {
+                btnScopri.setStyle("-fx-background-color: #2196F3; -fx-text-fill: white;");
+                btnInviaFinale.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
                 btnScopri.setOnAction(event -> {
                     ConferenzaDTO conferenza = getTableView().getItems().get(getIndex());
                     apriPaginaDettagli(conferenza, btnScopri);
@@ -138,16 +140,31 @@ public class FXML_HomeAutoreController implements Initializable {
 
     @FXML
     private void handleLogout(MouseEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/Login/FXML_Login.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) btnLogoutHomeAutore.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Registrazione");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Conferma Logout");
+        alert.setHeaderText("Sei sicuro di voler terminare la sessione?");
+        alert.setContentText("Scegli un'opzione:");
+
+        ButtonType buttonYes = new ButtonType("Sì");
+        ButtonType buttonNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonYes, buttonNo);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == buttonYes) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/Login/FXML_Login.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) btnLogoutHomeAutore.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Login");
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Errore nel caricamento della schermata di Login.").showAndWait();
+                }
+            }
+        });
     }
 
     private void handleSottomettiArticolo() {

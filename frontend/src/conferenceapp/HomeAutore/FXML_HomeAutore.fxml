@@ -15,7 +15,7 @@
         <padding>
            <Insets bottom="20" left="20" right="20" top="20" />
         </padding>
-         <TableView fx:id="tableConferenze" prefHeight="350" prefWidth="700.0">
+         <TableView fx:id="tableConferenze" prefHeight="350" prefWidth="700.0" style="-fx-background-color: #abd8f5; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);">
             <columns>
                <TableColumn fx:id="colTitolo" prefWidth="150.40004920959473" text="Titolo" />
                <TableColumn fx:id="colLuogo" prefWidth="123.199951171875" text="Luogo" />

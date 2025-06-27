@@ -89,7 +89,7 @@ public class FXML_CreaNuovaConferenzaController implements Initializable {
     }
 
     @FXML
-    private void handleConfermaCreazione(MouseEvent event) {
+    private void handleConfermaCreazione(MouseEvent event) throws IOException {
         try {
             UtenteDTO utenteCorrente = StatoApplicazione.getInstance().getUtenteCorrente();
             Long idUtente = utenteCorrente.getId(); 
@@ -113,20 +113,38 @@ public class FXML_CreaNuovaConferenzaController implements Initializable {
 
             if (response.statusCode() == 201 || response.statusCode() == 200) {
                 System.out.println("Conferenza creata con successo!");
-                Stage stage = (Stage) btnConfermaCreazione.getScene().getWindow();
-                stage.close();
-                String ruoloFromDatabase = utenteCorrente.getRuoli().getFirst();
-                String fxmlPath = "/conferenceapp/HomeChair/FXML_HomeChair.fxml";
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                
+                Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                successAlert.setTitle("Conferma");
+                successAlert.setHeaderText(null);
+                successAlert.setContentText("Conferenza creata con successo!");
+                successAlert.showAndWait();
+
+                // 🔁 Ritorna alla stessa pagina (CreaNuovaConferenza)
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/CreaNuovaConferenza/FXML_CreaNuovaConferenza.fxml"));
                 Parent root = loader.load();
-                Stage homeStage = new Stage();
-                homeStage.setScene(new Scene(root));
-                homeStage.setTitle("Home " + ruoloFromDatabase);
-                homeStage.show();
+                Stage stage = (Stage) btnConfermaCreazione.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Crea Nuova Conferenza");
+                stage.show();
             } else {
-                System.out.println("Errore: " + response.body());
-                //Alert alert 
+                String body = response.body();
+                System.out.println("Errore 409: " + response.body());
+                if (body.contains("esiste già una conferenza in questa data")) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Errore");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Esiste già una conferenza in questa data.");
+                    alert.showAndWait();
+                } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setHeaderText(null);
+                alert.setContentText("Errore nella creazione della conferenza:\n" + body);
+                alert.showAndWait();
+                }
             }
+                
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -61,7 +61,6 @@ public class FXMLRegistrationController implements Initializable {
     private Label btnAccedi;
     @FXML
     private CheckBox autoreCheckbox;
-    @FXML
     private String ruoloSelezionato = "";
 
 
@@ -216,7 +215,6 @@ public class FXMLRegistrationController implements Initializable {
         e.printStackTrace();
     }
     }
-    @FXML
     public void apriHomePerRuolo() {
         String fxmlPath = "";
         switch (ruoloSelezionato) {

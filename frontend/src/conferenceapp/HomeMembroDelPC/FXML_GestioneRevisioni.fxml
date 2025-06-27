@@ -4,8 +4,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400" prefWidth="800" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="conferenceapp.HomeMembroDelPC.FXML_GestioneRevisioniController">
-    <TableView fx:id="articoliTable" layoutX="20" layoutY="20" prefHeight="360" prefWidth="760">
+<AnchorPane prefHeight="400" prefWidth="800" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeMembroDelPC.FXML_GestioneRevisioniController">
+    <TableView fx:id="articoliTable" layoutX="20" layoutY="20" prefHeight="360" prefWidth="760" style="-fx-background-color: #95c8e8;">
         <columns>
             <TableColumn fx:id="colTitolo" prefWidth="180" text="Titolo" />
             <TableColumn fx:id="colStato" prefWidth="152.0" text="Stato" />

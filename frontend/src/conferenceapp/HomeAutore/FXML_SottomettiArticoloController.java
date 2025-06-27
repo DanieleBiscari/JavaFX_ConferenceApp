@@ -27,7 +27,6 @@ public class FXML_SottomettiArticoloController {
     private TextField titoloField;
 
     private TextField pdfField;
-    @FXML
     private TextField affiliazioneField;
     @FXML private TextArea abstractField, testoField;
 

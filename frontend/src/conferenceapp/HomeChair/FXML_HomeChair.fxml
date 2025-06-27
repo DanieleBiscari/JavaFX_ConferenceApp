@@ -28,7 +28,7 @@
                   <!-- Bottone crea nuova conferenza -->
                   <HBox alignment="CENTER" layoutX="70.0" layoutY="60.0" prefHeight="100.0" prefWidth="478.0">
                      <children>
-                        <Button fx:id="btnCreaNuovaConf" mnemonicParsing="false" onMouseClicked="#handleCreaNewConf" prefHeight="60.0" prefWidth="300.0" style="-fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8;">
+                        <Button fx:id="btnCreaNuovaConf" mnemonicParsing="false" onMouseClicked="#handleCreaNewConf" prefHeight="60.0" prefWidth="300.0" style="-fx-font-weight: bold; -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" textAlignment="CENTER">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -63,7 +63,7 @@
                   <!-- Bottone gestione profilo -->
                   <HBox alignment="CENTER" layoutX="180.0" layoutY="410.0" prefHeight="50.0" prefWidth="260.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8;" text="Gestisci profilo">
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Gestisci profilo">
                            <font>
                               <Font size="14.0" />
                            </font>

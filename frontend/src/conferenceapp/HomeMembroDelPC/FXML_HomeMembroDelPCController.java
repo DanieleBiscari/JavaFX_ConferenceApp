@@ -12,6 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -34,16 +37,35 @@ public class FXML_HomeMembroDelPCController implements Initializable {
         // TODO
     }    
 
-    @FXML
-    private void handleLogout(MouseEvent event) throws IOException {
-        Parent loginRoot = FXMLLoader.load(getClass().getResource("/conferenceapp/Login/FXML_Login.fxml"));
-        Scene loginScene = new Scene(loginRoot);
+        @FXML
+    private void handleLogout(MouseEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Conferma Logout");
+        alert.setHeaderText("Sei sicuro di voler terminare la sessione?");
+        alert.setContentText("Scegli un'opzione:");
 
-        Stage stage = (Stage) btnLogoutHomeMembro.getScene().getWindow();
-        stage.setScene(loginScene);
-        stage.setTitle("Login");
-        stage.show();
+        ButtonType buttonYes = new ButtonType("Sì");
+        ButtonType buttonNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonYes, buttonNo);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == buttonYes) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/Login/FXML_Login.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = (Stage) btnLogoutHomeMembro.getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Login");
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Errore nel caricamento della schermata di Login.").showAndWait();
+                }
+            }
+        });
     }
+
     
     @FXML
     private void handleInviti(MouseEvent event) throws IOException {

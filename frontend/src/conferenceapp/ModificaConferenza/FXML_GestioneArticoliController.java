@@ -34,8 +34,6 @@ public class FXML_GestioneArticoliController {
     @FXML private Button btnVisualizzaGraduatoria;
 
     private Long conferenzaId;
-    @FXML
-    private Button btnIndietro;
 
     public void setConferenzaId(Long conferenzaId) {
         this.conferenzaId = conferenzaId;
@@ -165,6 +163,18 @@ public class FXML_GestioneArticoliController {
     }
 
     @FXML
-    private void handleIndietro(ActionEvent event) {
+    private void handleVisualizzaGraduatoria(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_Graduatoria.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Visualizza graduatoria");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }

@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -31,12 +32,23 @@ public class FXML_ModificaConferenzaController implements Initializable {
     private Conferenza conferenza;
     @FXML
     private Button btnIndietro;
+    @FXML
+    private TableColumn<?, ?> colTitolo;
+    @FXML
+    private TableColumn<?, ?> colDescrizione;
+    @FXML
+    private TableColumn<?, ?> colLuogo;
+    @FXML
+    private TableColumn<?, ?> colData;
+    @FXML
+    private TableColumn<?, ?> colTopic;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
     }    
 
     @FXML
@@ -82,6 +94,24 @@ public class FXML_ModificaConferenzaController implements Initializable {
 
     @FXML
     private void handleIndietro(ActionEvent event) {
-        
+        try {
+            // Carica la schermata HomeChair
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/HomeChair/FXML_HomeChair.fxml"));
+            Parent root = loader.load();
+
+            // Crea e mostra una nuova finestra (stage) per la home
+            Stage homeStage = new Stage();
+            homeStage.setScene(new Scene(root));
+            homeStage.setTitle("Home Chair");
+            homeStage.show();
+
+            // Chiudi la finestra attuale
+            Stage currentStage = (Stage) btnIndietro.getScene().getWindow();
+            currentStage.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 }

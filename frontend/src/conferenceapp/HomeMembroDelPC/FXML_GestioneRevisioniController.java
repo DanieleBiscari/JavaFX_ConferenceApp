@@ -26,7 +26,6 @@ public class FXML_GestioneRevisioniController {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    @FXML
     public void initialize() {
         colTitolo.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         colStato.setCellValueFactory(new PropertyValueFactory<>("stato"));

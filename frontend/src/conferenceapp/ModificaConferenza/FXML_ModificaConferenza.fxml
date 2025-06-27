@@ -14,18 +14,18 @@
    <children>
       <StackPane layoutX="13.0" layoutY="12.0" prefHeight="422.0" prefWidth="646.0">
          <children>
-            <Pane prefHeight="422.0" prefWidth="585.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+            <Pane prefHeight="422.0" prefWidth="585.0" style="-fx-border-color: #ccc; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);">
                <children>
                   <VBox layoutX="14.0" layoutY="325.0" prefHeight="88.0" prefWidth="236.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="236.0">
                            <children>
-                              <Button fx:id="btnInvitaMemPC" mnemonicParsing="false" onMouseClicked="#handleInvitaMemPC" prefHeight="45.0" prefWidth="114.0" style="-fx-background-color: #4CAF50; -fx-background-radius: 8; -fx-text-fill: white;" text="Invita membri del PC" textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="btnInvitaMemPC" mnemonicParsing="false" onMouseClicked="#handleInvitaMemPC" prefHeight="45.0" prefWidth="114.0" style="-fx-background-color: #4CAF50; -fx-background-radius: 8; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Invita membri del PC" textAlignment="CENTER" wrapText="true" />
                            </children>
                         </HBox>
                         <HBox alignment="BOTTOM_LEFT" prefHeight="57.0" prefWidth="236.0">
                            <children>
-                              <Button fx:id="btnIndietro" mnemonicParsing="false" onAction="#handleIndietro" style="-fx-background-color: #ff432e; -fx-background-radius: 8; -fx-text-fill: white;" text="Indietro" />
+                              <Button fx:id="btnIndietro" mnemonicParsing="false" onAction="#handleIndietro" style="-fx-background-color: #ff432e; -fx-background-radius: 8; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Indietro" />
                            </children>
                         </HBox>
                      </children>
@@ -36,13 +36,13 @@
                            <children>
                               <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="236.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="114.0" style="-fx-background-color: #2196F3; -fx-background-radius: 8; -fx-text-fill: white;" text="Modifica deadline" textAlignment="CENTER" wrapText="true" />
+                                    <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="114.0" style="-fx-background-color: #2196F3; -fx-background-radius: 8; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Modifica deadline" textAlignment="CENTER" wrapText="true" />
                                  </children>
                               </HBox>
                            </children></HBox>
                         <HBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="236.0">
                            <children>
-                              <Button mnemonicParsing="false" onMouseClicked="#handleGestioneArticoli" prefHeight="45.0" prefWidth="114.0" style="-fx-background-radius: 8; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Gestione articoli" />
+                              <Button mnemonicParsing="false" onMouseClicked="#handleGestioneArticoli" prefHeight="45.0" prefWidth="114.0" style="-fx-background-radius: 8; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Gestione articoli" />
                            </children>
                         </HBox>
                      </children>
@@ -53,13 +53,13 @@
                            <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="600.0">
                                  <children>
-                                    <TableView prefHeight="275.0" prefWidth="599.0">
+                                    <TableView prefHeight="275.0" prefWidth="599.0" style="-fx-background-color: #95c8e8;">
                                       <columns>
-                                        <TableColumn prefWidth="100.79998856782913" text="Titolo" />
-                                        <TableColumn prefWidth="157.5999755859375" text="Descrizione" />
-                                          <TableColumn prefWidth="77.5999755859375" text="Luogo" />
-                                          <TableColumn minWidth="0.0" prefWidth="96.79998779296875" text="Data" />
-                                          <TableColumn minWidth="2.39996337890625" prefWidth="128.00006103515625" text="Topic" />
+                                        <TableColumn fx:id="colTitolo" prefWidth="100.79998856782913" text="Titolo" />
+                                        <TableColumn fx:id="colDescrizione" prefWidth="157.5999755859375" text="Descrizione" />
+                                          <TableColumn fx:id="colLuogo" prefWidth="77.5999755859375" text="Luogo" />
+                                          <TableColumn fx:id="colData" minWidth="0.0" prefWidth="96.79998779296875" text="Data" />
+                                          <TableColumn fx:id="colTopic" minWidth="2.39996337890625" prefWidth="128.00006103515625" text="Topic" />
                                       </columns>
                                     </TableView>
                                  </children>

@@ -22,9 +22,9 @@
                 <TextField fx:id="titoloField" promptText="Titolo" />
                 <TextArea fx:id="abstractField" promptText="Abstract" />
                 <TextArea fx:id="testoField" promptText="Testo dell'articolo" />
-            <Button fx:id="btnAddPDF" mnemonicParsing="false" prefHeight="15.0" prefWidth="166.0" text="Inserire PDF" />
+            <Button fx:id="btnAddPDF" mnemonicParsing="false" prefHeight="15.0" prefWidth="166.0" style="-fx-text-fill: white; -fx-background-color: #2196F3; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Inserire PDF" />
 
-                <Button onAction="#handleInviaArticolo" style="-fx-background-color: #4CAF50; -fx-background-radius: 8;" text="Invia articolo" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                <Button onAction="#handleInviaArticolo" style="-fx-background-color: #4CAF50; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Invia articolo" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -32,7 +32,7 @@
         </VBox>
       <HBox alignment="TOP_CENTER" layoutX="1.0" layoutY="572.0" prefHeight="38.0" prefWidth="129.0">
          <children>
-            <Button fx:id="btnIndietro" mnemonicParsing="false" onAction="#handleIndietro" style="-fx-background-color: #ff432e; -fx-text-fill: white; -fx-background-radius: 8;" text="Indietro" />
+            <Button fx:id="btnIndietro" mnemonicParsing="false" onAction="#handleIndietro" style="-fx-background-color: #ff432e; -fx-text-fill: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Indietro" />
          </children>
       </HBox>
     </children>
