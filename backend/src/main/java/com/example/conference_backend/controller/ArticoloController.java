@@ -3,6 +3,8 @@ package com.example.conference_backend.controller;
 import com.example.conference_backend.dto.ArticoloAssegnatoDTO;
 import com.example.conference_backend.dto.ArticoloDTO;
 import com.example.conference_backend.dto.AssegnazioneArticoloDTO;
+import com.example.conference_backend.dto.RichiestaModificaDTO;
+import com.example.conference_backend.dto.VersioneFinaleDTO;
 import com.example.conference_backend.model.Articolo;
 import com.example.conference_backend.model.Conferenza;
 import com.example.conference_backend.model.GestioneRevisore;
@@ -11,6 +13,7 @@ import com.example.conference_backend.repository.ArticoloRepository;
 import com.example.conference_backend.repository.GestioneRevisoreRepository;
 import com.example.conference_backend.repository.SottomissioneAutoreRepository;
 import com.example.conference_backend.service.ArticoloService;
+import com.example.conference_backend.service.EmailService;
 import jakarta.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
@@ -20,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.SimpleMailMessage;
 
 @RestController
 @RequestMapping("/api/articolo")
@@ -29,12 +33,14 @@ public class ArticoloController {
     @Autowired private GestioneRevisoreRepository gestioneRevisoreRepository;
     @Autowired private SottomissioneAutoreRepository sottomissioneAutoreRepository;
     @Autowired private ArticoloRepository articoloRepository;
+    @Autowired private EmailService emailService;
 
     @PostMapping
     public ResponseEntity<ArticoloDTO> crea(@RequestBody @Valid ArticoloDTO dto) {
         ArticoloDTO creato = articoloService.creaArticolo(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creato);
     }
+    
     @PostMapping("/assegna")
     public ResponseEntity<String> assegnaArticolo(@RequestBody AssegnazioneArticoloDTO dto) {
         try {
@@ -96,6 +102,26 @@ public class ArticoloController {
         articoloRepository.save(articolo);
 
         return ResponseEntity.ok("Versione finale caricata con successo.");
+    }
+    
+    @GetMapping("/versioni-finali/{idConferenza}")
+    public List<VersioneFinaleDTO> getVersioniFinali(@PathVariable Long idConferenza) {
+        return articoloRepository.findVersioniFinaliAccettate(idConferenza);
+    }
+
+    @PostMapping("/richiedi-modifica")
+    public ResponseEntity<String> richiediModifica(@RequestBody RichiestaModificaDTO richiesta) {
+        String subject = "Richiesta modifica articolo";
+        String testo = String.format(
+            "Gentile autore,\n\nL'editore ha richiesto una modifica al tuo articolo:\n" +
+            "Titolo: %s\n\nMotivo della richiesta:\n%s\n\nCordiali saluti.",
+            richiesta.getTitoloArticolo(),
+            richiesta.getMessaggio()
+        );
+
+        emailService.inviaEmailSemplice(richiesta.getEmailAutore(), subject, testo);
+
+        return ResponseEntity.ok("Richiesta inviata con successo");
     }
 
 }

@@ -29,7 +29,7 @@ public class FXML_GraduatoriaController {
     private TableColumn<GraduatoriaDTO, Void> colVisualizza;
 
     @FXML
-    private Button btnInviaEsiti;  // NUOVO bottone per invio esiti
+    private Button btnInviaEsiti;
 
     private Long conferenzaId;
 
@@ -40,7 +40,8 @@ public class FXML_GraduatoriaController {
     public void setListaGraduatoria(List<GraduatoriaDTO> graduatoria) {
         tableGraduatoria.setItems(FXCollections.observableArrayList(graduatoria));
     }
-
+    
+    @FXML
     private void initialize() {
         colTitolo.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         colPunteggio.setCellValueFactory(new PropertyValueFactory<>("punteggioFinale"));
@@ -112,7 +113,6 @@ public class FXML_GraduatoriaController {
         }
 
         try {
-            // Poiché non serve body, passiamo null
             var response = HttpClientUtil.post("http://localhost:8081/api/recensione/inviaEsiti/" + conferenzaId, null);
 
             if (response.statusCode() == 200) {

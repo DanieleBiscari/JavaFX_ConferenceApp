@@ -17,7 +17,6 @@ import com.example.conference_backend.repository.IscrizioneRepository;
 import com.example.conference_backend.repository.UtenteRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,6 +138,10 @@ public class ConferenzaService {
     
     public List<Conferenza> getConferenzeByChair(Long idUtente) {
         return creazioneChairRepository.findConferenzeByChairId(idUtente);
+    }
+    
+    public List<Conferenza> getConferenzeByEditore(Long idUtente) {
+        return iscrizioneRepository.findConferenzeByEditoreId(idUtente);
     }
     
     public List<Conferenza> getAllConferenze() {

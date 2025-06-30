@@ -26,8 +26,6 @@ public class FXML_SottomettiArticoloController {
     @FXML
     private TextField titoloField;
 
-    private TextField pdfField;
-    private TextField affiliazioneField;
     @FXML private TextArea abstractField, testoField;
 
     private ConferenzaDTO conferenza;
@@ -49,8 +47,6 @@ public class FXML_SottomettiArticoloController {
             articolo.put("titolo", titoloField.getText());
             articolo.put("abstractText", abstractField.getText());
             articolo.put("testo", testoField.getText());
-            articolo.put("pdf", pdfField.getText());
-            articolo.put("affiliazione", affiliazioneField.getText());
             articolo.put("idConferenza", conferenza.getIdConferenza());
             articolo.put("idAutore", autore.getId());
 

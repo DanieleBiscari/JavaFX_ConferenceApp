@@ -109,6 +109,12 @@ public class ConferenzaController {
         return ResponseEntity.ok(conferenze);
     }
     
+    @GetMapping("/editore/{idUtente}")
+    public ResponseEntity<List<Conferenza>> getConferenzeByEditore(@PathVariable Long idUtente) {
+        List<Conferenza> conferenze = service.getConferenzeByEditore(idUtente);
+        return ResponseEntity.ok(conferenze);
+    }
+    
     @GetMapping("/{id}/articoli-con-revisori")
     public ResponseEntity<List<ArticoloConRevisoreDTO>> getArticoliConRevisori(
             @PathVariable Long id) {

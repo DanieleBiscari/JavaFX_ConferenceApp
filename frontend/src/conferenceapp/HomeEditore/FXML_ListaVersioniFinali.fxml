@@ -6,17 +6,16 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="477.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeEditore.FXML_HomeEditoreController">
+<AnchorPane prefHeight="480.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeEditore.FXML_ListaVersioniFinaliController">
    <children>
       <StackPane layoutX="70.0" layoutY="14.0" prefHeight="395.0" prefWidth="620.0">
          <children>
-            <Pane prefHeight="395.0" prefWidth="620.0" style="-fx-background-color: #f9f9f9; -fx-border-color: #ccc; -fx-border-radius: 15; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);">
+            <AnchorPane prefHeight="395.0" prefWidth="620.0" style="-fx-background-color: #f9f9f9; -fx-border-color: #ccc; -fx-border-radius: 15; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);">
                <children>
-                  <Label layoutX="40.0" layoutY="20.0" text="Le tue Conferenze">
+                  <Label layoutX="40.0" layoutY="20.0" text="Versioni Finali Articoli">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -26,10 +25,10 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="520.0">
                            <children>
-                              <TableView fx:id="tableConferenze" layoutX="0.0" prefHeight="250.0" prefWidth="520.0">
+                              <TableView fx:id="tableVersioniFinali" layoutX="0.0" prefHeight="250.0" prefWidth="520.0">
                                  <columns>
-                                    <TableColumn fx:id="colTitolo" prefWidth="240.0" text="Titolo" />
-                                    <TableColumn fx:id="colData" prefWidth="240.0" text="Data Inizio" />
+                                    <TableColumn fx:id="colTitolo" prefWidth="220.0" text="Titolo Articolo" />
+                                    <TableColumn fx:id="colEmailAutore" prefWidth="180.0" text="Email Autore" />
                                     <TableColumn fx:id="colAzioni" prefWidth="120.0" text="Azioni" />
                                  </columns>
                               </TableView>
@@ -38,14 +37,10 @@
                      </content>
                   </ScrollPane>
 
-                  <Label fx:id="btnLogoutHomeEditore" alignment="CENTER" layoutX="270.0" layoutY="340.0" onMouseClicked="#handleLogout" prefHeight="26.0" prefWidth="100.0" style="-fx-text-fill: red; -fx-underline: true; -fx-font-weight: bold; -fx-cursor: hand;" text="Logout">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
                </children>
-            </Pane>
+            </AnchorPane>
          </children>
       </StackPane>
    </children>
 </AnchorPane>
+

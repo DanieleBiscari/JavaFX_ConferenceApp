@@ -33,15 +33,15 @@ public class FXML_ModificaConferenzaController implements Initializable {
     @FXML
     private Button btnIndietro;
     @FXML
-    private TableColumn<?, ?> colTitolo;
+    private TableColumn<Conferenza, String> colTitolo;
     @FXML
-    private TableColumn<?, ?> colDescrizione;
+    private TableColumn<Conferenza, String> colDescrizione;
     @FXML
-    private TableColumn<?, ?> colLuogo;
+    private TableColumn<Conferenza, String> colLuogo;
     @FXML
-    private TableColumn<?, ?> colData;
+    private TableColumn<Conferenza, String> colData;
     @FXML
-    private TableColumn<?, ?> colTopic;
+    private TableColumn<Conferenza, String> colTopic;
 
     /**
      * Initializes the controller class.

@@ -34,6 +34,19 @@ public class FXML_GestioneArticoliController {
     @FXML private Button btnVisualizzaGraduatoria;
 
     private Long conferenzaId;
+    
+    @FXML
+    private void initialize() {
+        btnVisualizzaGraduatoria.setOnAction(event -> {
+            try {
+                gestisciGraduatoria();
+            } catch (Exception e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Errore durante l'invio degli esiti:\n" + e.getMessage()).showAndWait();
+            }
+        });
+    }
+
 
     public void setConferenzaId(Long conferenzaId) {
         this.conferenzaId = conferenzaId;
@@ -126,7 +139,6 @@ public class FXML_GestioneArticoliController {
                 alert.setContentText("Al momento la graduatoria non è disponibile, aspetta il termine delle revisioni.");
                 alert.showAndWait();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Errore durante la visualizzazione della graduatoria.");
@@ -136,12 +148,11 @@ public class FXML_GestioneArticoliController {
 
     private void mostraGraduatoria(List<GraduatoriaDTO> listaGraduatoria) {
         try {
-            System.out.println("1");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_Graduatoria.fxml"));
             Parent root = loader.load();
 
             FXML_GraduatoriaController controller = loader.getController();
-            controller.setListaGraduatoria(listaGraduatoria);  // cambia il metodo setter nel controller graduatoria
+            controller.setListaGraduatoria(listaGraduatoria);
             controller.setConferenzaId(conferenzaId);
             
             Stage stage = new Stage();
@@ -154,26 +165,6 @@ public class FXML_GestioneArticoliController {
         } catch (IOException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Errore nell'apertura della graduatoria").showAndWait();
-        }
-    }
-
-    
-    private void initialize() {
-        btnVisualizzaGraduatoria.setOnAction(e -> gestisciGraduatoria());
-    }
-
-    @FXML
-    private void handleVisualizzaGraduatoria(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_Graduatoria.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Visualizza graduatoria");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
