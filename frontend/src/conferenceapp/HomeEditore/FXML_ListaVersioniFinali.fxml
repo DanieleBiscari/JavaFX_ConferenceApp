@@ -29,14 +29,14 @@
                                  <columns>
                                     <TableColumn fx:id="colTitolo" prefWidth="220.0" text="Titolo Articolo" />
                                     <TableColumn fx:id="colEmailAutore" prefWidth="180.0" text="Email Autore" />
-                                    <TableColumn fx:id="colAzioni" prefWidth="120.0" text="Azioni" />
+                                    <TableColumn fx:id="colAzioni" prefWidth="320.0" text="Azioni" />
                                  </columns>
                               </TableView>
                            </children>
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-
+                  <Button layoutX="40.0" layoutY="340.0" mnemonicParsing="false" text="Stampa proceedings" onAction="#handleStampaProceedings" />
                </children>
             </AnchorPane>
          </children>
