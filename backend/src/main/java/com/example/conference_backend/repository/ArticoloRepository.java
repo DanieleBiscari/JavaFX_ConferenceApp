@@ -15,7 +15,7 @@ public interface ArticoloRepository extends JpaRepository<Articolo, Long> {
         FROM Articolo a
         JOIN SottomissioneAutore sa ON sa.articolo.idArticolo = a.idArticolo
         JOIN Utente u ON sa.utente.idUtente = u.idUtente
-        WHERE a.conferenza.idConferenza = :idConf AND a.stato = 'ACCETTATO'
+        WHERE a.conferenza.idConferenza = :idConf AND a.versioneFinalePdf IS NOT NULL
     """)
     List<VersioneFinaleDTO> findVersioniFinaliAccettate(@Param("idConf") Long idConf);
 }
