@@ -92,6 +92,7 @@ public class FXML_GestioneRevisioniController {
         grid.add(emailField, 1, 0);
 
         dialog.getDialogPane().setContent(grid);
+        
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == confermaButtonType) {

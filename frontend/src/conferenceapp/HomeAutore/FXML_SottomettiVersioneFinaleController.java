@@ -13,7 +13,6 @@ import java.net.http.HttpResponse;
 
 public class FXML_SottomettiVersioneFinaleController {
 
-    private TextArea textAreaVersioneFinale;
     @FXML
     private Button btnAnnulla;
     @FXML
@@ -32,7 +31,7 @@ public class FXML_SottomettiVersioneFinaleController {
 
     @FXML
     private void handleSottometti() {
-        String contenuto = textAreaVersioneFinale.getText();
+
 
         Long idUtente = StatoApplicazione.getInstance().getUtenteCorrente().getId();
         String endpoint = "http://localhost:8081/api/articolo/" + idUtente + "/versione-finale?idConferenza=" + conferenza.getIdConferenza();
@@ -40,16 +39,32 @@ public class FXML_SottomettiVersioneFinaleController {
         try {
             HttpResponse<String> response = HttpClientUtil.post(endpoint, null);
             if (response.statusCode() == 200) {
-                new Alert(Alert.AlertType.INFORMATION, "Versione finale sottomessa con successo!").showAndWait();
-                handleAnnulla();
+                //new Alert(Alert.AlertType.INFORMATION, "Versione finale sottomessa con successo!").showAndWait();
+                //handleAnnulla();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Conferma");
+                alert.setContentText("Invio avvenuto con successo!");
+                alert.showAndWait();
             } else if (response.statusCode() == 403) {
-                new Alert(Alert.AlertType.ERROR, "Scadenza superata. Non è possibile sottomettere.").showAndWait();
+                //new Alert(Alert.AlertType.ERROR, "Scadenza superata. Non è possibile sottomettere.").showAndWait();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setContentText("Il tempo per la sottomissione della versione finale è scaduto");
+                alert.showAndWait();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Errore nella sottomissione: " + response.body()).showAndWait();
+                //new Alert(Alert.AlertType.ERROR, "Errore nella sottomissione: " + response.body()).showAndWait();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Errore");
+                alert.setContentText("Errore nella sottomissione");
+                alert.showAndWait();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Errore di comunicazione con il server.").showAndWait();
+            //new Alert(Alert.AlertType.ERROR, "Errore di comunicazione con il server.").showAndWait();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setContentText("Errore di comunicazione con il server.");
+            alert.showAndWait();
         }
     }
 }

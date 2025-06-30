@@ -46,8 +46,14 @@ public class FXML_SelezionaRevisoreController {
         if (idRevisore != null) {
             mainController.assegnaRevisore(idArticolo, idRevisore);
             ((Stage) listRevisori.getScene().getWindow()).close();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Conferma");
+            alert.setHeaderText(null);
+            alert.setContentText("Modifica assegnazione avvenuta con successo!");
+            alert.showAndWait();
         } else {
             new Alert(Alert.AlertType.WARNING, "Seleziona o inserisci un revisore").showAndWait();
         }
+        
     }
 }
