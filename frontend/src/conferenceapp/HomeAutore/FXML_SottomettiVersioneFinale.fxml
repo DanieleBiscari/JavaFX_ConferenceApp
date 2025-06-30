@@ -2,28 +2,38 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="430.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeAutore.FXML_SottomettiVersioneFinaleController">
+<AnchorPane prefHeight="185.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conferenceapp.HomeAutore.FXML_SottomettiVersioneFinaleController">
     <children>
-      <Pane layoutX="20.0" layoutY="15.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #95c8e8; -fx-border-color: #7296c4; -fx-background-radius: 15; -fx-border-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);">
+      <Pane layoutX="20.0" layoutY="9.0" prefHeight="159.0" prefWidth="600.0" style="-fx-background-color: #95c8e8; -fx-border-color: #7296c4; -fx-background-radius: 15; -fx-border-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);">
          <children>
-              <VBox layoutX="20.0" layoutY="20.0" prefHeight="360" prefWidth="560" spacing="10">
-                  <Label text="Contenuto Versione Finale" textFill="WHITE">
-                  <font>
-                     <Font name="System Bold" size="14.0" />
-                  </font>
-               </Label>
-                  <TextArea fx:id="textAreaVersioneFinale" prefHeight="250" wrapText="true" />
-                  <HBox spacing="10">
-                      <Button fx:id="btnAnnulla" onAction="#handleAnnulla" style="-fx-background-color: #ff432e; -fx-text-fill: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Annulla" />
-                      <Button fx:id="btnSottometti" onAction="#handleSottometti" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Sottometti" />
+              <VBox layoutX="20.0" layoutY="20.0" prefHeight="122.0" prefWidth="560" spacing="10">
+                  <HBox alignment="CENTER" prefHeight="86.0" prefWidth="560.0" spacing="10">
+                  <children>
+                     <Label prefHeight="20.0" prefWidth="185.0" text="Contenuto versione finale" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                     </Label>
+                  </children>
                   </HBox>
+               <HBox alignment="BOTTOM_CENTER" prefHeight="75.0" prefWidth="560.0">
+                  <children>
+                     <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: #2196F3; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2); -fx-text-fill: white; -fx-font-weight: bold;" text="Upload PDF" />
+                  </children>
+               </HBox>
+               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                         <Button fx:id="btnAnnulla" onAction="#handleAnnulla" style="-fx-background-color: #ff432e; -fx-text-fill: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Annulla" />
+                     <HBox prefHeight="45.0" prefWidth="17.0" />
+                         <Button fx:id="btnSottometti" onAction="#handleSottometti" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2);" text="Sottometti" />
+                  </children>
+               </HBox>
               </VBox>
          </children>
       </Pane>

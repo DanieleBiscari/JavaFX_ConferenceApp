@@ -16,4 +16,7 @@ public interface IscrizioneRepository extends JpaRepository<Iscrizione, Long> {
     List<Iscrizione> findByUtente_IdUtente(Long idUtente);
     @Query("SELECT i.conferenza FROM Iscrizione i WHERE i.utente.idUtente = :idUtente")
     List<Conferenza> findConferenzeByEditoreId(Long idUtente);
+    
+    @Query("SELECT i FROM Iscrizione i WHERE i.conferenza.idConferenza = :idConferenza AND i.stato = 'ACCETTATA'")
+    List<Iscrizione> findAcceptedByConferenza(Long idConferenza);
 }

@@ -53,7 +53,7 @@
                            <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="600.0">
                                  <children>
-                                    <TableView prefHeight="275.0" prefWidth="599.0" style="-fx-background-color: #95c8e8;">
+                                    <TableView fx:id="tableView" prefHeight="275.0" prefWidth="599.0" style="-fx-background-color: #95c8e8;">
                                       <columns>
                                         <TableColumn fx:id="colTitolo" prefWidth="100.79998856782913" text="Titolo" />
                                         <TableColumn fx:id="colDescrizione" prefWidth="157.5999755859375" text="Descrizione" />

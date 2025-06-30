@@ -13,7 +13,6 @@ import java.net.http.HttpResponse;
 
 public class FXML_SottomettiVersioneFinaleController {
 
-    @FXML
     private TextArea textAreaVersioneFinale;
     @FXML
     private Button btnAnnulla;

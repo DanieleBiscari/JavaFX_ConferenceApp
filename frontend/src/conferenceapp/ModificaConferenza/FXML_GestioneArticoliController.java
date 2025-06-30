@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import conferenceapp.State.StatoApplicazione;
 import conferenceapp.dto.GraduatoriaDTO;
+import conferenceapp.dto.UtenteDTO;
 import java.io.IOException;
 import java.time.LocalDate;
 import javafx.event.ActionEvent;
@@ -46,11 +47,27 @@ public class FXML_GestioneArticoliController {
             }
         });
     }
+    
+    private void caricaMembriPC() {
+        try {
+            HttpResponse<String> response = HttpClientUtil.get("http://localhost:8081/api/iscrizione/" + conferenzaId);
+            ObjectMapper mapper = new ObjectMapper();
+            List<UtenteDTO> membriPC = mapper.readValue(response.body(), new TypeReference<>() {});
 
+            for (UtenteDTO membro : membriPC) {
+                System.out.println("Membro PC: " + membro.getNome() + " " + membro.getCognome() + " (" + membro.getEmail() + ")");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Errore nel caricamento dei membri del PC.").showAndWait();
+        }
+    }
 
     public void setConferenzaId(Long conferenzaId) {
         this.conferenzaId = conferenzaId;
         caricaArticoli();
+        caricaMembriPC();
     }
 
     private void caricaArticoli() {
@@ -75,11 +92,28 @@ public class FXML_GestioneArticoliController {
                 {
                     btn.setOnAction(event -> {
                         ArticoloConRevisoreView articolo = getTableView().getItems().get(getIndex());
-                        TextInputDialog dialog = new TextInputDialog();
-                        dialog.setTitle("Riassegna revisore");
-                        dialog.setHeaderText("Inserisci l'ID del nuovo revisore:");
-                        Optional<String> result = dialog.showAndWait();
-                        result.ifPresent(idUtente -> assegnaRevisore(articolo.getIdArticolo(), Long.parseLong(idUtente)));
+                        try {
+                            // Carica i membri PC disponibili
+                            HttpResponse<String> response = HttpClientUtil.get("http://localhost:8081/api/iscrizione/" + conferenzaId);
+                            ObjectMapper mapper = new ObjectMapper();
+                            List<UtenteDTO> membriPC = mapper.readValue(response.body(), new TypeReference<>() {});
+
+                            // Carica e mostra la finestra di selezione
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_SelezionaRevisore.fxml"));
+                            Parent root = loader.load();
+
+                            FXML_SelezionaRevisoreController controller = loader.getController();
+                            controller.setDati(articolo.getIdArticolo(), membriPC, FXML_GestioneArticoliController.this);
+
+                            Stage stage = new Stage();
+                            stage.initModality(Modality.APPLICATION_MODAL);
+                            stage.setScene(new Scene(root));
+                            stage.setTitle("Seleziona Revisore");
+                            stage.showAndWait();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            new Alert(Alert.AlertType.ERROR, "Errore durante il caricamento della finestra selezione revisore").showAndWait();
+                        }
                     });
                 }
 
@@ -95,7 +129,7 @@ public class FXML_GestioneArticoliController {
         }
     }
 
-    private void assegnaRevisore(Long idArticolo, Long idUtente) {
+    public void assegnaRevisore(Long idArticolo, Long idUtente) {
         try {
             AssegnazioneArticoloDTO dto = new AssegnazioneArticoloDTO();
             dto.setIdArticolo(idArticolo);
