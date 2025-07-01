@@ -6,13 +6,21 @@ public class InvitoMembroPcDTO {
     private String titoloConferenza;
     private String luogoConferenza;
     private String dataInizioConferenza;
+    private ArticoloDTO articolo;
 
-    public InvitoMembroPcDTO(Long idIscrizione, String stato, String titoloConferenza, String luogoConferenza, String dataInizioConferenza) {
+    public InvitoMembroPcDTO(
+            Long idIscrizione, 
+            String stato, 
+            String titoloConferenza, 
+            String luogoConferenza, 
+            String dataInizioConferenza, 
+            ArticoloDTO articolo) {
         this.idIscrizione = idIscrizione;
         this.stato = stato;
         this.titoloConferenza = titoloConferenza;
         this.luogoConferenza = luogoConferenza;
         this.dataInizioConferenza = dataInizioConferenza;
+        this.articolo = articolo;
     }
 
     // Getters e Setters
@@ -30,4 +38,14 @@ public class InvitoMembroPcDTO {
 
     public String getDataInizioConferenza() { return dataInizioConferenza; }
     public void setDataInizioConferenza(String dataInizioConferenza) { this.dataInizioConferenza = dataInizioConferenza; }
+
+    public ArticoloDTO getArticolo() {
+        return articolo;
+    }
+
+    public void setArticolo(ArticoloDTO articolo) {
+        this.articolo = articolo;
+    }
+    
+    
 }

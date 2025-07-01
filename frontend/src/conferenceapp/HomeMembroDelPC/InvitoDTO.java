@@ -1,5 +1,7 @@
 package conferenceapp.HomeMembroDelPC;
 
+import conferenceapp.dto.ArticoloDTO;
+
 
 public class InvitoDTO {
     private Long idIscrizione;
@@ -7,6 +9,7 @@ public class InvitoDTO {
     private String titoloConferenza;
     private String luogoConferenza;
     private String dataInizioConferenza;
+    private ArticoloDTO articolo;
     
     
     public InvitoDTO() {}
@@ -56,6 +59,16 @@ public class InvitoDTO {
     public void setDataInizioConferenza(String dataInizioConferenza) {
         this.dataInizioConferenza = dataInizioConferenza;
     }
+
+    public ArticoloDTO getArticolo() {
+        return articolo;
+    }
+
+    public void setArticolo(ArticoloDTO articolo) {
+        this.articolo = articolo;
+    }
+    
+    
 
     @Override
     public String toString() {

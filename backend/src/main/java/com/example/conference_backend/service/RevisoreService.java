@@ -1,5 +1,6 @@
 package com.example.conference_backend.service;
 
+import com.example.conference_backend.dto.ArticoloDTO;
 import com.example.conference_backend.dto.InvitoMembroPcDTO;
 import com.example.conference_backend.model.Articolo;
 import com.example.conference_backend.model.Conferenza;
@@ -75,14 +76,31 @@ public class RevisoreService {
     
     public List<InvitoMembroPcDTO> getInvitiByUtente(Long idUtente) {
         List<Iscrizione> iscrizioni = iscrizioneRepository.findByUtente_IdUtente(idUtente);
-        return iscrizioni.stream().map(iscrizione -> new InvitoMembroPcDTO(
+
+        return iscrizioni.stream().map(iscrizione -> {
+            Articolo articolo = iscrizione.getArticolo();
+            ArticoloDTO articoloDTO = null;
+
+            if (articolo != null) {
+                articoloDTO = new ArticoloDTO(
+                    articolo.getTitolo(),
+                    articolo.getAbstractText(),
+                    articolo.getTesto(),
+                    articolo.getAffiliazione()
+                );
+            }
+
+            return new InvitoMembroPcDTO(
                 iscrizione.getIdIscrizione(),
                 iscrizione.getStato(),
                 iscrizione.getConferenza().getTitolo(),
                 iscrizione.getConferenza().getLuogo(),
-                iscrizione.getConferenza().getDataInizio().toString()
-        )).collect(Collectors.toList());
+                iscrizione.getConferenza().getDataInizio().toString(),
+                articoloDTO
+            );
+        }).collect(Collectors.toList());
     }
+
 }
 
 

@@ -20,6 +20,16 @@ public class ArticoloDTO {
     @Min(1)
     private Long idAutore;
 
+    public ArticoloDTO() {
+    }
+
+    public ArticoloDTO(String titolo, String abstractText, String testo, String affiliazione) {
+        this.titolo = titolo;
+        this.abstractText = abstractText;
+        this.testo = testo;
+        this.affiliazione = affiliazione;
+    }
+
     public String getTitolo() {
         return titolo;
     }

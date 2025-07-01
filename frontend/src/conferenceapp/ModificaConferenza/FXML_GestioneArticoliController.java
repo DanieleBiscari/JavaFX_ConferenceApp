@@ -13,13 +13,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Optional;
 import conferenceapp.State.StatoApplicazione;
 import conferenceapp.dto.GraduatoriaDTO;
 import conferenceapp.dto.UtenteDTO;
 import java.io.IOException;
 import java.time.LocalDate;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,6 +31,7 @@ public class FXML_GestioneArticoliController {
     @FXML private TableColumn<ArticoloConRevisoreView, String> colRevisore;
     @FXML private TableColumn<ArticoloConRevisoreView, Void> colAzione;
     @FXML private Button btnVisualizzaGraduatoria;
+    @FXML private Button btnInviaVersioniFinali;
 
     private Long conferenzaId;
     
@@ -46,6 +45,28 @@ public class FXML_GestioneArticoliController {
                 new Alert(Alert.AlertType.ERROR, "Errore durante l'invio degli esiti:\n" + e.getMessage()).showAndWait();
             }
         });
+        btnInviaVersioniFinali.setOnAction(event -> {
+            try {
+                mostraFinestraInserimentoEmail();
+            } catch (Exception e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Errore nell'apertura della finestra di invio email.").showAndWait();
+            }
+        });
+    }
+    
+    private void mostraFinestraInserimentoEmail() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/conferenceapp/ModificaConferenza/FXML_InserisciEmailEditore.fxml"));
+        Parent root = loader.load();
+
+        FXML_InserisciEmailEditoreController controller = loader.getController();
+        controller.setConferenzaId(conferenzaId);
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.setTitle("Invio Email Editore");
+        stage.showAndWait();
     }
     
     private void caricaMembriPC() {

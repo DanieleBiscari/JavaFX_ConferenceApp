@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="conferenceapp.HomeMembroDelPC.FXML_VisualizzaArticoloController"
+      prefWidth="400" prefHeight="300" alignment="CENTER_LEFT" style="-fx-padding: 20;">
+    <children>
+        <Label fx:id="titolo"/>
+        <Label fx:id="abstractText"/>
+        <Label fx:id="testo"/>
+        <Label fx:id="affiliazione"/>
+        <Button text="Chiudi" onAction="#chiudi"/>
+    </children>
+</VBox>

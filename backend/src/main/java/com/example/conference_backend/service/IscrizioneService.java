@@ -18,7 +18,7 @@ public class IscrizioneService {
     }
 
     public List<UtenteDTO> getMembriPcAccettati(Long conferenzaId) {
-        List<Iscrizione> iscrizioni = iscrizioneRepository.findAcceptedByConferenza(conferenzaId);
+        List<Iscrizione> iscrizioni = iscrizioneRepository.findAcceptedMembriPcByConferenza(conferenzaId);
         return iscrizioni.stream()
                 .map(i -> new UtenteDTO(
                         i.getUtente().getIdUtente(),
@@ -27,5 +27,6 @@ public class IscrizioneService {
                         i.getUtente().getEmail()))
                 .collect(Collectors.toList());
     }
+
 }
 

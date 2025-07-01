@@ -6,8 +6,18 @@ public class ArticoloDTO {
     private String titolo;
     private String stato;
     private String abstractText;
+    private String testo;
+    private String affiliazione;
 
-    // Getters e Setters
+    public ArticoloDTO() {
+    }
+
+    public ArticoloDTO(String titolo, String abstractText, String testo, String affiliazione) {
+        this.titolo = titolo;
+        this.abstractText = abstractText;
+        this.testo = testo;
+        this.affiliazione = affiliazione;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -32,7 +42,21 @@ public class ArticoloDTO {
     public void setIdConferenza(Long idConferenza) {
         this.idConferenza = idConferenza;
     }
-   
-    
+
+    public String getTesto() {
+        return testo;
+    }
+
+    public void setTesto(String testo) {
+        this.testo = testo;
+    }
+
+    public String getAffiliazione() {
+        return affiliazione;
+    }
+
+    public void setAffiliazione(String affiliazione) {
+        this.affiliazione = affiliazione;
+    }
 }
 
